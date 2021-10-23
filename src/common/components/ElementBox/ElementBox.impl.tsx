@@ -7,15 +7,15 @@ const ElementBox: React.FC<IElementBox.IProps> = ({
     children,
 }) => {
     return (
-        <div css={ElementBoxStyle} style={{ backgroundColor }}>
+        <div css={elementBoxStyle} style={{ backgroundColor }}>
             {children}
         </div>
     );
 };
 
-const ElementBoxStyle = css`
+const elementBoxStyle = css`
     width: 100vw;
-    height: 50vh;
+    height: 70vh;
 `;
 
 export default ElementBox;

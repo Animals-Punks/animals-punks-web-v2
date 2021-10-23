@@ -1,25 +1,21 @@
 import { css } from "@emotion/react";
 
-const TitleText: React.FC = ({ children }) => {
+const CenterText: React.FC = ({ children }) => {
     return (
         <>
             <link
                 rel="stylesheet"
                 href="https://fonts.googleapis.com/css2?family=OpenSans"
             />
-            <div css={TitleTextStyle}>{children}</div>
+            <div css={centerTextStyle}>{children}</div>
         </>
     );
 };
 
-const TitleTextStyle = css`
+const centerTextStyle = css`
     font-family: 'OpenSans', sans-serif;
-    font-weight: bold;
-    font-size: 60px;
     color: white;
-    display: flex;
-    justify-content: center;
-    margin-top: 11%;
+    height: 100%;
 `;
 
-export default TitleText;
+export default CenterText;

@@ -1,6 +1,6 @@
 import InformationBox from "./InformationBox";
 import ElementBox from "./ElementBox";
-import TitleText from "./TitleText";
-import DescriptionText from "./DescriptionText";
+import CenterText from "./CenterText";
+import TitleText from './TitleText'
 
-export { InformationBox, ElementBox, TitleText, DescriptionText };
+export { InformationBox, ElementBox, CenterText, TitleText };

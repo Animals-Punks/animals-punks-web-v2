@@ -1,1 +1,1 @@
-export { default } from "./TitleText.impl";
+export { default } from './TtitleText.impl';
