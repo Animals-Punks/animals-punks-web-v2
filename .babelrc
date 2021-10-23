@@ -1,7 +1,7 @@
 {
   "presets": [
     [
-      "@babel/preset-react",
+      "next/babel",
       {
         "preset-react": {
           "runtime": "automatic",
@@ -10,5 +10,18 @@
       }
     ]
   ],
-  "plugins": ["@emotion/babel-plugin"]
+  "plugins": [
+    "@emotion/babel-plugin",
+    [
+      "module-resolver",
+      {
+        "root": [
+          "./src"
+        ],
+        "alias": {
+          "@/*": "*",
+        }
+      }
+    ]
+  ]
 }
