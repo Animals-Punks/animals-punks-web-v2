@@ -4,7 +4,7 @@ import { InformationBox } from "../../../../common/components";
 
 const IntroBox: React.FC = () => {
     return (
-        <InformationBox>
+        <InformationBox backgroundColor="none">
             <link
                 rel="stylesheet"
                 href="https://fonts.googleapis.com/css2?family=Chewy"
