@@ -20,6 +20,10 @@
         ],
         "alias": {
           "@/*": "*",
+          "@common/*": "common/*",
+          "@assets/*": "assets/*",
+          "@pages/*": "pages/*",
+          "@User/*": "domains/User/*",
         }
       }
     ]

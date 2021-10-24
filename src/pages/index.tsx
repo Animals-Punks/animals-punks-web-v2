@@ -1,14 +1,14 @@
-import { css } from "@emotion/react";
 import type { NextPage } from "next";
+import { css } from "@emotion/react";
 
 import {
     IntroBox,
     IntroDuceBox,
-    RoadMapBox,
-    RarityBox,
-    TeamMemberBox,
     MixTokenBox,
-} from "../domains/User/components";
+    RarityBox,
+    RoadMapBox,
+    TeamMemberBox,
+} from "@User/components";
 
 const Home: NextPage = () => {
     return (

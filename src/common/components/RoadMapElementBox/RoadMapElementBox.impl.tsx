@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { IRoadMapElementBox } from "./RoadMapElementBox.interface";
+import { IRoadMapElementBox } from "@common/components/RoadMapElementBox/RoadMapElementBox.interface";
 
 const RoadMapElementBox: React.FC<IRoadMapElementBox.IProps> = ({
     title,
@@ -20,7 +20,7 @@ const RoadMapElementBox: React.FC<IRoadMapElementBox.IProps> = ({
 };
 
 const roadMapElementTextContatiner = css`
-    font-family: 'OpenSans', sans-serif;
+    font-family: "OpenSans", sans-serif;
     color: #000;
     height: 100%;
 `;
@@ -35,7 +35,7 @@ const elementTextStyle = css`
 
 const elementTitleTextStyle = css`
     font-weight: bold;
-    font-size: 25px;
+    font-size: 2vw;
     color: #000;
 `;
 
@@ -43,7 +43,7 @@ const elementDiscriptionStyle = css`
     text-align: center;
     margin-top: 8%;
     font-weight: normal;
-    font-size: 20px;
+    font-size: 1.3vw;
     color: #000;
 `;
 

@@ -1,6 +1,6 @@
 import { css } from "@emotion/react";
 
-import { IElementBox } from "./ElementBox.interface";
+import { IElementBox } from "@common/components/ElementBox/ElementBox.interface";
 
 const ElementBox: React.FC<IElementBox.IProps> = ({
     backgroundColor,
