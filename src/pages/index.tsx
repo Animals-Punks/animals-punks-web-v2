@@ -9,6 +9,7 @@ import {
     RoadMapBox,
     TeamMemberBox,
     PartnerShipBox,
+    ConnectUsBox,
 } from "@User/components";
 
 const Home: NextPage = () => {
@@ -23,6 +24,7 @@ const Home: NextPage = () => {
                     <TeamMemberBox />
                     <PartnerShipBox />
                     <MixTokenBox />
+                    <ConnectUsBox />
                 </div>
             </div>
         </div>

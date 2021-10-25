@@ -66,9 +66,9 @@ const MixTokenBox: React.FC = () => {
                         <Button width="20vw" height="8vh">
                             NAMING AP
                         </Button>
-                        <Button width="20vw" height="8vh">
+                        {/* <Button width="20vw" height="8vh">
                             CHECK TRANSACTIONS
-                        </Button>
+                        </Button> */}
                     </div>
                 </div>
             </CenterText>

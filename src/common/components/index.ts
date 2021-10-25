@@ -5,6 +5,7 @@ import TitleText from "./TitleText";
 import RoadMapElementBox from "./RoadMapElementBox";
 import Button from "./Button";
 import BackgroundImage from "./BackgroundImage";
+import LinkNewTap from "./LinkNewTap";
 
 export {
     InformationBox,
@@ -14,4 +15,5 @@ export {
     RoadMapElementBox,
     Button,
     BackgroundImage,
+    LinkNewTap,
 };
