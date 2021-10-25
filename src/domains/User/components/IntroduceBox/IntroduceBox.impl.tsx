@@ -1,11 +1,12 @@
 import { css } from "@emotion/react";
-import { ElementBox, CenterText } from "@common/components";
+
+import { ElementBox, CenterText, TitleText } from "@common/components";
 
 const IntroDuceBox: React.FC = () => {
     return (
         <ElementBox backgroundColor="#000">
             <CenterText>
-                <div css={titleTextStyle}>INTRODUCE</div>
+                <TitleText textColor="#fff">INTRODUCE</TitleText>
                 <div css={descriptionTextStyle}>
                     클레이튼(KLAY)기반 NFT <br /> 무작위로 생성된 10,000개의
                     카툰풍
@@ -15,11 +16,6 @@ const IntroDuceBox: React.FC = () => {
         </ElementBox>
     );
 };
-
-const titleTextStyle = css`
-    font-weight: bold;
-    font-size: 4vw;
-`;
 
 const descriptionTextStyle = css`
     font-weight: regular;

@@ -8,6 +8,7 @@ import {
     RarityBox,
     RoadMapBox,
     TeamMemberBox,
+    PartnerShipBox,
 } from "@User/components";
 
 const Home: NextPage = () => {
@@ -20,6 +21,7 @@ const Home: NextPage = () => {
                     <RoadMapBox />
                     <RarityBox />
                     <TeamMemberBox />
+                    <PartnerShipBox />
                     <MixTokenBox />
                 </div>
             </div>

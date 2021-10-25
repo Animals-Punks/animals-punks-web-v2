@@ -4,6 +4,7 @@ import RoadMapBox from "./RoadMapBox";
 import RarityBox from "./RarityBox";
 import TeamMemberBox from "./TeamMemberBox";
 import MixTokenBox from "./MixTokenBox";
+import PartnerShipBox from "./PartnerShipBox";
 
 export {
     IntroBox,
@@ -12,4 +13,5 @@ export {
     RarityBox,
     TeamMemberBox,
     MixTokenBox,
+    PartnerShipBox,
 };
