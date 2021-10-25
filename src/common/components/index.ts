@@ -4,6 +4,7 @@ import CenterText from "./CenterText";
 import TitleText from "./TitleText";
 import RoadMapElementBox from "./RoadMapElementBox";
 import Button from "./Button";
+import BackgroundImage from "./BackgroundImage";
 
 export {
     InformationBox,
@@ -12,4 +13,5 @@ export {
     TitleText,
     RoadMapElementBox,
     Button,
+    BackgroundImage,
 };

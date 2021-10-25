@@ -12,7 +12,7 @@ const TeamMemberBox: React.FC = () => {
                 <Slider css={sliderStyle}>
                     <div>
                         <div css={teamNameStyle}>Po0</div>
-                        <div style={{ marginTop: "5%" }}>
+                        <div css={memberHelloTextStyle}>
                             {" "}
                             애니멀 펑크의 전체적인 기획을 했습니다. 새로운 것을
                             배우는 것을 좋아합니다. <br />
@@ -26,7 +26,7 @@ const TeamMemberBox: React.FC = () => {
                     </div>
                     <div>
                         <div css={teamNameStyle}>Pix</div>
-                        <div style={{ marginTop: "5%" }}>
+                        <div css={memberHelloTextStyle}>
                             V1의 도트와 V2의 그림을 그렸습니다. 동물을 사랑하는
                             마음을 그림에 녹여내 <br /> 귀여운 동물친구들을
                             그리고자 노력했습니다. 게임을 매우 좋아하는 사람 중
@@ -37,7 +37,7 @@ const TeamMemberBox: React.FC = () => {
                     </div>
                     <div>
                         <div css={teamNameStyle}>Depp</div>
-                        <div style={{ marginTop: "5%" }}>
+                        <div css={memberHelloTextStyle}>
                             애니멀펑크의 이벤트 및 홍보를 기획하며, 커뮤니티
                             소통과 관리를 담당합니다. <br /> 애니멀펑크의 V1을
                             통해 아시아 및 유럽등 해외시장 진출을 위해 <br />{" "}
@@ -50,7 +50,7 @@ const TeamMemberBox: React.FC = () => {
                     </div>
                     <div>
                         <div css={teamNameStyle}>Wow</div>
-                        <div style={{ marginTop: "5%" }}>
+                        <div css={memberHelloTextStyle}>
                             다 년 간의 블록 체인 개발 경험을 살려 <br /> AP팀이
                             겪게 될 기술적 고난들을 돌파 하는데 큰 힘이
                             되겠습니다. <br /> AP 팀이 더 큰 목표를 바라보고,
@@ -82,6 +82,11 @@ const titleTextStyle = css`
 const teamNameStyle = css`
     font-weight: bold;
     font-size: 2vh;
+`;
+
+const memberHelloTextStyle = css`
+    margin-top: 5%;
+    font-size: 1.5vh;
 `;
 
 export default TeamMemberBox;

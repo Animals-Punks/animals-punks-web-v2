@@ -38,9 +38,9 @@ const RoadMapBox: React.FC = () => {
                     </div>
                 </div>
                 <div css={teamVisionTextStyle}>
-                    애니멀즈팀의 꿈은 애니멀즈로 애니메이션을 만들고, 메타버스
-                    세상에서 애니멀즈와 커뮤니티 유저들이 함께 놀 수 있도록 하는
-                    것입니다. <br />
+                    애니멀즈팀의 꿈은 애니멀즈로 애니메이션을 만들고,
+                    <br /> 메타버스 세상에서 애니멀즈와 커뮤니티 유저들이 함께
+                    놀 수 있도록 하는 것입니다. <br />
                     우리는 언제, 어떻게 꿈의 조각이 완성될지 가늠하기 어렵지만
                     이루어질 수 있다고 믿습니다.
                 </div>
@@ -69,7 +69,7 @@ const underElementStyle = css`
 const teamVisionTextStyle = css`
     display: flex;
     flex-direction: column;
-    margin-top: 5%;
+    margin-top: 7%;
     text-align: center;
     color: #000;
     font-size: 1.5vw;

@@ -1,9 +1,14 @@
 import { IButton } from "@common/components/Button/Button.interface";
 import { css } from "@emotion/react";
 
-const Button: React.FC<IButton.IProps> = ({ children, width, height }) => {
+const Button: React.FC<IButton.IProps> = ({
+    children,
+    width,
+    height,
+    onClick,
+}) => {
     return (
-        <div css={buttonContainer}>
+        <div css={buttonContainer} onClick={onClick}>
             <div css={buttonStyle} style={{ width, height }}>
                 {children}
             </div>
