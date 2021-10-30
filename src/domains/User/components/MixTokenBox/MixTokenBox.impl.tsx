@@ -24,7 +24,7 @@ const MixTokenBox: React.FC = () => {
     };
 
     return (
-        <InformationBox backgroundColor="#f2f27d">
+        <InformationBox backgroundColor="#FFFA96">
             <CenterText>
                 <TitleText textColor="#000">MIX TOKEN</TitleText>
                 <div css={discriptionTextStyle}>

@@ -6,6 +6,9 @@ import RoadMapElementBox from "./RoadMapElementBox";
 import Button from "./Button";
 import BackgroundImage from "./BackgroundImage";
 import LinkNewTap from "./LinkNewTap";
+import FilterButton from "./FilterButton";
+import FilterElementBox from "./FilterElementBox";
+import ImageBox from "./ImageBox";
 
 export {
     InformationBox,
@@ -16,4 +19,7 @@ export {
     Button,
     BackgroundImage,
     LinkNewTap,
+    FilterButton,
+    FilterElementBox,
+    ImageBox,
 };

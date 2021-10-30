@@ -9,7 +9,7 @@ import {
 
 const RoadMapBox: React.FC = () => {
     return (
-        <InformationBox backgroundColor="#6feb86">
+        <InformationBox backgroundColor="#55E19B">
             <CenterText>
                 <TitleText textColor="#000">ROAD MAP</TitleText>
                 <div css={elementContainer}>
