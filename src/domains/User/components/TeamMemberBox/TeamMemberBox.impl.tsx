@@ -77,7 +77,7 @@ const TeamMemberBox: React.FC = () => {
 const sliderStyle = css`
     background-color: #fff;
     display: flex;
-    width: 700px;
+    width: 80vh;
     justify-content: center;
     text-align: center;
 `;

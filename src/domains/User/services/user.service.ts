@@ -5,7 +5,7 @@ import {
 } from "@User/services/user-service.interface";
 
 export class UserService implements IUserService {
-    public async findRarity(): Promise<FindRarityResult | undefined | null> {
+    public async findRarity(): Promise<FindRarityResult | undefined| null> {
         try {
             const background = localStorage.getItem("배경");
             if (background === null) return undefined;
