@@ -10,9 +10,12 @@ export default function useMixTokenBox(): {
     useEffect(() => {
         const metaMask: any | undefined = (window as any).ethereum;
         const klaytn: any | undefined = (window as any).klaytn;
-        if (metaMask !== undefined)
+        if (metaMask !== undefined) {
             setIsconnectMetaMask(metaMask.isConnected());
-        if (klaytn !== undefined) setIsconnectKaikas(klaytn.isConnected());
+        }
+        if (klaytn !== undefined) {
+            setIsconnectKaikas(klaytn.isConnected());
+        }
     });
 
     return { isConnectedMetaMask, isConnectedKaikas };
