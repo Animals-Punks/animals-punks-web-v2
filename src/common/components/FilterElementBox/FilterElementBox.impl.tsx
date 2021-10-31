@@ -28,11 +28,11 @@ const elementStyle = css`
     justify-content: center;
     background-color: #acffef;
     color: #000;
-    font-size: 1vw;
+    font-size: 1.5vh;
     cursor: pointer;
-    width: 10vw;
-    height: 6vh;
-    border: 2px solid #000;
+    width: 5vw;
+    height: 4vh;
+    border: 2px solid #00d7ff;
     margin-bottom: 0.6vh;
     border-radius: 10px;
 `;

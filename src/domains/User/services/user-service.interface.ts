@@ -14,5 +14,5 @@ export interface FindRarityResult {
 }
 
 export interface IUserService {
-    findRarity(findRarityParams: FindRarityParams): Promise<FindRarityResult>;
+    findRarity(): Promise<FindRarityResult | undefined | null>;
 }

@@ -9,7 +9,7 @@ import {
 } from "@common/interfaces/graphql-service.interface";
 
 export default class GraphqlService implements IGraphqlService {
-    readonly endpoint = `http://ec2-3-145-4-123.us-east-2.compute.amazonaws.com:31103/v1/graphql`;
+    readonly endpoint = `http://${process.env.NEXT_PUBLIC_GRAPHQL_END_POINT}:${process.env.NEXT_PUBLIC_GRAPHQL_PORT}/v1/graphql`;
 
     async req<T1, T2>(args: {
         endpoint: string;
@@ -18,7 +18,7 @@ export default class GraphqlService implements IGraphqlService {
     }): Promise<T1> {
         return await new GraphQLClient(args.endpoint, {
             headers: {
-                "x-hasura-admin-secret": "BDp5F7rGBYcNtYHT7NAxb5",
+                "x-hasura-admin-secret": `${process.env.NEXT_PUBLIC_SECRET}`,
             },
         }).request<T1>(print(args.query), args.variables);
     }

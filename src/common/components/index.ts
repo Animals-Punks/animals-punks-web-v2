@@ -9,6 +9,7 @@ import LinkNewTap from "./LinkNewTap";
 import FilterButton from "./FilterButton";
 import FilterElementBox from "./FilterElementBox";
 import ImageBox from "./ImageBox";
+import FilterItem from "./FilterItem";
 
 export {
     InformationBox,
@@ -22,4 +23,5 @@ export {
     FilterButton,
     FilterElementBox,
     ImageBox,
+    FilterItem,
 };

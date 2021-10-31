@@ -11,7 +11,9 @@ const RoadMapBox: React.FC = () => {
     return (
         <InformationBox backgroundColor="#55E19B">
             <CenterText>
-                <TitleText textColor="#000">ROAD MAP</TitleText>
+                <div style={{ marginBottom: "10vh" }}>
+                    <TitleText textColor="#000">ROAD MAP</TitleText>
+                </div>
                 <div css={elementContainer}>
                     <div css={lineContainer}>
                         <RoadMapElementBox title="1. 확장">

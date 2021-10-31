@@ -1,8 +1,13 @@
+import Image from "next/image";
 import Slider from "react-awesome-slider";
 import "react-awesome-slider/dist/styles.css";
 import { css } from "@emotion/react";
 
 import { ElementBox, CenterText } from "@common/components";
+import po0 from "@assets/images/Po0.png";
+import pix from "@assets/images/Pix.png";
+import depp from "@assets/images/depp.png";
+import wow from "@assets/images/wow.png";
 
 const TeamMemberBox: React.FC = () => {
     return (
@@ -11,6 +16,7 @@ const TeamMemberBox: React.FC = () => {
                 <div css={titleTextStyle}>TEAM MEMBERS</div>
                 <Slider css={sliderStyle}>
                     <div>
+                        <Image src={po0} width="100px" height="100px" />
                         <div css={teamNameStyle}>Po0</div>
                         <div css={memberHelloTextStyle}>
                             {" "}
@@ -25,6 +31,7 @@ const TeamMemberBox: React.FC = () => {
                         </div>
                     </div>
                     <div>
+                        <Image src={pix} width="100px" height="100px" />
                         <div css={teamNameStyle}>Pix</div>
                         <div css={memberHelloTextStyle}>
                             V1의 도트와 V2의 그림을 그렸습니다. 동물을 사랑하는
@@ -36,6 +43,7 @@ const TeamMemberBox: React.FC = () => {
                         </div>
                     </div>
                     <div>
+                        <Image src={depp} width="100px" height="100px" />
                         <div css={teamNameStyle}>Depp</div>
                         <div css={memberHelloTextStyle}>
                             애니멀펑크의 이벤트 및 홍보를 기획하며, 커뮤니티
@@ -49,6 +57,7 @@ const TeamMemberBox: React.FC = () => {
                         </div>
                     </div>
                     <div>
+                        <Image src={wow} width="100px" height="100px" />
                         <div css={teamNameStyle}>Wow</div>
                         <div css={memberHelloTextStyle}>
                             다 년 간의 블록 체인 개발 경험을 살려 <br /> AP팀이
@@ -80,6 +89,7 @@ const titleTextStyle = css`
 `;
 
 const teamNameStyle = css`
+    margin-top: 50px;
     font-weight: bold;
     font-size: 2vh;
 `;

@@ -1,4 +1,5 @@
 import { css } from "@emotion/react";
+
 import { ITitleText } from "@common/components/TitleText/TitleText.interface";
 
 const TitleText: React.FC<ITitleText.IProps> = ({ children, textColor }) => {

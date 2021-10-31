@@ -47,8 +47,8 @@ const MixTokenBox: React.FC = () => {
                                 }
                             >
                                 {isConnectedMetaMask
-                                    ? "V1 WALLET CONNECTION"
-                                    : "CONNECT V1 WALLET"}
+                                    ? "CONNECTED METAMASK"
+                                    : "CONNECT METAMASK"}
                             </Button>
 
                             <Button
@@ -61,8 +61,8 @@ const MixTokenBox: React.FC = () => {
                                 }
                             >
                                 {isConnectedKaikas
-                                    ? "V2 WALLET CONNECTION"
-                                    : "CONNECT V2 WALLET"}
+                                    ? "CONNECTED KAIKAS"
+                                    : "CONNECT KAIKAS"}
                             </Button>
                         </div>
                     </div>
