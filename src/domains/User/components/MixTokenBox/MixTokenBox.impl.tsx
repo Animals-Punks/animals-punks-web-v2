@@ -9,18 +9,21 @@ import {
 import { useMixTokenBox } from "@User/hooks";
 
 const MixTokenBox: React.FC = () => {
-    const { isConnectedMetaMask, isConnectedKaikas } = useMixTokenBox();
+    // const { isConnectedMetaMask, isConnectedKaikas } = useMixTokenBox();
 
     const connectMetaMask = async () => {
         const metaMask: any | undefined = (window as any).ethereum;
-        if (metaMask !== undefined) await metaMask.enable();
-        alert("Please install metamask first.");
+        if (metaMask !== undefined) {
+            metaMask.request({ method: 'eth_requestAccounts' })
+            metaMask.enable();
+        };
     };
 
     const connectKaikas = () => {
         const klaytn: any | undefined = (window as any).klaytn;
-        if (klaytn !== undefined) klaytn.enable();
-        alert("Please install kaikas first.");
+        if (klaytn !== undefined) {
+            klaytn.enable();
+        };
     };
 
     const onSubmitNaming = () => {
@@ -40,29 +43,17 @@ const MixTokenBox: React.FC = () => {
                             <Button
                                 width="20vw"
                                 height="10vh"
-                                onClick={
-                                    isConnectedMetaMask
-                                        ? undefined
-                                        : connectMetaMask
-                                }
+                                onClick={connectMetaMask}
                             >
-                                {isConnectedMetaMask
-                                    ? "CONNECTED METAMASK"
-                                    : "CONNECT METAMASK"}
+                                {"CONNECT METAMASK"}
                             </Button>
 
                             <Button
                                 width="20vw"
                                 height="10vh"
-                                onClick={
-                                    isConnectedKaikas
-                                        ? undefined
-                                        : connectKaikas
-                                }
+                                onClick={connectKaikas}
                             >
-                                {isConnectedKaikas
-                                    ? "CONNECTED KAIKAS"
-                                    : "CONNECT KAIKAS"}
+                                {"CONNECT KAIKAS"}
                             </Button>
                         </div>
                     </div>

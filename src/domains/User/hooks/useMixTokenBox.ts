@@ -14,6 +14,7 @@ export default function useMixTokenBox(): {
             setIsconnectMetaMask(metaMask.isConnected());
         }
         if (klaytn !== undefined) {
+            console.log(klaytn.isConnected());
             setIsconnectKaikas(klaytn.isConnected());
         }
     });
