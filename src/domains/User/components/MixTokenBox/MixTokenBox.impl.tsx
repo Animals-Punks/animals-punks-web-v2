@@ -23,6 +23,10 @@ const MixTokenBox: React.FC = () => {
         klaytn.enable();
     };
 
+    const onSubmitNaming = () => {
+        alert("comming soon");
+    };
+
     return (
         <InformationBox backgroundColor="#FFFA96">
             <CenterText>
@@ -63,7 +67,11 @@ const MixTokenBox: React.FC = () => {
                         </div>
                     </div>
                     <div css={processButtonContainer}>
-                        <Button width="20vw" height="8vh">
+                        <Button
+                            width="20vw"
+                            height="8vh"
+                            onClick={onSubmitNaming}
+                        >
                             NAMING AP
                         </Button>
                         {/* <Button width="20vw" height="8vh">

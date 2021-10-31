@@ -75,7 +75,7 @@ const sliderStyle = css`
 
 const titleTextStyle = css`
     font-weight: bold;
-    font-size: 4vw;
+    font-size: 4vh;
     color: #000;
 `;
 

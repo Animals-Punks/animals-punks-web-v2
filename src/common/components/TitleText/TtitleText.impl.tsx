@@ -11,7 +11,7 @@ const TitleText: React.FC<ITitleText.IProps> = ({ children, textColor }) => {
 
 const titleTextStyle = css`
     font-weight: bold;
-    font-size: 4vw;
+    font-size: 4vh;
 `;
 
 export default TitleText;

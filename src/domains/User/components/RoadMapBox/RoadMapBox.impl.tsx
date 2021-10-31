@@ -53,6 +53,7 @@ const elementContainer = css`
     display: flex;
     flex-direction: row;
     justify-content: center;
+    margin-top: 3vh;
 `;
 
 const lineContainer = css`
@@ -72,7 +73,7 @@ const teamVisionTextStyle = css`
     margin-top: 7%;
     text-align: center;
     color: #000;
-    font-size: 1.5vw;
+    font-size: 1.7vh;
     font-style: normal;
     font-weight: bold;
 `;

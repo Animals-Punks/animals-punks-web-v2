@@ -35,7 +35,7 @@ const elementTextStyle = css`
 
 const elementTitleTextStyle = css`
     font-weight: bold;
-    font-size: 2vw;
+    font-size: 2vh;
     color: #000;
 `;
 
@@ -43,7 +43,7 @@ const elementDiscriptionStyle = css`
     text-align: center;
     margin-top: 8%;
     font-weight: normal;
-    font-size: 1.3vw;
+    font-size: 1.5vh;
     color: #000;
 `;
 
