@@ -13,14 +13,14 @@ const MixTokenBox: React.FC = () => {
 
     const connectMetaMask = async () => {
         const metaMask: any | undefined = (window as any).ethereum;
-        if (metaMask === undefined) alert("Please install metamask first.");
-        await metaMask.enable();
+        if (metaMask !== undefined) await metaMask.enable();
+        alert("Please install metamask first.");
     };
 
     const connectKaikas = () => {
         const klaytn: any | undefined = (window as any).klaytn;
-        if (klaytn === undefined) alert("Please install kaikas first.");
-        klaytn.enable();
+        if (klaytn !== undefined) klaytn.enable();
+        alert("Please install kaikas first.");
     };
 
     const onSubmitNaming = () => {
