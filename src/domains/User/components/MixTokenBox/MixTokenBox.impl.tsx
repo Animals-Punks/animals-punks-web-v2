@@ -6,24 +6,21 @@ import {
     TitleText,
     Button,
 } from "@common/components";
-import { useMixTokenBox } from "@User/hooks";
 
 const MixTokenBox: React.FC = () => {
-    // const { isConnectedMetaMask, isConnectedKaikas } = useMixTokenBox();
-
     const connectMetaMask = async () => {
         const metaMask: any | undefined = (window as any).ethereum;
         if (metaMask !== undefined) {
-            metaMask.request({ method: 'eth_requestAccounts' })
+            metaMask.request({ method: "eth_requestAccounts" });
             metaMask.enable();
-        };
+        }
     };
 
     const connectKaikas = () => {
         const klaytn: any | undefined = (window as any).klaytn;
         if (klaytn !== undefined) {
             klaytn.enable();
-        };
+        }
     };
 
     const onSubmitNaming = () => {

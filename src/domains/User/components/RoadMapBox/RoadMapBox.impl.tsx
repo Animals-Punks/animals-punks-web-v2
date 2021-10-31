@@ -17,7 +17,7 @@ const RoadMapBox: React.FC = () => {
                 <div css={elementContainer}>
                     <div css={lineContainer}>
                         <RoadMapElementBox title="1. 확장">
-                            애니멀즈를 활용한 제작(키키오톡 이모티콘, 굿즈,{" "}
+                            애니멀즈를 활용한 제작(카카오톡 이모티콘, 굿즈,{" "}
                             <br />
                             메타버스 웨어러블 등) 후 애니멀즈를 활용해 다양한
                             컨텐츠로의 확장
