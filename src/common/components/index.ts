@@ -10,6 +10,7 @@ import FilterButton from "./FilterButton";
 import FilterElementBox from "./FilterElementBox";
 import ImageBox from "./ImageBox";
 import FilterItem from "./FilterItem";
+import SelectBox from "./SelectBox";
 
 export {
     InformationBox,
@@ -24,4 +25,5 @@ export {
     FilterElementBox,
     ImageBox,
     FilterItem,
+    SelectBox,
 };

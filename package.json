@@ -17,7 +17,10 @@
         "web": "pm2 start npm --name next -- run dev"
     },
     "dependencies": {
-        "@emotion/react": "^11.4.1",
+        "@emotion/react": "^11.5.0",
+        "@emotion/styled": "^11.3.0",
+        "@mui/material": "^5.0.6",
+        "@mui/styled-engine-sc": "^5.0.4",
         "@next/bundle-analyzer": "^11.1.0",
         "antd": "^4.16.13",
         "axios": "^0.21.1",

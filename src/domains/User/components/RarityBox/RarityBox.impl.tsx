@@ -1,16 +1,14 @@
 import { css } from "@emotion/react";
-import { useState } from "react";
+import { useRecoilValue } from "recoil";
 
 import {
     InformationBox,
     TitleText,
-    FilterElementBox,
     ImageBox,
-    FilterItem,
+    SelectBox,
     Button,
 } from "@common/components";
 import { useRarity } from "@User/hooks";
-import { rowsList } from "@assets/metaDatas/rows";
 import {
     mouthItemList,
     backgroundList,
@@ -20,28 +18,34 @@ import {
     speciesList,
     eyeslist,
 } from "@assets/metaDatas/items";
+import {
+    backgroundState,
+    speciesState,
+    headState,
+    eyesState,
+    mouthState,
+    clothesState,
+    accessoryState,
+} from "@common/services/recoil/itemAtom";
 
 const RarityBox: React.FC = () => {
-    const [item, setItem] = useState("");
-    const [itemList, setItemList] = useState([""]);
+    const background = useRecoilValue(backgroundState);
+    const species = useRecoilValue(speciesState);
+    const head = useRecoilValue(headState);
+    const eyes = useRecoilValue(eyesState);
+    const mouth = useRecoilValue(mouthState);
+    const clothes = useRecoilValue(clothesState);
+    const accessory = useRecoilValue(accessoryState);
 
-    const onClickItem = (itemName: string) => {
-        if (itemName === "배경") setItemList(backgroundList);
-        if (itemName === "동물") setItemList(speciesList);
-        if (itemName === "머리") setItemList(headList);
-        if (itemName === "눈") setItemList(eyeslist);
-        if (itemName === "입") setItemList(mouthItemList);
-        if (itemName === "옷") setItemList(clothesList);
-        if (itemName === "악세사리") setItemList(accessoryList);
-        setItem(itemName);
-    };
-    const { onClick, imageUrlState, apNameState } = useRarity();
-
-    const filterRows = rowsList.map(row => (
-        <FilterElementBox key={row} onClick={() => onClickItem(row)}>
-            {row}
-        </FilterElementBox>
-    ));
+    const { onClick, imageUrlState, apNameState } = useRarity(
+        background,
+        species,
+        head,
+        eyes,
+        mouth,
+        clothes,
+        accessory
+    );
 
     return (
         <InformationBox backgroundColor="#9bf5ff">
@@ -64,8 +68,48 @@ const RarityBox: React.FC = () => {
                             </Button>
                         </div>
                     </div>
-                    <div css={filterElementContainer}>{filterRows}</div>
-                    <FilterItem itemList={itemList} itemName={item} />
+                    <div style={{ display: "flex", flexDirection: "column" }}>
+                        <div css={filterElementContainer}>
+                            <SelectBox
+                                itemList={backgroundList}
+                                itemAtom={backgroundState}
+                            >
+                                배경
+                            </SelectBox>
+                            <SelectBox
+                                itemList={speciesList}
+                                itemAtom={speciesState}
+                            >
+                                동물
+                            </SelectBox>
+                            <SelectBox itemList={headList} itemAtom={headState}>
+                                머리
+                            </SelectBox>
+                            <SelectBox itemList={eyeslist} itemAtom={eyesState}>
+                                눈
+                            </SelectBox>
+                        </div>
+                        <div css={filterElementContainer}>
+                            <SelectBox
+                                itemList={mouthItemList}
+                                itemAtom={mouthState}
+                            >
+                                입
+                            </SelectBox>
+                            <SelectBox
+                                itemList={clothesList}
+                                itemAtom={clothesState}
+                            >
+                                옷
+                            </SelectBox>
+                            <SelectBox
+                                itemList={accessoryList}
+                                itemAtom={accessoryState}
+                            >
+                                악세사리
+                            </SelectBox>
+                        </div>
+                    </div>
                 </div>
             </div>
         </InformationBox>

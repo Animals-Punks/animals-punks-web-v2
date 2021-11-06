@@ -1,6 +1,7 @@
 import type { NextPage } from "next";
 import { css } from "@emotion/react";
 import Head from "next/head";
+import { RecoilRoot } from "recoil";
 
 import {
     IntroBox,
@@ -16,24 +17,26 @@ import {
 const Home: NextPage = () => {
     return (
         <>
-            <Head>
-                <link rel="header icon" href="/headerIcon.png" />
-                <title>Animals Punks V2</title>
-            </Head>
-            <div css={containerWraper}>
-                <div css={headerContainterStyle}>
-                    <IntroBox />
-                    <div css={elementContainerStyle}>
-                        <IntroDuceBox />
-                        <RoadMapBox />
-                        <RarityBox />
-                        <TeamMemberBox />
-                        <PartnerShipBox />
-                        <MixTokenBox />
-                        <ConnectUsBox />
+            <RecoilRoot>
+                <Head>
+                    <link rel="header icon" href="/headerIcon.png" />
+                    <title>Animals Punks V2</title>
+                </Head>
+                <div css={containerWraper}>
+                    <div css={headerContainterStyle}>
+                        <IntroBox />
+                        <div css={elementContainerStyle}>
+                            <IntroDuceBox />
+                            <RoadMapBox />
+                            <RarityBox />
+                            <TeamMemberBox />
+                            <PartnerShipBox />
+                            <MixTokenBox />
+                            <ConnectUsBox />
+                        </div>
                     </div>
                 </div>
-            </div>
+            </RecoilRoot>
         </>
     );
 };

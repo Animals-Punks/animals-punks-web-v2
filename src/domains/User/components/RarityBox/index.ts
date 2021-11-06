@@ -1,1 +1,1 @@
-export { default } from './RarityBox.impl';
+export { default } from "./RarityBox.impl";
