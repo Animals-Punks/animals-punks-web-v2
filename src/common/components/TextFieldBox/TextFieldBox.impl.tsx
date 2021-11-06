@@ -1,7 +1,12 @@
 import { css } from "@emotion/react";
 import TextField from "@mui/material/TextField";
 
-const TextFieldBox: React.FC = ({ children }) => {
+import { ITextFieldBox } from "./TextFieldBox.interface";
+
+const TextFieldBox: React.FC<ITextFieldBox.IProps> = ({
+    children,
+    onChange,
+}) => {
     return (
         <div css={TextFieldContainer}>
             <TextField
@@ -10,6 +15,7 @@ const TextFieldBox: React.FC = ({ children }) => {
                 variant="standard"
                 color="primary"
                 fullWidth={true}
+                onChange={onChange}
             />
         </div>
     );

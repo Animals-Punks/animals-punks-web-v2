@@ -26,4 +26,9 @@ export interface IUserService {
         findRarityParams: FindRarityParams
     ): Promise<FindRarityResult | undefined | null>;
     getApName(getNameParams: GetNameParams): Promise<ApName | null>;
+    createApName(
+        isUpdate: boolean,
+        apNumber: number,
+        apName: string
+    ): Promise<boolean>;
 }

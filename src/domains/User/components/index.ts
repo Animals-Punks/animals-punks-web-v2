@@ -6,6 +6,9 @@ import TeamMemberBox from "./TeamMemberBox";
 import MixTokenBox from "./MixTokenBox";
 import PartnerShipBox from "./PartnerShipBox";
 import ConnectUsBox from "./ConnectUsBox";
+import SelectNameLogicModal from "./SelectNameLogicModal";
+import ChangeApNameModal from "./ChangeApNameModal";
+import DeleteApNameModal from "./DeleteApNameModal";
 
 export {
     IntroBox,
@@ -16,4 +19,7 @@ export {
     PartnerShipBox,
     MixTokenBox,
     ConnectUsBox,
+    SelectNameLogicModal,
+    ChangeApNameModal,
+    DeleteApNameModal,
 };

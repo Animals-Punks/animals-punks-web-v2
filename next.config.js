@@ -6,4 +6,15 @@ module.exports = [{
     images: {
         disableStaticImages: true,
     },
+    webpack: (config, {isServer}) => {
+        if (!isServer) {
+            config.node = {
+                fs: 'empty',
+                net: 'empty',
+                els: 'empty',
+                "fs-extra": 'empty'
+            }
+        }
+        return config
+    }
 }, withImages()];
