@@ -13,8 +13,17 @@ export interface FindRarityResult {
     name: string;
 }
 
+export interface GetNameParams {
+    apNumber: number;
+}
+
+export interface ApName {
+    nftName: string;
+}
+
 export interface IUserService {
     findRarity(
         findRarityParams: FindRarityParams
     ): Promise<FindRarityResult | undefined | null>;
+    getApName(getNameParams: GetNameParams): Promise<ApName | null>;
 }

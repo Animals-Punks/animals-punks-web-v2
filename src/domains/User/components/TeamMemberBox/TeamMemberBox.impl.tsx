@@ -91,7 +91,7 @@ const titleTextStyle = css`
 
 const sliderContainer = css`
     display: flex;
-    width: 60vh;
+    width: 58vh;
     justify-content: center;
     align-items: center;
     text-align: center;

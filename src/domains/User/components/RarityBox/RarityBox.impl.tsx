@@ -63,6 +63,7 @@ const RarityBox: React.FC = () => {
                                 width="100px"
                                 height="35px"
                                 onClick={onClick}
+                                fontSize="1vw"
                             >
                                 Search
                             </Button>

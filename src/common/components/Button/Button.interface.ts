@@ -3,5 +3,6 @@ export declare namespace IButton {
         width: string;
         height: string;
         onClick?: any;
+        fontSize?: any;
     }
 }

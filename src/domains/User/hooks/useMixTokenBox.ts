@@ -1,23 +1,9 @@
-import { useEffect, useState } from "react";
+import { SetterOrUpdater, useRecoilState } from "recoil";
 
-export default function useMixTokenBox(): {
-    isConnectedMetaMask: boolean;
-    isConnectedKaikas: boolean;
-} {
-    const [isConnectedMetaMask, setIsconnectMetaMask] = useState(false);
-    const [isConnectedKaikas, setIsconnectKaikas] = useState(false);
+import { updateNameState } from "@common/services/recoil/updateNameState";
+import { userService } from "@User/services";
 
-    useEffect(() => {
-        const metaMask: any | undefined = (window as any).ethereum;
-        const klaytn: any | undefined = (window as any).klaytn;
-        if (metaMask !== undefined) {
-            setIsconnectMetaMask(metaMask.isConnected());
-        }
-        if (klaytn !== undefined) {
-            console.log(klaytn.isConnected());
-            setIsconnectKaikas(klaytn.isConnected());
-        }
-    });
-
-    return { isConnectedMetaMask, isConnectedKaikas };
+export default async function useMixTokenBox(apNumber: number) {
+    const [updateName, setUpdateName] = useRecoilState(updateNameState);
+    return { updateName, setUpdateName };
 }

@@ -11,6 +11,8 @@ import FilterElementBox from "./FilterElementBox";
 import ImageBox from "./ImageBox";
 import FilterItem from "./FilterItem";
 import SelectBox from "./SelectBox";
+import Modal from "./Modal";
+import TextFieldBox from "./TextFieldBox";
 
 export {
     InformationBox,
@@ -26,4 +28,6 @@ export {
     ImageBox,
     FilterItem,
     SelectBox,
+    Modal,
+    TextFieldBox,
 };

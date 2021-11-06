@@ -6,10 +6,11 @@ const Button: React.FC<IButton.IProps> = ({
     width,
     height,
     onClick,
+    fontSize,
 }) => {
     return (
         <div css={buttonContainer} onClick={onClick}>
-            <div css={buttonStyle} style={{ width, height }}>
+            <div css={buttonStyle} style={{ width, height, fontSize }}>
                 {children}
             </div>
         </div>
