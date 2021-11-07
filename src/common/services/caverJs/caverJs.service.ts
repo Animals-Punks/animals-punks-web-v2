@@ -1,4 +1,14 @@
 export class CaverJsService {
+    async checkOwner(reqAddress: string) {
+        const klaytn: any | undefined = (window as any).klaytn;
+        const klaytnAddress = await klaytn.enable();
+
+        console.log(klaytnAddress[0]);
+
+        if (klaytnAddress[0] === reqAddress.toLowerCase()) return true;
+        return false;
+    }
+
     async burnMix(isUpdate: boolean, burnMixAmount: string): Promise<boolean> {
         if (isUpdate === false) return true;
         try {
@@ -31,7 +41,7 @@ export class CaverJsService {
                 result.senderTxHash
             );
             if (trxResult.status === true) return true;
-            return false
+            return false;
         } catch (error) {
             alert(error.message);
             return false;

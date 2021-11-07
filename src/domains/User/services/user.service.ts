@@ -23,7 +23,7 @@ export class UserService implements IUserService {
             );
             const searchNft = rarity[0];
             if (searchNftName[0].name === undefined) {
-                return { ...searchNft}
+                return { ...searchNft };
             }
             const name = `${searchNft.name} ${searchNftName[0].name}`;
             const url = rarity[0].imgUrl;
@@ -49,9 +49,21 @@ export class UserService implements IUserService {
         apName: string
     ): Promise<boolean> {
         try {
+            const isOwner = await axios({
+                method: "get",
+                url: `${process.env.NEXT_PUBLIC_WEB_SERVER}/owner/${apNumber}`,
+            });
+
+            const checkOwner = await new CaverJsService().checkOwner(
+                isOwner.data
+            )
+
+            if (checkOwner === false)
+                throw new Error("This Animals Punks is not yours");
+
             const trxResult = await new CaverJsService().burnMix(
                 isUpdate,
-                "0.01"
+                "0.01",
             );
 
             if (trxResult === true) {
@@ -66,15 +78,28 @@ export class UserService implements IUserService {
 
                 return changeResult.data.isUpdate;
             }
+
             return false;
         } catch (error) {
-            alert("Animals Punks un-changed. Please try again.");
+            alert(error);
             return false;
         }
     }
 
     public async removeApName(apNumber: number): Promise<boolean> {
         try {
+            const isOwner = await axios({
+                method: "get",
+                url: `${process.env.NEXT_PUBLIC_WEB_SERVER}/owner/${apNumber}`,
+            });
+
+            const checkOwner = await new CaverJsService().checkOwner(
+                isOwner.data
+            );
+
+            if (checkOwner === false)
+                throw new Error("This Animals Punks is not yours");
+
             const result = await new CaverJsService().burnMix(true, "0.01");
             if (result === true) {
                 await axios({
