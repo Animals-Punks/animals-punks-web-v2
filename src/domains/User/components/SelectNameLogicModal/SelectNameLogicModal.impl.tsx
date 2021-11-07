@@ -73,7 +73,7 @@ const modalKeyFrame = keyframes`
 
 const modalContainer = css`
     animation-name: ${modalKeyFrame};
-    animation-duration: 1s;
+    animation-duration: 0.7s;
 `;
 
 export default SelectNameLogicModal;

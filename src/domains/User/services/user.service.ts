@@ -40,19 +40,24 @@ export class UserService implements IUserService {
         apName: string
     ): Promise<boolean> {
         try {
-            if (isUpdate === true) {
-                new CaverJsService().burnMix("1");
-            }
-            const changeResult = await axios({
-                method: "post",
-                url: `${process.env.NEXT_PUBLIC_WEB_SERVER}/name`,
-                data: {
-                    nftNumber: apNumber,
-                    apName: apName,
-                },
-            });
+            const trxResult = await new CaverJsService().burnMix(
+                isUpdate,
+                "0.01"
+            );
 
-            return changeResult.data.isUpdate;
+            if (trxResult === true) {
+                const changeResult = await axios({
+                    method: "post",
+                    url: `${process.env.NEXT_PUBLIC_WEB_SERVER}/name`,
+                    data: {
+                        nftNumber: apNumber,
+                        apName: apName,
+                    },
+                });
+
+                return changeResult.data.isUpdate;
+            }
+            return false;
         } catch (error) {
             alert("Animals Punks un-changed. Please try again.");
             return false;
@@ -61,15 +66,18 @@ export class UserService implements IUserService {
 
     public async removeApName(apNumber: number): Promise<boolean> {
         try {
-            new CaverJsService().burnMix("1");
-            await axios({
-                method: "delete",
-                url: `${process.env.NEXT_PUBLIC_WEB_SERVER}/name`,
-                data: {
-                    nftNumber: apNumber,
-                },
-            });
-            return true;
+            const result = await new CaverJsService().burnMix(true, "0.01");
+            if (result === true) {
+                await axios({
+                    method: "delete",
+                    url: `${process.env.NEXT_PUBLIC_WEB_SERVER}/name`,
+                    data: {
+                        nftNumber: apNumber,
+                    },
+                });
+                return true;
+            }
+            return false;
         } catch (error) {
             alert(error);
             return false;

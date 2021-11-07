@@ -13,6 +13,7 @@ import FilterItem from "./FilterItem";
 import SelectBox from "./SelectBox";
 import Modal from "./Modal";
 import TextFieldBox from "./TextFieldBox";
+import TransactionResultModal from "./TransactionResultModal";
 
 export {
     InformationBox,
@@ -30,4 +31,5 @@ export {
     SelectBox,
     Modal,
     TextFieldBox,
+    TransactionResultModal,
 };

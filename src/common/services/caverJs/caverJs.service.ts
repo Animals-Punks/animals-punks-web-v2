@@ -1,5 +1,6 @@
 export class CaverJsService {
-    async burnMix(burnMixAmount: string) {
+    async burnMix(isUpdate: boolean, burnMixAmount: string): Promise<boolean> {
+        if (isUpdate === false) return true;
         try {
             const Caver: any | undefined = (window as any).caver;
             const klaytn: any | undefined = (window as any).klaytn;
@@ -23,12 +24,17 @@ export class CaverJsService {
                 type: "SMART_CONTRACT_EXECUTION",
                 from: klaytnAddress[0],
                 to: process.env.NEXT_PUBLIC_MIX_CONTRACT_ADDRESS,
-                gas: "8000000",
+                gas: "80000",
                 data,
             });
-            return result;
+            const trxResult = await Caver.klay.getTransactionReceipt(
+                result.senderTxHash
+            );
+            if (trxResult.status === true) return true;
+            return false
         } catch (error) {
             alert(error.message);
+            return false;
         }
     }
 }
