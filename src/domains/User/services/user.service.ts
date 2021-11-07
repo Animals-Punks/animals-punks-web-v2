@@ -18,7 +18,13 @@ export class UserService implements IUserService {
                 ...findRarityParams,
             });
             if (rarity.length === 0) return null;
-            return { ...rarity[0] };
+            const searchNftName = await graphqlService.getNameByUrl(
+                rarity[0].imgUrl
+            );
+            const searchNft = rarity[0];
+            const name = `${searchNft.name} ${searchNftName.name}`;
+            const url = rarity[0].imgUrl;
+            return { name, imgUrl: url };
         } catch (error) {
             return undefined;
         }

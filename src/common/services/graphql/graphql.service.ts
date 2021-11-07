@@ -70,4 +70,28 @@ export default class GraphqlService implements IGraphqlService {
             };
         });
     }
+
+    async getNameByUrl(url: string): Promise<RarityOutput> {
+        return (
+            await this.req<any, any>({
+                endpoint: this.endpoint,
+                query: gql`
+                    query NftNameQuery($nftUrl: String!) {
+                        V2_nft_name(where: { nft_url: { _eq: $nftUrl } }) {
+                            nft_name
+                            nft_url
+                        }
+                    }
+                `,
+                variables: {
+                    nftUrl: url,
+                },
+            })
+        ).V2_nft_name.map((value: { nft_name: string; nft_url: string }) => {
+            return {
+                imgUrl: value.nft_url,
+                name: value.nft_name,
+            };
+        });
+    }
 }
