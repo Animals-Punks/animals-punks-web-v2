@@ -22,7 +22,10 @@ export class UserService implements IUserService {
                 rarity[0].imgUrl
             );
             const searchNft = rarity[0];
-            const name = `${searchNft.name} ${searchNftName.name}`;
+            if (searchNftName[0].name === undefined) {
+                return { ...searchNft}
+            }
+            const name = `${searchNft.name} ${searchNftName[0].name}`;
             const url = rarity[0].imgUrl;
             return { name, imgUrl: url };
         } catch (error) {

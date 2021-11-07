@@ -15,5 +15,5 @@ export interface RarityOutput {
 
 export interface IGraphqlService {
     getRarity(getRarityInput: GetRarityInput): Promise<RarityOutput[]>;
-    getNameByUrl(url: string): Promise<RarityOutput>;
+    getNameByUrl(url: string): Promise<RarityOutput[]>;
 }

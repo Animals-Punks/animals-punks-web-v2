@@ -71,7 +71,7 @@ export default class GraphqlService implements IGraphqlService {
         });
     }
 
-    async getNameByUrl(url: string): Promise<RarityOutput> {
+    async getNameByUrl(url: string): Promise<RarityOutput[]> {
         return (
             await this.req<any, any>({
                 endpoint: this.endpoint,
