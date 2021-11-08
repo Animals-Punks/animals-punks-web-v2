@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { useRecoilValue } from "recoil";
+import { useRecoilValue, useSetRecoilState } from "recoil";
 
 import {
     InformationBox,
@@ -7,6 +7,7 @@ import {
     ImageBox,
     SelectBox,
     Button,
+    TextFieldBox,
 } from "@common/components";
 import { useRarity } from "@User/hooks";
 import {
@@ -27,6 +28,7 @@ import {
     clothesState,
     accessoryState,
 } from "@common/services/recoil/itemAtom";
+import { searchRarityNumberState } from "@common/services/recoil/updateNameState";
 
 const RarityBox: React.FC = () => {
     const background = useRecoilValue(backgroundState);
@@ -36,8 +38,11 @@ const RarityBox: React.FC = () => {
     const mouth = useRecoilValue(mouthState);
     const clothes = useRecoilValue(clothesState);
     const accessory = useRecoilValue(accessoryState);
+    const setSearchRarityNumberState = useSetRecoilState(
+        searchRarityNumberState
+    );
 
-    const { onClick, imageUrlState, apNameState } = useRarity(
+    const { onClick, onClickApName, imageUrlState, apNameState } = useRarity(
         background,
         species,
         head,
@@ -47,10 +52,14 @@ const RarityBox: React.FC = () => {
         accessory
     );
 
+    const onChangeNumber = (event: any) => {
+        setSearchRarityNumberState(event.target.value);
+    }
+
     return (
         <InformationBox backgroundColor="#9bf5ff">
             <div css={rarityContiner}>
-                <div style={{ marginTop: "5vh" }}>
+                <div style={{ marginTop: "1vh" }}>
                     <TitleText textColor="#000">SEARCH ANIMALS</TitleText>
                 </div>
                 <div css={filterBackgroundStyle}>
@@ -59,15 +68,30 @@ const RarityBox: React.FC = () => {
                             <ImageBox imageUrl={imageUrlState}>
                                 {apNameState}
                             </ImageBox>
-                            <Button
-                                width="100px"
-                                height="35px"
-                                onClick={onClick}
-                                fontSize="1vw"
-                            >
-                                Search
-                            </Button>
+                            <div style={{ display: "flex" }}>
+                                <Button
+                                    width="150px"
+                                    height="35px"
+                                    onClick={onClick}
+                                    fontSize="1vw"
+                                >
+                                    Search
+                                </Button>
+                                <Button
+                                    width="150px"
+                                    height="35px"
+                                    onClick={onClickApName}
+                                    fontSize="1vw"
+                                >
+                                    Search Number
+                                </Button>
+                            </div>
                         </div>
+                    </div>
+                    <div style={{display: 'flex', marginTop: '2vh'}}>
+                        <TextFieldBox onChange={onChangeNumber}>
+                            Ap Number
+                        </TextFieldBox>
                     </div>
                     <div style={{ display: "flex", flexDirection: "column" }}>
                         <div css={filterElementContainer}>

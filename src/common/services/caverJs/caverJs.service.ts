@@ -3,8 +3,6 @@ export class CaverJsService {
         const klaytn: any | undefined = (window as any).klaytn;
         const klaytnAddress = await klaytn.enable();
 
-        console.log(klaytnAddress[0]);
-
         if (klaytnAddress[0] === reqAddress.toLowerCase()) return true;
         return false;
     }

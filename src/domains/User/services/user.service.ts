@@ -22,12 +22,26 @@ export class UserService implements IUserService {
                 rarity[0].imgUrl
             );
             const searchNft = rarity[0];
-            if (searchNftName[0].name === undefined) {
+            if (searchNftName[0].name === null) {
                 return { ...searchNft };
             }
             const name = `${searchNft.name} ${searchNftName[0].name}`;
             const url = rarity[0].imgUrl;
             return { name, imgUrl: url };
+        } catch (error) {
+            return undefined;
+        }
+    }
+
+    public async getApByNumber(
+        apNumber: number
+    ): Promise<FindRarityResult | undefined> {
+        try {
+            const apnft = await axios.get(
+                `${process.env.NEXT_PUBLIC_WEB_SERVER}/info/${apNumber}`
+            );
+            const response = apnft.data;
+            return { name: response.name, imgUrl: response.image };
         } catch (error) {
             return undefined;
         }
@@ -56,14 +70,14 @@ export class UserService implements IUserService {
 
             const checkOwner = await new CaverJsService().checkOwner(
                 isOwner.data
-            )
+            );
 
             if (checkOwner === false)
                 throw new Error("This Animals Punks is not yours");
 
             const trxResult = await new CaverJsService().burnMix(
                 isUpdate,
-                "0.01",
+                "0.01"
             );
 
             if (trxResult === true) {

@@ -94,4 +94,28 @@ export default class GraphqlService implements IGraphqlService {
             };
         });
     }
+
+    async getNameByNumber(apName: string): Promise<RarityOutput[]> {
+        return (
+            await this.req<any, any>({
+                endpoint: this.endpoint,
+                query: gql`
+                    query NftQuery($name: String!) {
+                        V2_nfts(where: { ap_name: { _eq: $name } }) {
+                            ap_name
+                            image_url
+                        }
+                    }
+                `,
+                variables: {
+                    name: apName,
+                },
+            })
+        ).V2_name.map((value: { ap_name: string; image_url: string }) => {
+            return {
+                imgUrl: value.image_url,
+                name: value.ap_name,
+            };
+        });
+    }
 }
