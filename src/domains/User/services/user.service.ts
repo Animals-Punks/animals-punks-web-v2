@@ -83,7 +83,7 @@ export class UserService implements IUserService {
             if (trxResult === true) {
                 const changeResult = await axios({
                     method: "post",
-                    url: `${process.env.NEXT_PUBLIC_WEB_SERVER}/name`,
+                    url: `${process.env.NEXT_PUBLIC_WEB_SERVER}/customName`,
                     data: {
                         nftNumber: apNumber,
                         apName: apName,
@@ -118,7 +118,7 @@ export class UserService implements IUserService {
             if (result === true) {
                 await axios({
                     method: "delete",
-                    url: `${process.env.NEXT_PUBLIC_WEB_SERVER}/name`,
+                    url: `${process.env.NEXT_PUBLIC_WEB_SERVER}/title`,
                     data: {
                         nftNumber: apNumber,
                     },
