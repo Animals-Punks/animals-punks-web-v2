@@ -12,7 +12,7 @@ const ConnectUsBox: React.FC = () => {
     return (
         <div css={connectUsBoxContainer}>
             <CenterText>
-                <div css={connectUsTextStyle}>ConnectUs</div>
+                <div css={connectUsTextStyle}>Connect us</div>
                 <div css={imageContainer}>
                     <LinkNewTap url="https://discord.gg/Wvyeasb9">
                         <Image src={discodeLogo} height="80%" width="80%" />

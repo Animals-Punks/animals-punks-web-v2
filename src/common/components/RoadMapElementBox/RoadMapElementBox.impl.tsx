@@ -21,7 +21,7 @@ const RoadMapElementBox: React.FC<IRoadMapElementBox.IProps> = ({
 
 const roadMapElementTextContatiner = css`
     font-family: "OpenSans", sans-serif;
-    color: #000;
+    color: #fff;
     height: 100%;
 `;
 
@@ -31,20 +31,21 @@ const elementTextStyle = css`
     width: 100%;
     height: 100%;
     align-items: center;
+    color: #000;
 `;
 
 const elementTitleTextStyle = css`
     font-weight: bold;
-    font-size: 2vh;
-    color: #000;
+    font-size: 3.5vh;
+    color: #fff;
 `;
 
 const elementDiscriptionStyle = css`
     text-align: center;
     margin-top: 8%;
     font-weight: normal;
-    font-size: 1.5vh;
-    color: #000;
+    font-size: 3vh;
+    color: #fff;
 `;
 
 export default RoadMapElementBox;

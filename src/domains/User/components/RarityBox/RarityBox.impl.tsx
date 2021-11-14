@@ -11,15 +11,6 @@ import {
 } from "@common/components";
 import { useRarity } from "@User/hooks";
 import {
-    mouthItemList,
-    backgroundList,
-    accessoryList,
-    clothesList,
-    headList,
-    speciesList,
-    eyeslist,
-} from "@assets/metaDatas/items";
-import {
     backgroundState,
     speciesState,
     headState,
@@ -57,83 +48,43 @@ const RarityBox: React.FC = () => {
     }
 
     return (
-        <InformationBox backgroundColor="#9bf5ff">
+        <InformationBox backgroundColor="#45EF8B">
             <div css={rarityContiner}>
-                <div style={{ marginTop: "1vh" }}>
-                    <TitleText textColor="#000">SEARCH ANIMALS</TitleText>
+                <div style={{ marginTop: "15vh" }}>
+                    <TitleText textColor="#000">AP COLLECTION</TitleText>
                 </div>
                 <div css={filterBackgroundStyle}>
-                    <div style={{ display: "flex", flexDirection: "row" }}>
-                        <div>
-                            <ImageBox imageUrl={imageUrlState}>
-                                {apNameState}
-                            </ImageBox>
-                            <div style={{ display: "flex" }}>
-                                <Button
-                                    width="150px"
-                                    height="35px"
-                                    onClick={onClick}
-                                    fontSize="1vw"
-                                >
-                                    Search
+                    <div style={{ marginTop: "5vh" }}>
+                        <div style={{ display: "flex", flexDirection: "row" }}>
+                            <div>
+                                <ImageBox imageUrl={imageUrlState}>
+                                    {apNameState}
+                                </ImageBox>
+                                <div style={{ display: "flex" }}>
+                                    <Button
+                                        width="150px"
+                                        height="35px"
+                                        onClick={onClick}
+                                        fontSize="1.5vw"
+                                    >
+                                        Search
                                 </Button>
-                                <Button
-                                    width="150px"
-                                    height="35px"
-                                    onClick={onClickApName}
-                                    fontSize="1vw"
-                                >
-                                    Search Number
+                                    <Button
+                                        width="200px"
+                                        height="35px"
+                                        onClick={onClickApName}
+                                        fontSize="1.5vw"
+                                    >
+                                        Search Number
                                 </Button>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    <div style={{display: 'flex', marginTop: '2vh'}}>
+                    <div style={{ display: 'flex', marginTop: '2vh' }}>
                         <TextFieldBox onChange={onChangeNumber}>
                             Ap Number
                         </TextFieldBox>
-                    </div>
-                    <div style={{ display: "flex", flexDirection: "column" }}>
-                        <div css={filterElementContainer}>
-                            <SelectBox
-                                itemList={backgroundList}
-                                itemAtom={backgroundState}
-                            >
-                                배경
-                            </SelectBox>
-                            <SelectBox
-                                itemList={speciesList}
-                                itemAtom={speciesState}
-                            >
-                                동물
-                            </SelectBox>
-                            <SelectBox itemList={headList} itemAtom={headState}>
-                                머리
-                            </SelectBox>
-                            <SelectBox itemList={eyeslist} itemAtom={eyesState}>
-                                눈
-                            </SelectBox>
-                        </div>
-                        <div css={filterElementContainer}>
-                            <SelectBox
-                                itemList={mouthItemList}
-                                itemAtom={mouthState}
-                            >
-                                입
-                            </SelectBox>
-                            <SelectBox
-                                itemList={clothesList}
-                                itemAtom={clothesState}
-                            >
-                                옷
-                            </SelectBox>
-                            <SelectBox
-                                itemList={accessoryList}
-                                itemAtom={accessoryState}
-                            >
-                                악세사리
-                            </SelectBox>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -145,6 +96,7 @@ const rarityContiner = css`
     display: flex;
     flex-direction: column;
     align-items: center;
+    justify-content: center;
 `;
 
 const filterBackgroundStyle = css`
