@@ -3,7 +3,13 @@ import { css } from "@emotion/react";
 
 import nftzLogo from "@assets/images/nftz.png";
 import dogeLogo from "@assets/images/doge.png";
-import { ElementBox, CenterText, TitleText, LinkNewTap } from "@common/components";
+import ecoverseLogo from "@assets/images/ecoverse.png";
+import {
+    ElementBox,
+    CenterText,
+    TitleText,
+    LinkNewTap,
+} from "@common/components";
 
 const PartnerShipBox: React.FC = () => {
     return (
@@ -16,6 +22,9 @@ const PartnerShipBox: React.FC = () => {
                     </LinkNewTap>
                     <LinkNewTap url="https://dogesound.club/">
                         <Image src={dogeLogo} />
+                    </LinkNewTap>
+                    <LinkNewTap url="https://www.ecoversekorea.com/">
+                        <Image src={ecoverseLogo} width="150px" height="150px" />
                     </LinkNewTap>
                 </div>
             </CenterText>
