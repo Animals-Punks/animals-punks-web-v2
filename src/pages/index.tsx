@@ -27,11 +27,11 @@ const Home: NextPage = () => {
                         <IntroBox />
                         <div css={elementContainerStyle}>
                             <IntroDuceBox />
+                            <TeamMemberBox />
                             <RoadMapBox />
                             <RarityBox />
-                            <TeamMemberBox />
-                            <PartnerShipBox />
                             <MixTokenBox />
+                            <PartnerShipBox />
                             <ConnectUsBox />
                         </div>
                     </div>

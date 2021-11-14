@@ -22,21 +22,6 @@ const MixTokenBox: React.FC = () => {
     const [modalState, setModalState] = useRecoilState(modalAtom);
     const changeNameState = useRecoilValue(changeNameStateAtom);
 
-    const connectMetaMask = async () => {
-        const metaMask: any | undefined = (window as any).ethereum;
-        if (metaMask !== undefined) {
-            metaMask.request({ method: "eth_requestAccounts" });
-            metaMask.enable();
-        }
-    };
-
-    const connectKaikas = () => {
-        const klaytn: any | undefined = (window as any).klaytn;
-        if (klaytn !== undefined) {
-            klaytn.enable();
-        }
-    };
-
     const onSubmitNaming = () => {
         setModalState(!modalState);
     };
@@ -62,34 +47,10 @@ const MixTokenBox: React.FC = () => {
             )}
             <InformationBox backgroundColor="#FFFA96">
                 <CenterText>
-                    <TitleText textColor="#000">MIX TOKEN</TitleText>
-                    <div css={discriptionTextStyle}>
-                        Connect your wallet first
+                    <div style={{display: 'flex', marginBottom: '10vh'}}>
+                        <TitleText textColor="#000">MIX TOKEN</TitleText>
                     </div>
-                    <div css={buttonsContainer}>
-                        <div
-                            style={{
-                                display: "flex",
-                                justifyContent: "center",
-                            }}
-                        >
-                            <div css={connectionButtonContainer}>
-                                <Button
-                                    width="20vw"
-                                    height="10vh"
-                                    onClick={connectMetaMask}
-                                >
-                                    {"CONNECT METAMASK"}
-                                </Button>
-                                <Button
-                                    width="20vw"
-                                    height="10vh"
-                                    onClick={connectKaikas}
-                                >
-                                    {"CONNECT KAIKAS"}
-                                </Button>
-                            </div>
-                        </div>
+                    <div css={buttonContainer}>
                         <div css={processButtonContainer}>
                             <Button
                                 width="20vw"
@@ -115,7 +76,7 @@ const discriptionTextStyle = css`
     justify-content: center;
     color: #000;
     font-size: 1.8vw;
-    height: 15vh;
+    height: 8vh;
 `;
 
 const buttonsContainer = css`
@@ -134,10 +95,18 @@ const connectionButtonContainer = css`
     width: 50vw;
 `;
 
+const buttonContainer = css`
+    display: flex;
+    flex-directionL row;
+    justify-content: center;
+    align-items: center;
+    maring-top: 10vh
+`
+
 const processButtonContainer = css`
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
+    justify-content: center;
     width: 100vw;
     align-items: center;
     text-align: center;
