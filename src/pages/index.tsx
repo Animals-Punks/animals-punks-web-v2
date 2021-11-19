@@ -13,6 +13,7 @@ import {
     PartnerShipBox,
     ConnectUsBox,
 } from "@User/components";
+import { RouteV1Button } from "@common/components";
 
 const Home: NextPage = () => {
     return (
@@ -35,6 +36,7 @@ const Home: NextPage = () => {
                             <ConnectUsBox />
                         </div>
                     </div>
+                    <RouteV1Button />
                 </div>
             </RecoilRoot>
         </>

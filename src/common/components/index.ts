@@ -14,6 +14,7 @@ import SelectBox from "./SelectBox";
 import Modal from "./Modal";
 import TextFieldBox from "./TextFieldBox";
 import TransactionResultModal from "./TransactionResultModal";
+import RouteV1Button from "./RouteV1Button";
 
 export {
     InformationBox,
@@ -32,4 +33,5 @@ export {
     Modal,
     TextFieldBox,
     TransactionResultModal,
+    RouteV1Button,
 };
