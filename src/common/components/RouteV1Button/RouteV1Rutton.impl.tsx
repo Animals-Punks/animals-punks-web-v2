@@ -9,7 +9,7 @@ const RouteV1Button: React.FC = () => {
             <div
                 style={{
                     display: "flex",
-                    width: "95vw",
+                    width: "97vw",
                     justifyContent: "flex-end",
                 }}
             >
@@ -17,7 +17,7 @@ const RouteV1Button: React.FC = () => {
                     style={{
                         position: "fixed",
                         width: "100px",
-                        marginTop: "10vh",
+                        marginTop: "6vh",
                     }}
                 >
                     <a
