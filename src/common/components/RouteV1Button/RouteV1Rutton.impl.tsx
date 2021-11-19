@@ -20,7 +20,11 @@ const RouteV1Button: React.FC = () => {
                         marginTop: "10vh",
                     }}
                 >
-                    <a href="https://animals-punks.com/animals-v1/index.html">
+                    <a
+                        href="https://animals-punks.com/animals-v1/index.html"
+                        target="_blank"
+                        rel="noreferrer"
+                    >
                         <Image src={v1Logo} css={imageStyle} />
                     </a>
                 </div>
