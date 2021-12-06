@@ -9,7 +9,7 @@ const IntroDuceBox: React.FC = () => {
         if (klaytn !== undefined) {
             klaytn.enable();
         }
-    })
+    });
 
     return (
         <ElementBox backgroundColor="#000">
@@ -18,7 +18,7 @@ const IntroDuceBox: React.FC = () => {
                 <div css={descriptionTextStyle}>
                     Klaytn(Klay) based NFT Generative Project.
                     <br />
-                     Randomly generated 10,000 Cartoon Style,
+                    Randomly generated 10,000 Cartoon Style,
                     <br /> "ANIMALS PUNKS"
                 </div>
             </CenterText>

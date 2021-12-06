@@ -47,7 +47,7 @@ const MixTokenBox: React.FC = () => {
             )}
             <InformationBox backgroundColor="#FFFA96">
                 <CenterText>
-                    <div style={{display: 'flex', marginBottom: '10vh'}}>
+                    <div style={{ display: 'flex', marginBottom: '10vh' }}>
                         <TitleText textColor="#000">MIX TOKEN</TitleText>
                     </div>
                     <div css={buttonContainer}>

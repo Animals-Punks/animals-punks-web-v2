@@ -9,6 +9,7 @@ import ConnectUsBox from "./ConnectUsBox";
 import SelectNameLogicModal from "./SelectNameLogicModal";
 import ChangeApNameModal from "./ChangeApNameModal";
 import DeleteApNameModal from "./DeleteApNameModal";
+import TicketMint from "./TicketMint";
 
 export {
     IntroBox,
@@ -22,4 +23,5 @@ export {
     SelectNameLogicModal,
     ChangeApNameModal,
     DeleteApNameModal,
+    TicketMint,
 };
