@@ -48,7 +48,8 @@ const hoverKeyFrame = keyframes`
 `;
 
 const menuTextStyle = css`
-    font-family: "Chewy", sans-seri;
+    font-family: Roboto;
+    font-weight: bold;
     text-shadow: 5px 5px 5px #000;
     font-size: 2vw;
     color: white;
@@ -65,7 +66,8 @@ const menuTextStyle = css`
 `;
 
 const namingTextStyle = css`
-    font-family: "Chewy", sans-seri;
+    font-family: Roboto;
+    font-weight: bold;
     text-shadow: 5px 5px 5px #000;
     font-size: 2vw;
     color: white;
@@ -82,7 +84,8 @@ const namingTextStyle = css`
 `;
 
 const teamTextStyle = css`
-    font-family: "Chewy", sans-seri;
+    font-family: Roboto;
+    font-weight: bold;
     text-shadow: 5px 5px 5px #000;
     font-size: 2vw;
     color: white;

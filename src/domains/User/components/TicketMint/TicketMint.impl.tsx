@@ -1,24 +1,45 @@
-import { css } from "@emotion/react";
+import { css, keyframes } from "@emotion/react";
+import Link from "next/link";
 
 import { OwnApBox, SelectApBox, UsedApBox } from "@common/components";
+import { useTicketMint } from "../../hooks";
+import { PATH } from "@/constant";
 
 const TicketMint: React.FC = () => {
+    const {
+        connectKaikasWallet,
+        connectMetamaskWallet,
+        kaikasSelectAddress,
+        metaSelectAddress,
+    } = useTicketMint();
+
     return (
         <div css={defaultBackground}>
+            <Link href={PATH.main}>
+                <div css={teamTextStyle}>Home</div>
+            </Link>
+            <div css={namingTextStyle}>Naming</div>
+            <Link href={PATH.ticket}>
+                <div css={menuTextStyle}>Ticket</div>
+            </Link>
             <div css={ticketTitleStyle}>AnimalsPunks Ticket</div>
             <div css={bodyContainer}>
                 <div css={walletConnectContainer}>
                     <div css={ticketContainer}>
-                        <div css={buttonStyle}>
+                        <div css={buttonStyle} onClick={connectMetamaskWallet}>
                             <div css={buttonTextStyle}>
-                                Metamask wallet connect
+                                {metaSelectAddress === ""
+                                    ? "Metamask wallet connect"
+                                    : metaSelectAddress}
                             </div>
                         </div>
                     </div>
                     <div css={ticketContainer}>
-                        <div css={buttonStyle}>
+                        <div css={buttonStyle} onClick={connectKaikasWallet}>
                             <div css={buttonTextStyle}>
-                                Kaikas wallet connect
+                                {kaikasSelectAddress === ""
+                                    ? "Kaikas wallet connect"
+                                    : kaikasSelectAddress}
                             </div>
                         </div>
                     </div>
@@ -104,6 +125,7 @@ const buttonStyle = css`
     padding: 7.5px 29.5px 6.5px 19.5px;
     border-radius: 10px;
     border: solid 3px #fff;
+    cursor: pointer;
 `;
 
 const buttonTextStyle = css`
@@ -117,6 +139,70 @@ const buttonTextStyle = css`
     letter-spacing: normal;
     text-align: left;
     color: #fff;
+`;
+
+const hoverKeyFrame = keyframes`
+    0% {
+        /* font-size: 2vw; */
+    }
+    100% {
+        font-size: 2.3vw;
+        color: #FFFA96;
+    }
+`;
+
+const menuTextStyle = css`
+    font-family: Roboto;
+    font-weight: bold;
+    text-shadow: 5px 5px 5px #000;
+    font-size: 2vw;
+    color: white;
+    position: absolute;
+    z-index: 48;
+    text-align: right;
+    width: 90vw;
+    cursor: pointer;
+    &:hover {
+        animation-name: ${hoverKeyFrame};
+        animation-duration: 0.2s;
+        animation-fill-mode: forwards;
+    }
+`;
+
+const namingTextStyle = css`
+    font-family: Roboto;
+    font-weight: bold;
+    text-shadow: 5px 5px 5px #000;
+    font-size: 2vw;
+    color: white;
+    position: absolute;
+    z-index: 49;
+    text-align: right;
+    width: 82.5vw;
+    cursor: pointer;
+    &:hover {
+        animation-name: ${hoverKeyFrame};
+        animation-duration: 0.2s;
+        animation-fill-mode: forwards;
+    }
+`;
+
+const teamTextStyle = css`
+    font-family: Roboto;
+    font-weight: bold;
+    text-shadow: 5px 5px 5px #000;
+    font-size: 2vw;
+    color: white;
+    position: absolute;
+    z-index: 50;
+    text-align: right;
+    width: 73vw;
+    cursor: pointer;
+    &:hover {
+        animation-name: ${hoverKeyFrame};
+        animation-duration: 0.2s;
+        animation-fill-mode: forwards;
+    }
 `;
 
 export default TicketMint;
