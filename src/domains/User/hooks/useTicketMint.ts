@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { UserService } from "../services/user.service";
 
 function useTicketMint(): {
     connectKaikasWallet: any;
@@ -8,12 +9,16 @@ function useTicketMint(): {
 } {
     const [kaikasSelectAddress, setKaikasSelectAddress] = useState("");
     const [metaSelectAddress, setMetaSelectAddress] = useState("");
+    const userService = new UserService();
 
     const connectKaikasWallet = async () => {
         const klaytn: any | undefined = (window as any).klaytn;
         if (klaytn !== undefined) {
             klaytn.enable();
         }
+        const address = klaytn.selectedAddress;
+        const sliceAddress = `${address.slice(0, 5)}...${address.slice(-5)}`;
+        setKaikasSelectAddress(sliceAddress);
     };
 
     const checkWalletConnection = async () => {
@@ -47,7 +52,12 @@ function useTicketMint(): {
         if (meta !== undefined) {
             meta.enable();
         }
-        setMetaSelectAddress(meta.selectedAddress);
+        const address = meta.selectedAddress;
+        const sliceAddress = `${address.slice(0, 5)}...${address.slice(-5)}`;
+        setMetaSelectAddress(sliceAddress);
+        await userService.getV1Ap(address);
+        // const v1Balance = await userService.getV1Ap(metaSelectAddress);
+        // console.log(v1Balance);
     };
 
     useEffect(() => {

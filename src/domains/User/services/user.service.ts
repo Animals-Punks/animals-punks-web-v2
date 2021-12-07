@@ -1,3 +1,6 @@
+import axios from "axios";
+import Web3 from "web3";
+
 import { CaverJsService } from "@common/services/caverJs/caverJs.service";
 import { graphqlService } from "@common/services";
 import {
@@ -7,7 +10,6 @@ import {
     GetNameParams,
     ApName,
 } from "@User/services/user-service.interface";
-import axios from "axios";
 
 export class UserService implements IUserService {
     public async findRarity(
@@ -129,6 +131,47 @@ export class UserService implements IUserService {
         } catch (error) {
             alert(error);
             return false;
+        }
+    }
+
+    public async getV1Ap(address: string): Promise<any> {
+        // const testAddress = "0x4B0acFf8eaa9F5A9426d06d4f1E0A3316735f7E7";
+        const slug = process.env.NEXT_PUBLIC_ANIMALS_PUNKS_V1_SLUG || "";
+        const openSeaEndpoint = process.env.NEXT_PUBLIC_OPENSEA_ENDPOINT || "";
+        const imageUrls = [];
+        try {
+            for (let i = 0; i <= 10; i++) {
+                const params = {
+                    owner: address,
+                    asset_contract_address:
+                        process.env.NEXT_PUBLIC_ANIMALS_PUNKS_V1_ADDRESS,
+                    order_direction: "desc",
+                    offset: i,
+                    limit: 50,
+                    collection: slug,
+                };
+                const response = await axios.get(openSeaEndpoint, { params });
+                const result = response.data;
+                if (result !== []) {
+                    for (const tokenInfo of result.assets) {
+                        imageUrls.push(tokenInfo.image_url);
+                    }
+                }
+            }
+            return imageUrls;
+        } catch (error) {
+            const errorResponse = error.request.response;
+            const parseErrorResponse = JSON.parse(errorResponse);
+            console.log(parseErrorResponse);
+        }
+    }
+
+    public async getAp(address: string): Promise<any> {
+        try {
+            console.log({ address });
+            return address;
+        } catch (error) {
+            console.log(error);
         }
     }
 }

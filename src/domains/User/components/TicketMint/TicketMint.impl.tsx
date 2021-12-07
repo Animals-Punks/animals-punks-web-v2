@@ -22,7 +22,7 @@ const TicketMint: React.FC = () => {
             <Link href={PATH.ticket}>
                 <div css={menuTextStyle}>Ticket</div>
             </Link>
-            <div css={ticketTitleStyle}>AnimalsPunks Ticket</div>
+            <div css={ticketTitleStyle}>Zoo Ticket</div>
             <div css={bodyContainer}>
                 <div css={walletConnectContainer}>
                     <div css={ticketContainer}>
