@@ -1,3 +1,5 @@
+import axios from "axios";
+
 import { CaverJsService } from "@common/services/caverJs/caverJs.service";
 import { graphqlService } from "@common/services";
 import {
@@ -7,7 +9,6 @@ import {
     GetNameParams,
     ApName,
 } from "@User/services/user-service.interface";
-import axios from "axios";
 
 export class UserService implements IUserService {
     public async findRarity(
@@ -129,6 +130,72 @@ export class UserService implements IUserService {
         } catch (error) {
             alert(error);
             return false;
+        }
+    }
+
+    public async getV1Ap(address: string): Promise<string[]> {
+        try {
+            // const testAddress = "0x4B0acFf8eaa9F5A9426d06d4f1E0A3316735f7E7";
+            const slug = process.env.NEXT_PUBLIC_ANIMALS_PUNKS_V1_SLUG || "";
+            const openSeaEndpoint =
+                process.env.NEXT_PUBLIC_OPENSEA_ENDPOINT || "";
+            const imageUrls: string[] = [];
+            for (let i = 0; i <= 10; i++) {
+                const params = {
+                    owner: address,
+                    asset_contract_address:
+                        process.env.NEXT_PUBLIC_ANIMALS_PUNKS_V1_ADDRESS,
+                    order_direction: "desc",
+                    offset: i,
+                    limit: 50,
+                    collection: slug,
+                };
+                const response = await axios.get(openSeaEndpoint, { params });
+                const result = response.data;
+                if (result !== []) {
+                    for (const tokenInfo of result.assets) {
+                        imageUrls.push(tokenInfo.image_url);
+                    }
+                }
+            }
+            // return imageUrls;
+            return [
+                "https://lh3.googleusercontent.com/6tVO1FjXYWvQVBzrkHQSDViQJSxf6zOKzAJdFndC-QKwdfbDYsEtFLj5HCTAUKZ74dHlQXtxW92-OWr_9_tFm-JhF6elPmpSZHI-",
+                "https://lh3.googleusercontent.com/s6JahOpCEZqAj-05NcXo_R3vndu-DJ2z67lOE1IqLESVPXz2LZq3I-FqPa6qi5wfuWCBWwv9tj7VNzYPn9fL19gRBFV6LZUOdLv7",
+                "https://lh3.googleusercontent.com/2g_N4BF6y9PPafRvQ2rq701eL1jEjmoy5HI_X0chTyAB3Gc2DWZEUa8lr-HvpwnIyvW1UAgU9GnbUiJ7q54PCnQk-6nRdVGEtQ5_uAk",
+                "https://lh3.googleusercontent.com/9WxZFlcp_67p3cFOUv0ZK6MCRRDzY_eqTiDW4qipphAmfW-kbG5N2Tq5lLmoL4FaJxIE86wBcd2ILjcDPLczD8RHEp0lLTj-GiRGXII",
+            ];
+        } catch (error) {
+            const errorResponse = error.request.response;
+            const parseErrorResponse = JSON.parse(errorResponse);
+            console.log(parseErrorResponse);
+            return [];
+        }
+    }
+
+    public async getV2ApImageUrl(address: string): Promise<string[]> {
+        const testAddress = "0x757e2833f59c6073d029df4e39778055207bf611";
+        const caverServerEndpoint =
+            `${process.env.NEXT_PUBLIC_CAVER_SERVER}caver/getOwnTokens` || "";
+        const webServeerEndPoint =
+            `${process.env.NEXT_PUBLIC_WEB_SERVER}/info` || "";
+        const params = { address: testAddress };
+        try {
+            const response = await axios.get(caverServerEndpoint, { params });
+            const result = response.data;
+            const imageUrls = [];
+            for (const apNumber of result) {
+                const apInfoResponse = await axios.get(
+                    `${webServeerEndPoint}/${apNumber}`
+                );
+                const apInfoResult = apInfoResponse.data;
+                const imageUrl = apInfoResult.image;
+                imageUrls.push(imageUrl);
+            }
+            return imageUrls;
+        } catch (error) {
+            console.log(error);
+            return [];
         }
     }
 }

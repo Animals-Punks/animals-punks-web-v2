@@ -11,6 +11,8 @@ const TicketMint: React.FC = () => {
         connectMetamaskWallet,
         kaikasSelectAddress,
         metaSelectAddress,
+        v1ImageList,
+        v2ImageList,
     } = useTicketMint();
 
     return (
@@ -22,7 +24,7 @@ const TicketMint: React.FC = () => {
             <Link href={PATH.ticket}>
                 <div css={menuTextStyle}>Ticket</div>
             </Link>
-            <div css={ticketTitleStyle}>AnimalsPunks Ticket</div>
+            <div css={ticketTitleStyle}>Zoo Ticket</div>
             <div css={bodyContainer}>
                 <div css={walletConnectContainer}>
                     <div css={ticketContainer}>
@@ -47,8 +49,8 @@ const TicketMint: React.FC = () => {
             </div>
             <div css={itemContainer}>
                 <div css={defaultContainer}>
-                    <OwnApBox />
-                    <OwnApBox />
+                    <OwnApBox apImage={v1ImageList} type="V1" />
+                    <OwnApBox apImage={v2ImageList} type="V2" />
                 </div>
                 <div css={defaultContainer}>
                     <UsedApBox />

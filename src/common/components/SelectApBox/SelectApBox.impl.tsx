@@ -1,32 +1,44 @@
 import { css } from "@emotion/react";
+import { useRecoilValue } from "recoil";
+
+import {
+    seletedIdV1CountAtom,
+    seletedIdV2CountAtom,
+    totalSeletedIdAtom,
+} from "@common/services/recoil/selectItemAtom";
 
 const SelectApBox: React.FC = () => {
+    const seletedV1IdCount = useRecoilValue(seletedIdV1CountAtom);
+    const seletedV2IdCount = useRecoilValue(seletedIdV2CountAtom);
+    const totalList = useRecoilValue(totalSeletedIdAtom);
+
+    const imageBox = totalList.map(image => (
+        <>
+            <img key={image} src={image} css={imageStyle} />
+        </>
+    ));
+
     return (
         <>
             <div css={selectBoxStyle}>
                 <div css={headerStyle}>
                     <div css={selectApCountBoxStyle}>
-                        <div css={selectApTextStyle}>V1 : 0/4</div>
+                        <div
+                            css={selectApTextStyle}
+                        >{`V1 : ${seletedV1IdCount}/4`}</div>
                     </div>
                     <div css={selectApCountBoxStyle}>
-                        <div css={selectApTextStyle}>V2 : 0/8</div>
+                        <div
+                            css={selectApTextStyle}
+                        >{`V2 : ${seletedV2IdCount}/8`}</div>
                     </div>
                 </div>
                 <div css={apBoxContainer}>
-                    <div css={apBoxStyle}></div>
-                    <div css={apBoxStyle}></div>
-                    <div css={apBoxStyle}></div>
-                    <div css={apBoxStyle}></div>
-                    <div css={apBoxStyle}></div>
-                    <div css={apBoxStyle}></div>
-                </div>
-                <div css={apBoxContainer}>
-                    <div css={apBoxStyle}></div>
-                    <div css={apBoxStyle}></div>
-                    <div css={apBoxStyle}></div>
-                    <div css={apBoxStyle}></div>
-                    <div css={apBoxStyle}></div>
-                    <div css={apBoxStyle}></div>
+                    {seletedV1IdCount !== 0 || seletedV2IdCount !== 0 ? (
+                        imageBox
+                    ) : (
+                        <></>
+                    )}
                 </div>
                 <div css={buttonContainer}>
                     <div
@@ -56,12 +68,20 @@ const headerStyle = css`
 const selectBoxStyle = css`
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-between;
     width: 740px;
     height: 410px;
     padding: 20px;
     border-radius: 10px;
     margin: 10px;
+    border: solid 3px #fff;
+`;
+
+const imageStyle = css`
+    width: 100px;
+    height: 100px;
+    margin: 3.5px;
+    border-radius: 10px;
     border: solid 3px #fff;
 `;
 
@@ -91,14 +111,7 @@ const selectApTextStyle = css`
 const apBoxContainer = css`
     display: flex;
     flex-direction: row;
-`;
-
-const apBoxStyle = css`
-    width: 100px;
-    height: 100px;
-    margin: 10px;
-    border-radius: 10px;
-    border: solid 3px #fff;
+    flex-wrap: wrap;
 `;
 
 const buttonContainer = css`
