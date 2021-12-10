@@ -24,3 +24,13 @@ export const totalSeletedIdAtom = atom({
     key: "totalSeletedIdAtom",
     default: [""],
 });
+
+export const usedV1ApAtom = atom({
+    key: "usedV1ApAtom",
+    default: [""],
+});
+
+export const usedV2ApAtom = atom({
+    key: "usedV2ApAtom",
+    default: [""],
+});
