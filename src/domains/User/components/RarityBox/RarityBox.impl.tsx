@@ -22,6 +22,8 @@ const RarityBox: React.FC = () => {
         setSearchRarityNumberState(event.target.value);
     };
 
+    console.log(imageUrlState);
+
     return (
         <InformationBox backgroundColor="#45EF8B">
             <div css={rarityContiner}>

@@ -47,7 +47,6 @@ const usedApBoxStyle = css`
 const itemContainer = css`
     display: flex;
     flex-direction: column;
-    /* justify-content: center; */
     align-items: center;
 `;
 

@@ -5,6 +5,10 @@ module.exports = [{
     reactStrictMode: true,
     images: {
         disableStaticImages: true,
+        // loader:'pinata',
+        // domains: ['gateway.pinata.cloud'],
+        // path: 'https://gateway.pinata.cloud/',
+        // hostname: 'gateway.pinata.cloud',
     },
     webpack: (config, {isServer}) => {
         if (!isServer) {
