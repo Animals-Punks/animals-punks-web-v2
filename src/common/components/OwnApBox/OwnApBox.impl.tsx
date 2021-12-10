@@ -42,22 +42,26 @@ const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
                     setTotalList(updateSeletedTotalId);
                 }
             } else {
-                if (seletedV1Id.includes("")) {
-                    const removeNull = seletedV1Id.filter(item => {
-                        return item !== "";
-                    });
-                    setSeletedV1Id(removeNull.concat(id));
-                    if (totalList.includes("")) {
-                        setTotalList(removeNull.concat(id));
-                    } else {
-                        setTotalList(totalList.concat(id));
-                    }
-                    setSeletedV1IdCount(1);
+                if (seletedV1Id.length === 4) {
+                    alert("V1 must be selected 4 items.");
                 } else {
-                    setSeletedV1Id(seletedV1Id.concat(id));
-                    setTotalList(totalList.concat(id));
-                    const count = seletedIdV1Count + 1;
-                    setSeletedV1IdCount(count);
+                    if (seletedV1Id.includes("")) {
+                        const removeNull = seletedV1Id.filter(item => {
+                            return item !== "";
+                        });
+                        setSeletedV1Id(removeNull.concat(id));
+                        if (totalList.includes("")) {
+                            setTotalList(removeNull.concat(id));
+                        } else {
+                            setTotalList(totalList.concat(id));
+                        }
+                        setSeletedV1IdCount(1);
+                    } else {
+                        setSeletedV1Id(seletedV1Id.concat(id));
+                        setTotalList(totalList.concat(id));
+                        const count = seletedIdV1Count + 1;
+                        setSeletedV1IdCount(count);
+                    }
                 }
             }
         }
@@ -86,22 +90,26 @@ const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
                     setTotalList(updateSeletedTotalId);
                 }
             } else {
-                if (seletedV2Id.includes("")) {
-                    const removeNull = seletedV2Id.filter(item => {
-                        return item !== "";
-                    });
-                    setSeletedV2Id(removeNull.concat(id));
-                    if (totalList.includes("")) {
-                        setTotalList(removeNull.concat(id));
-                    } else {
-                        setTotalList(totalList.concat(id));
-                    }
-                    setSeletedV2IdCount(1);
+                if (seletedV2Id.length === 8) {
+                    alert("V2 must be selected 8 items.");
                 } else {
-                    setSeletedV2Id(seletedV2Id.concat(id));
-                    setTotalList(totalList.concat(id));
-                    const count = seletedIdV2Count + 1;
-                    setSeletedV2IdCount(count);
+                    if (seletedV2Id.includes("")) {
+                        const removeNull = seletedV2Id.filter(item => {
+                            return item !== "";
+                        });
+                        setSeletedV2Id(removeNull.concat(id));
+                        if (totalList.includes("")) {
+                            setTotalList(removeNull.concat(id));
+                        } else {
+                            setTotalList(totalList.concat(id));
+                        }
+                        setSeletedV2IdCount(1);
+                    } else {
+                        setSeletedV2Id(seletedV2Id.concat(id));
+                        setTotalList(totalList.concat(id));
+                        const count = seletedIdV2Count + 1;
+                        setSeletedV2IdCount(count);
+                    }
                 }
             }
         }

@@ -83,7 +83,6 @@ const imageStyle = css`
     margin: 3.5px;
     border-radius: 10px;
     border: solid 3px #fff;
-    cursor: pointer;
 `;
 
 const selectApCountBoxStyle = css`
@@ -112,6 +111,7 @@ const selectApTextStyle = css`
 const apBoxContainer = css`
     display: flex;
     flex-direction: row;
+    flex-wrap: wrap;
 `;
 
 const buttonContainer = css`
