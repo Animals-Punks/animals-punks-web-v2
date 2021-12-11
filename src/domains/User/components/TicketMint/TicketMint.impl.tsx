@@ -1,9 +1,12 @@
-import { css, keyframes } from "@emotion/react";
+import Image from "next/image";
+import { css } from "@emotion/react";
 import Link from "next/link";
 
 import { OwnApBox, SelectApBox, UsedApBox } from "@common/components";
 import { useTicketMint } from "../../hooks";
 import { PATH } from "@/constant";
+import logo from "@assets/images/headerIcon.png";
+import { RouteV1Button } from "@common/components";
 
 const TicketMint: React.FC = () => {
     const {
@@ -19,13 +22,25 @@ const TicketMint: React.FC = () => {
 
     return (
         <div css={defaultBackground}>
-            <Link href={PATH.main}>
-                <div css={teamTextStyle}>Home</div>
-            </Link>
-            <div css={namingTextStyle}>Naming</div>
-            <Link href={PATH.ticket}>
-                <div css={menuTextStyle}>Ticket</div>
-            </Link>
+            <RouteV1Button />
+            <div css={headerBox}>
+                <div css={imageContainer}>
+                    <Image src={logo} css={imageStyle} />
+                </div>
+                <div css={titleTextStyle}> AnimalsPunks</div>
+                <Link href={PATH.main}>
+                    <div css={menuTextStyle}>Home</div>
+                </Link>
+                <Link href={PATH.ticket}>
+                    <div
+                        css={menuTextStyle}
+                        style={{ margin: "22px 462px 22px 40px" }}
+                    >
+                        Ticket
+                    </div>
+                </Link>
+            </div>
+            <div css={barStyle}></div>
             <div css={ticketTitleStyle}>Zoo Ticket</div>
             <div css={bodyContainer}>
                 <div css={walletConnectContainer}>
@@ -66,6 +81,43 @@ const TicketMint: React.FC = () => {
         </div>
     );
 };
+
+const headerBox = css`
+    width: 100vw;
+    /* padding: 12px 50px 18px 20px; */
+    background-color: #fff;
+    display: flex;
+`;
+
+const imageContainer = css`
+    background-color: #fff;
+    display: flex;
+    margin: 5px;
+`;
+
+const imageStyle = css`
+    display: flex;
+`;
+
+const titleTextStyle = css`
+    width: 259px;
+    height: 53px;
+    margin: 9px 462px 8px 20px;
+    font-family: Roboto;
+    font-size: 40px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000;
+`;
+
+const barStyle = css`
+    height: 0;
+    border: solid 2px #000;
+`;
 
 const defaultBackground = css`
     background-color: #94bbff;
@@ -148,68 +200,20 @@ const buttonTextStyle = css`
     color: #fff;
 `;
 
-const hoverKeyFrame = keyframes`
-    0% {
-        /* font-size: 2vw; */
-    }
-    100% {
-        font-size: 2.3vw;
-        color: #FFFA96;
-    }
-`;
-
 const menuTextStyle = css`
+    width: 54px;
+    height: 26px;
+    margin: 22px 40px 22px 462px;
     font-family: Roboto;
+    font-size: 20px;
     font-weight: bold;
-    text-shadow: 5px 5px 5px #000;
-    font-size: 2vw;
-    color: white;
-    position: absolute;
-    z-index: 48;
-    text-align: right;
-    width: 90vw;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.3;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000;
     cursor: pointer;
-    &:hover {
-        animation-name: ${hoverKeyFrame};
-        animation-duration: 0.2s;
-        animation-fill-mode: forwards;
-    }
-`;
-
-const namingTextStyle = css`
-    font-family: Roboto;
-    font-weight: bold;
-    text-shadow: 5px 5px 5px #000;
-    font-size: 2vw;
-    color: white;
-    position: absolute;
-    z-index: 49;
-    text-align: right;
-    width: 82.5vw;
-    cursor: pointer;
-    &:hover {
-        animation-name: ${hoverKeyFrame};
-        animation-duration: 0.2s;
-        animation-fill-mode: forwards;
-    }
-`;
-
-const teamTextStyle = css`
-    font-family: Roboto;
-    font-weight: bold;
-    text-shadow: 5px 5px 5px #000;
-    font-size: 2vw;
-    color: white;
-    position: absolute;
-    z-index: 50;
-    text-align: right;
-    width: 73vw;
-    cursor: pointer;
-    &:hover {
-        animation-name: ${hoverKeyFrame};
-        animation-duration: 0.2s;
-        animation-fill-mode: forwards;
-    }
 `;
 
 export default TicketMint;

@@ -178,4 +178,30 @@ export default class GraphqlService implements IGraphqlService {
             };
         });
     }
+
+    async getTicketCurrnetNumber(type: string): Promise<any> {
+        return (
+            await this.req<any, any>({
+                endpoint: this.endpoint,
+                query: gql`
+                    query GetTieketCurrentNumber($type: String!) {
+                        Ticket_ticket_number_enum(
+                            where: { type: { _eq: $type } }
+                        ) {
+                            current_ticket_number
+                        }
+                    }
+                `,
+                variables: {
+                    type: type,
+                },
+            })
+        ).Ticket_ticket_number_enum.map(
+            (value: { current_ticket_number: number }) => {
+                return {
+                    currentTicketNumber: value.current_ticket_number,
+                };
+            }
+        );
+    }
 }
