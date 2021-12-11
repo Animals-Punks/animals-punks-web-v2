@@ -70,7 +70,6 @@ function useTicketMint(): {
         const klaytn: any | undefined = (window as any).klaytn;
         const address = klaytn.selectedAddress;
         const ticketType = "gold";
-        const ticketNumber = 0;
         const property = [];
         if (selectedV2IdList.length < 8) {
             alert("Please select 8 V2 item");
@@ -91,7 +90,6 @@ function useTicketMint(): {
             const result = await userService.mintTicket(
                 ticketType,
                 address,
-                ticketNumber,
                 property
             );
             if (result === true) {
@@ -104,7 +102,6 @@ function useTicketMint(): {
         const klaytn: any | undefined = (window as any).klaytn;
         const address = klaytn.selectedAddress;
         const ticketType = "diamond";
-        const ticketNumber = 0;
         const property = [];
         if (selectedV2IdList.length < 8 || selectedV1IdList.length < 4) {
             alert("Please select item enough");
@@ -128,7 +125,6 @@ function useTicketMint(): {
             const result = await userService.mintTicket(
                 ticketType,
                 address,
-                ticketNumber,
                 property
             );
             const ticketTypeProperty = {

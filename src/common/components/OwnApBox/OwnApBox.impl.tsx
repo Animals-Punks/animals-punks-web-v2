@@ -1,5 +1,5 @@
 import { css } from "@emotion/react";
-import { useRecoilState } from "recoil";
+import { useRecoilState, useRecoilValue } from "recoil";
 
 import { IOwnApBox } from "./OwnApBox.interface";
 import {
@@ -8,6 +8,8 @@ import {
     seletedV2IdAtom,
     seletedIdV2CountAtom,
     totalSeletedIdAtom,
+    usedV1ApAtom,
+    usedV2ApAtom,
 } from "@common/services/recoil/selectItemAtom";
 
 const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
@@ -18,21 +20,29 @@ const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
     const [seletedIdV2Count, setSeletedV2IdCount] =
         useRecoilState(seletedIdV2CountAtom);
     const [totalList, setTotalList] = useRecoilState(totalSeletedIdAtom);
+    const usedV1ApList = useRecoilValue(usedV1ApAtom);
+    const usedV2ApList = useRecoilValue(usedV2ApAtom);
 
-    const validateSeletedAp = (selectAp: string, selectedApList: string[]) => {
+    const validateSeletedAp = (
+        selectAp: string,
+        selectedApList: string[],
+        usedApList: string[]
+    ) => {
         const parseSelectAp = JSON.parse(selectAp);
         const result = [];
         for (const selectedAp of selectedApList) {
             const parseSelectedItem = JSON.parse(selectedAp);
             if (parseSelectedItem.species === parseSelectAp.species) {
-                console.log(parseSelectedItem.species);
                 result.push(false);
             } else {
                 result.push(true);
             }
         }
+        if (usedApList.includes(parseSelectAp.imageUrl)) {
+            result.push(false);
+        }
         return result;
-    }
+    };
 
     const calculateV1SeletedAp = (id: string) => {
         if (seletedV1Id.length > 0) {
@@ -64,17 +74,23 @@ const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
                         const removeNull = seletedV1Id.filter(item => {
                             return item !== "";
                         });
-                        setSeletedV1Id(removeNull.concat(id));
-                        if (totalList.includes("")) {
-                            setTotalList(removeNull.concat(id));
+                        const parseSelectAp = JSON.parse(id);
+                        if (usedV1ApList.includes(parseSelectAp.imageUrl)) {
+                            alert("This AP is used");
                         } else {
-                            setTotalList(totalList.concat(id));
+                            setSeletedV1Id(removeNull.concat(id));
+                            if (totalList.includes("")) {
+                                setTotalList(removeNull.concat(id));
+                            } else {
+                                setTotalList(totalList.concat(id));
+                            }
+                            setSeletedV1IdCount(1);
                         }
-                        setSeletedV1IdCount(1);
                     } else {
                         const validateResult = validateSeletedAp(
                             id,
-                            seletedV1Id
+                            seletedV1Id,
+                            usedV1ApList
                         );
                         if (validateResult.includes(false)) {
                             alert("Ticket must be another species");
@@ -120,17 +136,25 @@ const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
                         const removeNull = seletedV2Id.filter(item => {
                             return item !== "";
                         });
-                        setSeletedV2Id(removeNull.concat(id));
-                        if (totalList.includes("")) {
-                            setTotalList(removeNull.concat(id));
+                        const parseSelectAp = JSON.parse(id);
+                        console.log(parseSelectAp.imageUrl);
+                        console.log(usedV2ApList);
+                        if (usedV2ApList.includes(parseSelectAp.imageUrl)) {
+                            alert("This AP is used");
                         } else {
-                            setTotalList(totalList.concat(id));
+                            setSeletedV2Id(removeNull.concat(id));
+                            if (totalList.includes("")) {
+                                setTotalList(removeNull.concat(id));
+                            } else {
+                                setTotalList(totalList.concat(id));
+                            }
+                            setSeletedV2IdCount(1);
                         }
-                        setSeletedV2IdCount(1);
                     } else {
                         const validateResult = validateSeletedAp(
                             id,
-                            seletedV2Id
+                            seletedV2Id,
+                            usedV2ApList
                         );
                         if (validateResult.includes(false)) {
                             alert("Ticket must be another species");
@@ -232,7 +256,7 @@ const apBackgroundBoxStyle = css`
     flex-direction: column;
     justify-content: center;
     width: 670px;
-    height: 340px;
+    height: 280px;
     padding: 10px;
     border-radius: 10px;
     border: solid 3px #fff;
