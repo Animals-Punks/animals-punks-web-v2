@@ -25,14 +25,19 @@ const TicketMint: React.FC = () => {
             <RouteV1Button />
             <div css={headerBox}>
                 <div css={imageContainer}>
-                    <Image src={logo} css={imageStyle}/>
+                    <Image src={logo} css={imageStyle} />
                 </div>
                 <div css={titleTextStyle}> AnimalsPunks</div>
                 <Link href={PATH.main}>
-                    <div css={teamTextStyle}>Home</div>
+                    <div css={menuTextStyle}>Home</div>
                 </Link>
                 <Link href={PATH.ticket}>
-                    <div css={menuTextStyle}>Ticket</div>
+                    <div
+                        css={menuTextStyle}
+                        style={{ margin: "22px 462px 22px 40px" }}
+                    >
+                        Ticket
+                    </div>
                 </Link>
             </div>
             <div css={barStyle}></div>
@@ -196,22 +201,6 @@ const buttonTextStyle = css`
 `;
 
 const menuTextStyle = css`
-    width: 54px;
-    height: 26px;
-    margin: 22px 40px 22px 462px;
-    font-family: Roboto;
-    font-size: 20px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.3;
-    letter-spacing: normal;
-    text-align: left;
-    color: #000;
-    cursor: pointer;
-`;
-
-const teamTextStyle = css`
     width: 54px;
     height: 26px;
     margin: 22px 40px 22px 462px;
