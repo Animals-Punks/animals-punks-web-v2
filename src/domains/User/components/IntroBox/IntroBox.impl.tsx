@@ -1,27 +1,74 @@
+import Image from "next/image";
 import { css, keyframes } from "@emotion/react";
 import Link from "next/link";
 
 import { BackgroundImage } from "@common/components";
 import { PATH } from "@/constant";
+import logo from "@assets/images/headerIcon.png";
 
 const IntroBox: React.FC = () => {
     return (
         <>
+            <div css={headerBox}>
+                <div css={imageContainer}>
+                    <Image src={logo} css={imageStyle} />
+                </div>
+                <div css={titleTextStyle}> AnimalsPunks</div>
+                <Link href={PATH.main}>
+                    <div css={teamTextStyle}>Home</div>
+                </Link>
+                <Link href={PATH.ticket}>
+                    <div css={menuTextStyle}>Ticket</div>
+                </Link>
+            </div>
+            <div css={barStyle}></div>
             <BackgroundImage>
                 <link
                     rel="stylesheet"
                     href="https://fonts.googleapis.com/css2?family=Chewy"
                 />
-                <div css={teamTextStyle}>Team</div>
-                <div css={namingTextStyle}>Naming</div>
-                <Link href={PATH.ticket}>
-                <div css={menuTextStyle}>Ticket</div>
-                </Link>
                 <div css={welcomTextStyle}>ANIMALS PUNKS</div>
             </BackgroundImage>
         </>
     );
 };
+
+const headerBox = css`
+    width: 100vw;
+    /* padding: 12px 50px 18px 20px; */
+    background-color: #fff;
+    display: flex;
+`;
+
+const titleTextStyle = css`
+    width: 259px;
+    height: 53px;
+    margin: 9px 462px 8px 20px;
+    font-family: Roboto;
+    font-size: 40px;
+    font-weight: bold;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.33;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000;
+`;
+
+const imageContainer = css`
+    background-color: #fff;
+    display: flex;
+    margin: 5px;
+`;
+
+const imageStyle = css`
+    display: flex;
+`;
+
+const barStyle = css`
+    height: 0;
+    border: solid 2px #000;
+`;
 
 const welcomTextStyle = css`
     font-family: "Chewy", sans-seri;
@@ -37,68 +84,36 @@ const welcomTextStyle = css`
     margin-top: 7vw;
 `;
 
-const hoverKeyFrame = keyframes`
-    0% {
-        /* font-size: 2vw; */
-    }
-    100% {
-        font-size: 2.3vw;
-        color: #FFFA96;
-    }
-`;
-
 const menuTextStyle = css`
+    width: 54px;
+    height: 26px;
+    margin: 22px 40px 22px 462px;
     font-family: Roboto;
+    font-size: 20px;
     font-weight: bold;
-    text-shadow: 5px 5px 5px #000;
-    font-size: 2vw;
-    color: white;
-    position: absolute;
-    z-index: 48;
-    text-align: right;
-    width: 90vw;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.3;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000;
     cursor: pointer;
-    &:hover {
-        animation-name: ${hoverKeyFrame};
-        animation-duration: 0.2s;
-        animation-fill-mode: forwards;
-    }
-`;
-
-const namingTextStyle = css`
-    font-family: Roboto;
-    font-weight: bold;
-    text-shadow: 5px 5px 5px #000;
-    font-size: 2vw;
-    color: white;
-    position: absolute;
-    z-index: 49;
-    text-align: right;
-    width: 82.5vw;
-    cursor: pointer;
-    &:hover {
-        animation-name: ${hoverKeyFrame};
-        animation-duration: 0.2s;
-        animation-fill-mode: forwards;
-    }
 `;
 
 const teamTextStyle = css`
+    width: 54px;
+    height: 26px;
+    margin: 22px 40px 22px 462px;
     font-family: Roboto;
+    font-size: 20px;
     font-weight: bold;
-    text-shadow: 5px 5px 5px #000;
-    font-size: 2vw;
-    color: white;
-    position: absolute;
-    z-index: 50;
-    text-align: right;
-    width: 73vw;
+    font-stretch: normal;
+    font-style: normal;
+    line-height: 1.3;
+    letter-spacing: normal;
+    text-align: left;
+    color: #000;
     cursor: pointer;
-    &:hover {
-        animation-name: ${hoverKeyFrame};
-        animation-duration: 0.2s;
-        animation-fill-mode: forwards;
-    }
 `;
 
 export default IntroBox;

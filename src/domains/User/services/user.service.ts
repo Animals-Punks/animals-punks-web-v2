@@ -270,25 +270,65 @@ export class UserService implements IUserService {
     public async mintTicket(
         ticketType: string,
         address: string,
-        ticketNumber: number,
         property: any[]
     ): Promise<boolean> {
         try {
             const imageUrl = await graphqlService.getTicketImage(ticketType);
-            const data = {
-                ticketType,
-                address,
-                imageUrl: imageUrl[0].url,
-                ticketNumber: ticketNumber,
-                usedAps: property,
-            };
-            const response = await axios.post(
-                `${process.env.NEXT_PUBLIC_TICKET_SERVER}ticket/mint`,
-                data
+            const ticketNumber = await graphqlService.getTicketCurrnetNumber(
+                ticketType
             );
-            const result = response.data;
-            return result.minted.minted;
+            let responseResult = false;
+            if (ticketType === "gold") {
+                try {
+                    const trxResult = await new CaverJsService().mintGoldTicket(
+                        address,
+                        ticketNumber[0].currentTicketNumber
+                    );
+                    responseResult = true;
+                    const data = {
+                        ticketType,
+                        address,
+                        imageUrl: imageUrl[0].url,
+                        ticketNumber: ticketNumber[0].currentTicketNumber,
+                        usedAps: property,
+                    };
+                    if (trxResult === true) {
+                        await axios.post(
+                            `${process.env.NEXT_PUBLIC_TICKET_SERVER}ticket/mint`,
+                            data
+                        );
+                    }
+                } catch (error) {
+                    alert(error);
+                }
+            } else {
+                try {
+                    const trxResult =
+                        await new CaverJsService().mintDiamondTicket(
+                            address,
+                            ticketNumber[0].currentTicketNumber
+                        );
+                    responseResult = true;
+                    const data = {
+                        ticketType,
+                        address,
+                        imageUrl: imageUrl[0].url,
+                        ticketNumber: ticketNumber[0].currentTicketNumber,
+                        usedAps: property,
+                    };
+                    if (trxResult === true) {
+                        await axios.post(
+                            `${process.env.NEXT_PUBLIC_TICKET_SERVER}ticket/mint`,
+                            data
+                        );
+                    }
+                } catch (error) {
+                    alert(error);
+                }
+            }
+            return responseResult;
         } catch (error) {
+            console.log(error);
             alert(error.response.data.message);
             return false;
         }
