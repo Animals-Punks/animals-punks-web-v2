@@ -133,13 +133,13 @@ export class UserService implements IUserService {
         }
     }
 
-    public async getV1Ap(address: string): Promise<string[]> {
+    public async getV1Ap(address: string): Promise<any[]> {
         try {
             // const testAddress = "0x4B0acFf8eaa9F5A9426d06d4f1E0A3316735f7E7";
             const slug = process.env.NEXT_PUBLIC_ANIMALS_PUNKS_V1_SLUG || "";
             const openSeaEndpoint =
                 process.env.NEXT_PUBLIC_OPENSEA_ENDPOINT || "";
-            const imageUrls: string[] = [];
+            const imageUrls: any[] = [];
             for (let i = 0; i <= 10; i++) {
                 const params = {
                     owner: address,
@@ -154,7 +154,12 @@ export class UserService implements IUserService {
                 const result = response.data;
                 if (result !== []) {
                     for (const tokenInfo of result.assets) {
-                        imageUrls.push(tokenInfo.image_url);
+                        const resultInfo = {
+                            imageUrl: tokenInfo.image_url,
+                            tokenId: tokenInfo.token_id,
+                        };
+                        const parseResult = JSON.stringify(resultInfo);
+                        imageUrls.push(parseResult);
                     }
                 }
             }
@@ -190,7 +195,8 @@ export class UserService implements IUserService {
                 );
                 const apInfoResult = apInfoResponse.data;
                 const imageUrl = apInfoResult.image;
-                imageUrls.push(imageUrl);
+                const resultInfo = JSON.stringify({ imageUrl, apNumber });
+                imageUrls.push(resultInfo);
             }
             return imageUrls;
         } catch (error) {
@@ -198,4 +204,79 @@ export class UserService implements IUserService {
             return [];
         }
     }
+
+    public async getUsedV2ImageUrl(): Promise<string[]> {
+        const usedApList = await graphqlService.getV2UsedAp();
+        if (usedApList === []) {
+            return [];
+        }
+        const imageList = [];
+        try {
+            for (const usedApNumnber of usedApList) {
+                const response = await axios.get(
+                    `${process.env.NEXT_PUBLIC_WEB_SERVER}/name/${usedApNumnber.apNumber}`
+                );
+                const result = response.data;
+                const imageUrl = result.url;
+                imageList.push(imageUrl);
+            }
+            return imageList;
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
+    public async getUsedV1ImageUrl(): Promise<string[]> {
+        const usedApList = await graphqlService.getV1UsedAp();
+        const contractAddress =
+            process.env.NEXT_PUBLIC_ANIMALS_PUNKS_V1_ADDRESS || "";
+        const openSeaEndpoint =
+            process.env.NEXT_PUBLIC_OPENSEA_SINGLE_ASSET_ENDPOINT || "";
+        try {
+            if (usedApList === []) {
+                return [];
+            }
+            const imageList = [];
+            for (const usedApNumber of usedApList) {
+                const response = await axios.get(
+                    `${openSeaEndpoint}/${contractAddress}/${usedApNumber.apNumber}`
+                );
+                const result = response.data;
+                imageList.push(result.image_url);
+            }
+            return imageList;
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
+    public async mintTicket(
+        ticketType: string,
+        address: string,
+        ticketNumber: number,
+        property: any[]
+    ): Promise<boolean> {
+        const imageUrl = await graphqlService.getTicketImage(ticketType);
+        const params = {
+            ticketType,
+            address,
+            imageUrl: imageUrl[0],
+            ticketNumber: ticketNumber,
+            usedAps: property,
+        };
+        const response = await axios.post(
+            `${process.env.NEXT_PUBLIC_TICKET_SERVER}/ticket/mint`,
+            { params }
+        );
+        const result = response.data;
+        return result.minted;
+    }
 }
+
+// ticketType: string;
+// address: string;
+// imageUrl: string;
+// ticketNumber: number;
+// usedAps: any[];

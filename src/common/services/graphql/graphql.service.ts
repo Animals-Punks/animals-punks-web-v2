@@ -118,4 +118,66 @@ export default class GraphqlService implements IGraphqlService {
             };
         });
     }
+
+    async getV1UsedAp(): Promise<any> {
+        return (
+            await this.req<any, any>({
+                endpoint: this.endpoint,
+                query: gql`
+                    query UsedV1Query {
+                        Ticket_minted_ap_v1 {
+                            ap_number
+                        }
+                    }
+                `,
+            })
+        ).Ticket_minted_ap_v1.map((value: { ap_number: number }) => {
+            return {
+                apNumber: value.ap_number,
+            };
+        });
+    }
+
+    async getV2UsedAp(): Promise<any> {
+        return (
+            await this.req<any, any>({
+                endpoint: this.endpoint,
+                query: gql`
+                    query GetV2Used {
+                        Ticket_minted_ap_v2 {
+                            ap_number
+                        }
+                    }
+                `,
+            })
+        ).Ticket_minted_ap_v2.map((value: { ap_number: number }) => {
+            return {
+                apNumber: value.ap_number,
+            };
+        });
+    }
+
+    async getAp
+
+    async getTicketImage(type: string): Promise<any> {
+        return (
+            await this.req<any, any>({
+                endpoint: this.endpoint,
+                query: gql`
+                    query GetTicketImage($type: String!) {
+                        Ticket_ticket_image(where: { type: { _eq: $type } }) {
+                            url
+                        }
+                    }
+                `,
+                variables: {
+                    type: type,
+                },
+            })
+        ).Ticket_ticket_image.map((value: { url: string }) => {
+            return {
+                url: value.url,
+            };
+        });
+    }
 }

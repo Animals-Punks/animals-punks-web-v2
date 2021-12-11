@@ -1,6 +1,24 @@
 import { css } from "@emotion/react";
+import { useRecoilValue } from "recoil";
 
-const UsedApBox: React.FC = () => {
+import {
+    usedV1ApAtom,
+    usedV2ApAtom,
+} from "@common/services/recoil/selectItemAtom";
+import { IUsedApBox } from "./UsedApBox.interface";
+
+const UsedApBox: React.FC<IUsedApBox.IProps> = ({ type }) => {
+    const usedV1ImageList = useRecoilValue(usedV1ApAtom);
+    const usedV2ImageList = useRecoilValue(usedV2ApAtom);
+
+    const v1ImageBox = usedV1ImageList.map(image => (
+        <img src={image} key={image} css={apBoxStyle} />
+    ));
+
+    const v2ImageBox = usedV2ImageList.map(image => (
+        <img src={image} key={image} css={apBoxStyle} />
+    ));
+
     return (
         <>
             <div css={usedApBoxStyle}>
@@ -14,20 +32,7 @@ const UsedApBox: React.FC = () => {
                         </div>
                     </div>
                     <div css={apBoxContainer}>
-                        <div css={apBoxStyle}></div>
-                        <div css={apBoxStyle}></div>
-                    </div>
-                    <div css={apBoxContainer}>
-                        <div css={apBoxStyle}></div>
-                        <div css={apBoxStyle}></div>
-                    </div>
-                    <div css={apBoxContainer}>
-                        <div css={apBoxStyle}></div>
-                        <div css={apBoxStyle}></div>
-                    </div>
-                    <div css={apBoxContainer}>
-                        <div css={apBoxStyle}></div>
-                        <div css={apBoxStyle}></div>
+                        {type === "V1" ? (<>{v1ImageBox}</>) : (<>{v2ImageBox}</>)}
                     </div>
                 </div>
             </div>
@@ -37,6 +42,7 @@ const UsedApBox: React.FC = () => {
 
 const usedApBoxStyle = css`
     display: flex;
+    width: 310px;
     height: 410px;
     padding: 20px;
     border-radius: 10px;
@@ -46,8 +52,11 @@ const usedApBoxStyle = css`
 
 const itemContainer = css`
     display: flex;
+    align-items: center;
+    /* flex-wrap: wrap; */
     flex-direction: column;
     align-items: center;
+    /* overflow: hidden scroll; */
 `;
 
 const buttonContiner = css`
@@ -56,7 +65,6 @@ const buttonContiner = css`
 `;
 
 const buttonStyle = css`
-    display: flex;
     width: 100px;
     height: 40px;
     margin: 0 14px 14px 14px;
@@ -80,14 +88,14 @@ const buttonTextStyle = css`
 `;
 
 const apBoxContainer = css`
-    display: flex;
-    flex-direction: row;
+    /* flex-wrap: wrap; */
+    overflow: hidden scroll;
 `;
 
 const apBoxStyle = css`
     width: 100px;
     height: 100px;
-    margin: 5px 5px 5px 5px;
+    margin: 3px;
     border-radius: 10px;
     border: solid 3px #fff;
 `;

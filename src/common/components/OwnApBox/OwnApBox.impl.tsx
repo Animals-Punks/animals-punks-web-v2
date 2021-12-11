@@ -134,8 +134,8 @@ const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
                             ? selectedImageStyle
                             : imageStyle
                         : seletedV2Id.includes(image)
-                        ? selectedImageStyle
-                        : imageStyle
+                            ? selectedImageStyle
+                            : imageStyle
                 }
                 onClick={() => selectImageOnClick(image)}
             />
@@ -151,6 +151,7 @@ const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
                             // console.log(apImage);
                             // apImage
                             apImage.length > 1 ? imageBox : <></>
+                            // type === "V1" ? <div css={commingSoonText}>Comming soon</div> : (apImage.length > 1 ? imageBox : <></>)
                         }
                     </div>
                 </div>

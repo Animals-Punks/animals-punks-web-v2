@@ -13,6 +13,8 @@ const TicketMint: React.FC = () => {
         metaSelectAddress,
         v1ImageList,
         v2ImageList,
+        goldTicketMint,
+        diamondTicketMint,
     } = useTicketMint();
 
     return (
@@ -53,9 +55,12 @@ const TicketMint: React.FC = () => {
                     <OwnApBox apImage={v2ImageList} type="V2" />
                 </div>
                 <div css={defaultContainer}>
-                    <UsedApBox />
-                    <SelectApBox />
-                    <UsedApBox />
+                    <UsedApBox type="V1" />
+                    <SelectApBox
+                        goldOnClick={goldTicketMint}
+                        diamondOnClick={diamondTicketMint}
+                    />
+                    <UsedApBox type="V2" />
                 </div>
             </div>
         </div>

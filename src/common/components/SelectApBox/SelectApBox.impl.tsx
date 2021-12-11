@@ -6,8 +6,12 @@ import {
     seletedIdV2CountAtom,
     totalSeletedIdAtom,
 } from "@common/services/recoil/selectItemAtom";
+import { ISelectApBox } from "./SeletApBox.interface";
 
-const SelectApBox: React.FC = () => {
+const SelectApBox: React.FC<ISelectApBox.IProps> = ({
+    goldOnClick,
+    diamondOnClick,
+}) => {
     const seletedV1IdCount = useRecoilValue(seletedIdV1CountAtom);
     const seletedV2IdCount = useRecoilValue(seletedIdV2CountAtom);
     const totalList = useRecoilValue(totalSeletedIdAtom);
@@ -44,12 +48,14 @@ const SelectApBox: React.FC = () => {
                     <div
                         css={ticketButtonStyle}
                         style={{ backgroundColor: "#ffc94b" }}
+                        onClick={goldOnClick}
                     >
                         <div css={buttonTextStyle}>GOLD TICKET</div>
                     </div>
                     <div
                         css={ticketButtonStyle}
                         style={{ backgroundColor: "#78e3ff" }}
+                        onClick={diamondOnClick}
                     >
                         <div css={buttonTextStyle}>DIAMOND TICKET</div>
                     </div>
