@@ -19,6 +19,21 @@ const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
         useRecoilState(seletedIdV2CountAtom);
     const [totalList, setTotalList] = useRecoilState(totalSeletedIdAtom);
 
+    const validateSeletedAp = (selectAp: string, selectedApList: string[]) => {
+        const parseSelectAp = JSON.parse(selectAp);
+        const result = [];
+        for (const selectedAp of selectedApList) {
+            const parseSelectedItem = JSON.parse(selectedAp);
+            if (parseSelectedItem.species === parseSelectAp.species) {
+                console.log(parseSelectedItem.species);
+                result.push(false);
+            } else {
+                result.push(true);
+            }
+        }
+        return result;
+    }
+
     const calculateV1SeletedAp = (id: string) => {
         if (seletedV1Id.length > 0) {
             if (seletedV1Id.includes(id)) {
@@ -57,10 +72,18 @@ const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
                         }
                         setSeletedV1IdCount(1);
                     } else {
-                        setSeletedV1Id(seletedV1Id.concat(id));
-                        setTotalList(totalList.concat(id));
-                        const count = seletedIdV1Count + 1;
-                        setSeletedV1IdCount(count);
+                        const validateResult = validateSeletedAp(
+                            id,
+                            seletedV1Id
+                        );
+                        if (validateResult.includes(false)) {
+                            alert("Ticket must be another species");
+                        } else {
+                            setSeletedV1Id(seletedV1Id.concat(id));
+                            setTotalList(totalList.concat(id));
+                            const count = seletedIdV1Count + 1;
+                            setSeletedV1IdCount(count);
+                        }
                     }
                 }
             }
@@ -105,10 +128,18 @@ const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
                         }
                         setSeletedV2IdCount(1);
                     } else {
-                        setSeletedV2Id(seletedV2Id.concat(id));
-                        setTotalList(totalList.concat(id));
-                        const count = seletedIdV2Count + 1;
-                        setSeletedV2IdCount(count);
+                        const validateResult = validateSeletedAp(
+                            id,
+                            seletedV2Id
+                        );
+                        if (validateResult.includes(false)) {
+                            alert("Ticket must be another species");
+                        } else {
+                            setSeletedV2Id(seletedV2Id.concat(id));
+                            setTotalList(totalList.concat(id));
+                            const count = seletedIdV2Count + 1;
+                            setSeletedV2IdCount(count);
+                        }
                     }
                 }
             }
@@ -123,11 +154,21 @@ const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
         }
     };
 
+    const jsonParse = (imageData: string) => {
+        if (imageData === "") {
+            return {
+                imageUrl: "",
+            }
+        } else {
+            return JSON.parse(imageData).imageUrl;
+        }
+    };
+
     const imageBox = apImage.map(image => (
         <>
             <img
                 key={image}
-                src={image}
+                src={jsonParse(image)}
                 css={
                     type === "V1"
                         ? seletedV1Id.includes(image)
@@ -150,7 +191,7 @@ const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
                         {
                             // console.log(apImage);
                             // apImage
-                            apImage.length > 1 ? imageBox : <></>
+                            apImage !== [""] ? imageBox : <></>
                             // type === "V1" ? <div css={commingSoonText}>Comming soon</div> : (apImage.length > 1 ? imageBox : <></>)
                         }
                     </div>

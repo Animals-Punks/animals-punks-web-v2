@@ -133,19 +133,29 @@ export class UserService implements IUserService {
         }
     }
 
+    private filterSpecies(traits: any[]): string {
+        let species = "";
+        for (const property of traits) {
+            if (property.trait_type === "species") {
+                species = property.value;
+            }
+        }
+        return species;
+    }
+
     public async getV1Ap(address: string): Promise<any[]> {
         try {
-            // const testAddress = "0x4B0acFf8eaa9F5A9426d06d4f1E0A3316735f7E7";
+            const testAddress = "0x7b989e2f025cdf1b39ca45ca01f694cae71ffed9";
             const slug = process.env.NEXT_PUBLIC_ANIMALS_PUNKS_V1_SLUG || "";
             const openSeaEndpoint =
                 process.env.NEXT_PUBLIC_OPENSEA_ENDPOINT || "";
             const imageUrls: any[] = [];
             for (let i = 0; i <= 10; i++) {
                 const params = {
-                    owner: address,
+                    owner: testAddress,
                     asset_contract_address:
                         process.env.NEXT_PUBLIC_ANIMALS_PUNKS_V1_ADDRESS,
-                    order_direction: "desc",
+                    order_direction: "asc",
                     offset: i,
                     limit: 50,
                     collection: slug,
@@ -154,22 +164,22 @@ export class UserService implements IUserService {
                 const result = response.data;
                 if (result !== []) {
                     for (const tokenInfo of result.assets) {
+                        const species = this.filterSpecies(tokenInfo.traits);
                         const resultInfo = {
                             imageUrl: tokenInfo.image_url,
-                            tokenId: tokenInfo.token_id,
+                            apNumber: tokenInfo.token_id,
+                            species: species,
                         };
                         const parseResult = JSON.stringify(resultInfo);
-                        imageUrls.push(parseResult);
+                        if (imageUrls.includes(parseResult) === false) {
+                            imageUrls.push(parseResult);
+                        }
                     }
+                } else {
+                    break;
                 }
             }
-            // return imageUrls;
-            return [
-                "https://lh3.googleusercontent.com/6tVO1FjXYWvQVBzrkHQSDViQJSxf6zOKzAJdFndC-QKwdfbDYsEtFLj5HCTAUKZ74dHlQXtxW92-OWr_9_tFm-JhF6elPmpSZHI-",
-                "https://lh3.googleusercontent.com/s6JahOpCEZqAj-05NcXo_R3vndu-DJ2z67lOE1IqLESVPXz2LZq3I-FqPa6qi5wfuWCBWwv9tj7VNzYPn9fL19gRBFV6LZUOdLv7",
-                "https://lh3.googleusercontent.com/2g_N4BF6y9PPafRvQ2rq701eL1jEjmoy5HI_X0chTyAB3Gc2DWZEUa8lr-HvpwnIyvW1UAgU9GnbUiJ7q54PCnQk-6nRdVGEtQ5_uAk",
-                "https://lh3.googleusercontent.com/9WxZFlcp_67p3cFOUv0ZK6MCRRDzY_eqTiDW4qipphAmfW-kbG5N2Tq5lLmoL4FaJxIE86wBcd2ILjcDPLczD8RHEp0lLTj-GiRGXII",
-            ];
+            return imageUrls;
         } catch (error) {
             const errorResponse = error.request.response;
             const parseErrorResponse = JSON.parse(errorResponse);
@@ -195,7 +205,12 @@ export class UserService implements IUserService {
                 );
                 const apInfoResult = apInfoResponse.data;
                 const imageUrl = apInfoResult.image;
-                const resultInfo = JSON.stringify({ imageUrl, apNumber });
+                const species = this.filterSpecies(apInfoResult.attributes);
+                const resultInfo = JSON.stringify({
+                    imageUrl,
+                    apNumber,
+                    species,
+                });
                 imageUrls.push(resultInfo);
             }
             return imageUrls;
@@ -258,25 +273,24 @@ export class UserService implements IUserService {
         ticketNumber: number,
         property: any[]
     ): Promise<boolean> {
-        const imageUrl = await graphqlService.getTicketImage(ticketType);
-        const params = {
-            ticketType,
-            address,
-            imageUrl: imageUrl[0],
-            ticketNumber: ticketNumber,
-            usedAps: property,
-        };
-        const response = await axios.post(
-            `${process.env.NEXT_PUBLIC_TICKET_SERVER}/ticket/mint`,
-            { params }
-        );
-        const result = response.data;
-        return result.minted;
+        try {
+            const imageUrl = await graphqlService.getTicketImage(ticketType);
+            const data = {
+                ticketType,
+                address,
+                imageUrl: imageUrl[0].url,
+                ticketNumber: ticketNumber,
+                usedAps: property,
+            };
+            const response = await axios.post(
+                `${process.env.NEXT_PUBLIC_TICKET_SERVER}ticket/mint`,
+                data
+            );
+            const result = response.data;
+            return result.minted.minted;
+        } catch (error) {
+            alert(error.response.data.message);
+            return false;
+        }
     }
 }
-
-// ticketType: string;
-// address: string;
-// imageUrl: string;
-// ticketNumber: number;
-// usedAps: any[];
