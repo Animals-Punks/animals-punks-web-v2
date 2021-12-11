@@ -157,8 +157,6 @@ export default class GraphqlService implements IGraphqlService {
         });
     }
 
-    async getAp
-
     async getTicketImage(type: string): Promise<any> {
         return (
             await this.req<any, any>({

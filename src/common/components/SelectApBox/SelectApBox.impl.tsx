@@ -16,9 +16,17 @@ const SelectApBox: React.FC<ISelectApBox.IProps> = ({
     const seletedV2IdCount = useRecoilValue(seletedIdV2CountAtom);
     const totalList = useRecoilValue(totalSeletedIdAtom);
 
+    const jsonParse = (imageData: string) => {
+        if (imageData === "") {
+            return;
+        } else {
+            return JSON.parse(imageData).imageUrl;
+        }
+    };
+
     const imageBox = totalList.map(image => (
         <>
-            <img key={image} src={image} css={imageStyle} />
+            <img key={image} src={jsonParse(image)} css={imageStyle} />
         </>
     ));
 
