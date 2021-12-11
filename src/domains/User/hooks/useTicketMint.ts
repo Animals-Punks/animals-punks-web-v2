@@ -15,6 +15,7 @@ function useTicketMint(): {
     v1ImageList: string[];
     v2ImageList: string[];
     goldTicketMint: any;
+    diamondTicketMint: any;
 } {
     const [kaikasSelectAddress, setKaikasSelectAddress] = useState("");
     const [metaSelectAddress, setMetaSelectAddress] = useState("");
@@ -125,6 +126,7 @@ function useTicketMint(): {
         v1ImageList,
         v2ImageList,
         goldTicketMint,
+        diamondTicketMint,
     };
 }
 

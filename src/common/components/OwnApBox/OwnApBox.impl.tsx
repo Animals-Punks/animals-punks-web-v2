@@ -130,10 +130,9 @@ const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
                 src={image}
                 css={
                     type === "V1"
-                        // ? seletedV1Id.includes(image)
-                        //     ? selectedImageStyle
-                        //     : imageStyle
-                        ? <></>
+                        ? seletedV1Id.includes(image)
+                            ? selectedImageStyle
+                            : imageStyle
                         : seletedV2Id.includes(image)
                             ? selectedImageStyle
                             : imageStyle
@@ -151,8 +150,8 @@ const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
                         {
                             // console.log(apImage);
                             // apImage
-                            // apImage.length > 1 ? imageBox : <></>
-                            type === "V1" ? <div css={commingSoonText}>Comming soon</div> : (apImage.length > 1 ? imageBox : <></>)
+                            apImage.length > 1 ? imageBox : <></>
+                            // type === "V1" ? <div css={commingSoonText}>Comming soon</div> : (apImage.length > 1 ? imageBox : <></>)
                         }
                     </div>
                 </div>
@@ -160,21 +159,6 @@ const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
         </div>
     );
 };
-
-const commingSoonText = css`
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    font-family: Roboto;
-    font-size: 30px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.36;
-    letter-spacing: normal;
-    color: #fff;
-`;
 
 const apBackgroundBoxContainer = css`
     display: flex;

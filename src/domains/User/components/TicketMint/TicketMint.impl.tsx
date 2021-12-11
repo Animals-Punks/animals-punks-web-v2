@@ -14,6 +14,7 @@ const TicketMint: React.FC = () => {
         v1ImageList,
         v2ImageList,
         goldTicketMint,
+        diamondTicketMint,
     } = useTicketMint();
 
     return (
@@ -29,11 +30,10 @@ const TicketMint: React.FC = () => {
             <div css={bodyContainer}>
                 <div css={walletConnectContainer}>
                     <div css={ticketContainer}>
-                        {/* <div css={buttonStyle} onClick={connectMetamaskWallet}> */}
-                        <div css={buttonStyle}>
+                        <div css={buttonStyle} onClick={connectMetamaskWallet}>
                             <div css={buttonTextStyle}>
                                 {metaSelectAddress === ""
-                                    ? "Comming soon"
+                                    ? "Metamask wallet connect"
                                     : metaSelectAddress}
                             </div>
                         </div>
@@ -56,7 +56,10 @@ const TicketMint: React.FC = () => {
                 </div>
                 <div css={defaultContainer}>
                     <UsedApBox type="V1" />
-                    <SelectApBox goldOnClick={goldTicketMint} />
+                    <SelectApBox
+                        goldOnClick={goldTicketMint}
+                        diamondOnClick={diamondTicketMint}
+                    />
                     <UsedApBox type="V2" />
                 </div>
             </div>

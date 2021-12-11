@@ -2,18 +2,18 @@ import { css } from "@emotion/react";
 import { useRecoilValue } from "recoil";
 
 import {
-    // usedV1ApAtom,
+    usedV1ApAtom,
     usedV2ApAtom,
 } from "@common/services/recoil/selectItemAtom";
 import { IUsedApBox } from "./UsedApBox.interface";
 
 const UsedApBox: React.FC<IUsedApBox.IProps> = ({ type }) => {
-    // const usedV1ImageList = useRecoilValue(usedV1ApAtom);
+    const usedV1ImageList = useRecoilValue(usedV1ApAtom);
     const usedV2ImageList = useRecoilValue(usedV2ApAtom);
 
-    // const v1ImageBox = usedV1ImageList.map(image => (
-    //     <img src={image} key={image} css={apBoxStyle} />
-    // ));
+    const v1ImageBox = usedV1ImageList.map(image => (
+        <img src={image} key={image} css={apBoxStyle} />
+    ));
 
     const v2ImageBox = usedV2ImageList.map(image => (
         <img src={image} key={image} css={apBoxStyle} />
@@ -32,11 +32,7 @@ const UsedApBox: React.FC<IUsedApBox.IProps> = ({ type }) => {
                         </div>
                     </div>
                     <div css={apBoxContainer}>
-                        {type === "V1" ? (
-                            <div css={commingSoonText}>Comming Soon</div>
-                        ) : (
-                            <>{v2ImageBox}</>
-                        )}
+                        {type === "V1" ? (<>{v1ImageBox}</>) : (<>{v2ImageBox}</>)}
                     </div>
                 </div>
             </div>
@@ -83,21 +79,6 @@ const buttonTextStyle = css`
     height: 19px;
     font-family: Roboto;
     font-size: 14px;
-    font-weight: bold;
-    font-stretch: normal;
-    font-style: normal;
-    line-height: 1.36;
-    letter-spacing: normal;
-    color: #fff;
-`;
-
-const commingSoonText = css`
-    display: flex;
-    text-align: center;
-    align-items: center;
-    justify-content: center;
-    font-family: Roboto;
-    font-size: 30px;
     font-weight: bold;
     font-stretch: normal;
     font-style: normal;
