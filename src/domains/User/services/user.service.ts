@@ -145,14 +145,13 @@ export class UserService implements IUserService {
 
     public async getV1Ap(address: string): Promise<any[]> {
         try {
-            const testAddress = "0x7b989e2f025cdf1b39ca45ca01f694cae71ffed9";
             const slug = process.env.NEXT_PUBLIC_ANIMALS_PUNKS_V1_SLUG || "";
             const openSeaEndpoint =
                 process.env.NEXT_PUBLIC_OPENSEA_ENDPOINT || "";
             const imageUrls: any[] = [];
             for (let i = 0; i <= 10; i++) {
                 const params = {
-                    owner: testAddress,
+                    owner: address,
                     asset_contract_address:
                         process.env.NEXT_PUBLIC_ANIMALS_PUNKS_V1_ADDRESS,
                     order_direction: "asc",
@@ -189,12 +188,11 @@ export class UserService implements IUserService {
     }
 
     public async getV2ApImageUrl(address: string): Promise<string[]> {
-        const testAddress = "0x757e2833f59c6073d029df4e39778055207bf611";
         const caverServerEndpoint =
             `${process.env.NEXT_PUBLIC_CAVER_SERVER}caver/getOwnTokens` || "";
         const webServeerEndPoint =
             `${process.env.NEXT_PUBLIC_WEB_SERVER}/info` || "";
-        const params = { address: testAddress };
+        const params = { address: address };
         try {
             const response = await axios.get(caverServerEndpoint, { params });
             const result = response.data;
