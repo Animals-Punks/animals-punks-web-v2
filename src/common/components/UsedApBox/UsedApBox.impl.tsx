@@ -43,7 +43,7 @@ const UsedApBox: React.FC<IUsedApBox.IProps> = ({ type }) => {
 const usedApBoxStyle = css`
     display: flex;
     width: 310px;
-    height: 410px;
+    height: 380px;
     padding: 20px;
     border-radius: 10px;
     border: solid 3px #fff;
