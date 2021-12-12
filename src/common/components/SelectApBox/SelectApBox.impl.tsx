@@ -84,7 +84,7 @@ const selectBoxStyle = css`
     flex-direction: column;
     justify-content: space-between;
     width: 740px;
-    height: 410px;
+    height: 380px;
     padding: 20px;
     border-radius: 10px;
     margin: 10px;
