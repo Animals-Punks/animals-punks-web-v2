@@ -1,5 +1,7 @@
 import { css } from "@emotion/react";
 import { useRecoilValue } from "recoil";
+import Box from "@mui/material/Box";
+import TextField from "@mui/material/TextField";
 
 import {
     usedV1ApAtom,
@@ -7,7 +9,11 @@ import {
 } from "@common/services/recoil/selectItemAtom";
 import { IUsedApBox } from "./UsedApBox.interface";
 
-const UsedApBox: React.FC<IUsedApBox.IProps> = ({ type }) => {
+const UsedApBox: React.FC<IUsedApBox.IProps> = ({
+    type,
+    onChange,
+    onClick,
+}) => {
     const usedV1ImageList = useRecoilValue(usedV1ApAtom);
     const usedV2ImageList = useRecoilValue(usedV2ApAtom);
 
@@ -24,15 +30,34 @@ const UsedApBox: React.FC<IUsedApBox.IProps> = ({ type }) => {
             <div css={usedApBoxStyle}>
                 <div css={itemContainer}>
                     <div css={buttonContiner}>
+                        <Box
+                            component="form"
+                            sx={{
+                                "& > :not(style)": {
+                                    m: 1,
+                                    width: "10ch",
+                                    height: "8ch",
+                                },
+                            }}
+                            noValidate
+                            autoComplete="off"
+                        >
+                            <TextField
+                                id="outlined-basic"
+                                label="Number"
+                                variant="filled"
+                                onChange={onChange}
+                            />
+                        </Box>
+
                         <div css={buttonStyle}>
-                            <div css={buttonTextStyle}>Number</div>
-                        </div>
-                        <div css={buttonStyle}>
-                            <div css={buttonTextStyle}>Search</div>
+                            <div css={buttonTextStyle} onClick={onClick}>
+                                Search
+                            </div>
                         </div>
                     </div>
                     <div css={apBoxContainer}>
-                        {type === "V1" ? (<>{v1ImageBox}</>) : (<>{v2ImageBox}</>)}
+                        {type === "V1" ? <>{v1ImageBox}</> : <>{v2ImageBox}</>}
                     </div>
                 </div>
             </div>
@@ -67,10 +92,11 @@ const buttonContiner = css`
 const buttonStyle = css`
     width: 100px;
     height: 40px;
-    margin: 0 14px 14px 14px;
+    margin: 15px 14px 14px 14px;
     padding: 10.5px 25px;
     border-radius: 10px;
     border: solid 3px #fff;
+    cursor: pointer;
 `;
 
 const buttonTextStyle = css`

@@ -123,9 +123,8 @@ const selectApTextStyle = css`
 `;
 
 const apBoxContainer = css`
-    display: flex;
-    flex-direction: row;
     flex-wrap: wrap;
+    overflow-x: scroll;
 `;
 
 const buttonContainer = css`

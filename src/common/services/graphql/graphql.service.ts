@@ -138,6 +138,54 @@ export default class GraphqlService implements IGraphqlService {
         });
     }
 
+    async searchUsedV1Ap(apNumber: string): Promise<any> {
+        return (
+            await this.req<any, any>({
+                endpoint: this.endpoint,
+                query: gql`
+                    query SearchUsedV1Query($ap_number: String!) {
+                        Ticket_minted_ap_v1(
+                            where: { ap_number: { _eq: $ap_number } }
+                        ) {
+                            ap_number
+                        }
+                    }
+                `,
+                variables: {
+                    ap_number: apNumber,
+                },
+            })
+        ).Ticket_minted_ap_v1.map((value: { ap_number: string }) => {
+            return {
+                apNumber: value.ap_number,
+            };
+        });
+    }
+
+    async searchUsedV2Ap(apNumber: number): Promise<any> {
+        return (
+            await this.req<any, any>({
+                endpoint: this.endpoint,
+                query: gql`
+                    query SearchUsedV2Query($ap_number: Int!) {
+                        Ticket_minted_ap_v2(
+                            where: { ap_number: { _eq: $ap_number } }
+                        ) {
+                            ap_number
+                        }
+                    }
+                `,
+                variables: {
+                    ap_number: apNumber,
+                },
+            })
+        ).Ticket_minted_ap_v2.map((value: { ap_number: number }) => {
+            return {
+                apNumber: value.ap_number,
+            };
+        });
+    }
+
     async getV2UsedAp(): Promise<any> {
         return (
             await this.req<any, any>({
