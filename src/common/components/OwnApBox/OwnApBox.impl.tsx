@@ -87,19 +87,10 @@ const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
                             setSeletedV1IdCount(1);
                         }
                     } else {
-                        const validateResult = validateSeletedAp(
-                            id,
-                            seletedV1Id,
-                            usedV1ApList
-                        );
-                        if (validateResult.includes(false)) {
-                            alert("Ticket must be another species");
-                        } else {
-                            setSeletedV1Id(seletedV1Id.concat(id));
-                            setTotalList(totalList.concat(id));
-                            const count = seletedIdV1Count + 1;
-                            setSeletedV1IdCount(count);
-                        }
+                        setSeletedV1Id(seletedV1Id.concat(id));
+                        setTotalList(totalList.concat(id));
+                        const count = seletedIdV1Count + 1;
+                        setSeletedV1IdCount(count);
                     }
                 }
             }
@@ -137,8 +128,6 @@ const OwnApBox: React.FC<IOwnApBox.IProps> = ({ apImage, type }) => {
                             return item !== "";
                         });
                         const parseSelectAp = JSON.parse(id);
-                        console.log(parseSelectAp.imageUrl);
-                        console.log(usedV2ApList);
                         if (usedV2ApList.includes(parseSelectAp.imageUrl)) {
                             alert("This AP is used");
                         } else {

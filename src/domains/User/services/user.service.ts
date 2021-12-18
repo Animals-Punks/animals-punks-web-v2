@@ -145,13 +145,14 @@ export class UserService implements IUserService {
 
     public async getV1Ap(address: string): Promise<any[]> {
         try {
+            const testAddress = "0x7b989e2f025cdf1b39ca45ca01f694cae71ffed9";
             const slug = process.env.NEXT_PUBLIC_ANIMALS_PUNKS_V1_SLUG || "";
             const openSeaEndpoint =
                 process.env.NEXT_PUBLIC_OPENSEA_ENDPOINT || "";
             const imageUrls: any[] = [];
             for (let i = 0; i <= 10; i++) {
                 const params = {
-                    owner: address,
+                    owner: testAddress,
                     asset_contract_address:
                         process.env.NEXT_PUBLIC_ANIMALS_PUNKS_V1_ADDRESS,
                     order_direction: "asc",
@@ -188,11 +189,12 @@ export class UserService implements IUserService {
     }
 
     public async getV2ApImageUrl(address: string): Promise<string[]> {
+        const testAddress = "0x757e2833f59c6073d029df4e39778055207bf611";
         const caverServerEndpoint =
             `${process.env.NEXT_PUBLIC_CAVER_SERVER}caver/getOwnTokens` || "";
         const webServeerEndPoint =
             `${process.env.NEXT_PUBLIC_WEB_SERVER}/info` || "";
-        const params = { address: address };
+        const params = { address: testAddress };
         try {
             const response = await axios.get(caverServerEndpoint, { params });
             const result = response.data;
@@ -265,6 +267,74 @@ export class UserService implements IUserService {
         }
     }
 
+    public async seachOneV1ImageUrl(usedApNumer: string): Promise<string[]> {
+        const contractAddress =
+            process.env.NEXT_PUBLIC_ANIMALS_PUNKS_V1_ADDRESS || "";
+        const openSeaEndpoint =
+            process.env.NEXT_PUBLIC_OPENSEA_SINGLE_ASSET_ENDPOINT || "";
+        try {
+            const response = await axios.get(
+                `${openSeaEndpoint}/${contractAddress}/${usedApNumer}`
+            );
+            const result = response.data;
+            const imageList = [result.image_url];
+            return imageList;
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
+    public async seachOneV2ImageUrl(usedApNumer: number): Promise<string[]> {
+        console.log(usedApNumer);
+        try {
+            const response = await axios.get(
+                `${process.env.NEXT_PUBLIC_WEB_SERVER}/name/${usedApNumer}`
+            );
+            const result = response.data;
+            const imageUrl = result.url;
+            const imageList = [imageUrl];
+            return imageList;
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
+    }
+
+    public async usedV1Validate(requestV1List: string[]): Promise<boolean> {
+        const usedApList = await graphqlService.getV1UsedAp();
+        const validateResult = true;
+        const usedApNumberList = [];
+        if (usedApList !== []) {
+            for (const usedAp of usedApList) {
+                usedApNumberList.push(usedAp.apNumber);
+            }
+            for (const requestV1 of requestV1List) {
+                if (usedApNumberList.includes(requestV1)) {
+                    throw new Error(`${requestV1} is used before.`);
+                }
+            }
+        }
+        return validateResult;
+    }
+
+    public async usedV2Validate(requestV2List: number[]): Promise<boolean> {
+        const usedApList = await graphqlService.getV2UsedAp();
+        const validateResult = true;
+        const usedApNumberList = [];
+        if (usedApList !== []) {
+            for (const usedAp of usedApList) {
+                usedApNumberList.push(usedAp.apNumber);
+            }
+            for (const requestV2 of requestV2List) {
+                if (usedApNumberList.includes(requestV2) === true) {
+                    throw new Error(`${requestV2} is used before`);
+                }
+            }
+        }
+        return validateResult;
+    }
+
     public async mintTicket(
         ticketType: string,
         address: string,
@@ -282,7 +352,6 @@ export class UserService implements IUserService {
                         address,
                         ticketNumber[0].currentTicketNumber
                     );
-                    responseResult = true;
                     const data = {
                         ticketType,
                         address,
@@ -296,6 +365,7 @@ export class UserService implements IUserService {
                             data
                         );
                     }
+                    responseResult = true;
                 } catch (error) {
                     alert(error);
                 }
@@ -306,7 +376,6 @@ export class UserService implements IUserService {
                             address,
                             ticketNumber[0].currentTicketNumber
                         );
-                    responseResult = true;
                     const data = {
                         ticketType,
                         address,
@@ -320,6 +389,7 @@ export class UserService implements IUserService {
                             data
                         );
                     }
+                    responseResult = true;
                 } catch (error) {
                     alert(error);
                 }
