@@ -66,12 +66,17 @@ export class CaverJsService {
                         type: "uint256",
                     },
                     {
-                        name: "imageUri",
+                        name: "imageUrl",
                         type: "string",
                     },
                 ],
-                name: "mintWithTokenId",
-                outputs: [],
+                name: "mint",
+                outputs: [
+                    {
+                        name: "",
+                        type: "bool",
+                    },
+                ],
                 payable: false,
                 stateMutability: "nonpayable",
                 type: "function",
@@ -113,12 +118,17 @@ export class CaverJsService {
                         type: "uint256",
                     },
                     {
-                        name: "imageUri",
+                        name: "imageUrl",
                         type: "string",
                     },
                 ],
-                name: "mintWithTokenId",
-                outputs: [],
+                name: "mint",
+                outputs: [
+                    {
+                        name: "",
+                        type: "bool",
+                    },
+                ],
                 payable: false,
                 stateMutability: "nonpayable",
                 type: "function",

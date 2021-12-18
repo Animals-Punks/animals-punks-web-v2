@@ -7,7 +7,8 @@ import {
     usedV2ApAtom,
     seletedV1IdAtom,
     seletedV2IdAtom,
-} from "@/common/services/recoil/selectItemAtom";
+} from "@common/services/recoil/selectItemAtom";
+import { graphqlService } from "@/common/services";
 
 function useTicketMint(): {
     connectKaikasWallet: any;
@@ -18,6 +19,10 @@ function useTicketMint(): {
     v2ImageList: string[];
     goldTicketMint: any;
     diamondTicketMint: any;
+    onChangeV1: any;
+    onChangeV2: any;
+    onClickV1: any;
+    onClickV2: any;
 } {
     const [kaikasSelectAddress, setKaikasSelectAddress] = useState("");
     const [metaSelectAddress, setMetaSelectAddress] = useState("");
@@ -27,6 +32,8 @@ function useTicketMint(): {
         useRecoilState(usedV1ApAtom);
     const [usedV2ApImageList, setUsedV2ApImageList] =
         useRecoilState(usedV2ApAtom);
+    const [searchV1Ap, setSearchV1Ap] = useState("");
+    const [searchV2Ap, setSearchV2Ap] = useState(0);
     const selectedV1IdList = useRecoilValue(seletedV1IdAtom);
     const selectedV2IdList = useRecoilValue(seletedV2IdAtom);
     const userService = new UserService();
@@ -74,6 +81,7 @@ function useTicketMint(): {
         if (selectedV2IdList.length < 8) {
             alert("Please select 8 V2 item");
         } else {
+            const requestV2NumberList = [];
             for (const selected of selectedV2IdList) {
                 const parseSelected = JSON.parse(selected);
                 const itemProperty = {
@@ -81,19 +89,29 @@ function useTicketMint(): {
                     value: Number(parseSelected.apNumber),
                 };
                 property.push(itemProperty);
+                requestV2NumberList.push(Number(parseSelected.apNumber));
             }
-            const ticketTypeProperty = {
-                trait_type: "type",
-                value: ticketType,
-            };
-            property.push(ticketTypeProperty);
-            const result = await userService.mintTicket(
-                ticketType,
-                address,
-                property
-            );
-            if (result === true) {
-                alert("Gold Ticket Minting Success");
+            try {
+                const validateResult = await userService.usedV2Validate(
+                    requestV2NumberList
+                );
+                if (validateResult === true) {
+                    const ticketTypeProperty = {
+                        trait_type: "type",
+                        value: ticketType,
+                    };
+                    property.push(ticketTypeProperty);
+                    const result = await userService.mintTicket(
+                        ticketType,
+                        address,
+                        property
+                    );
+                    if (result === true) {
+                        alert("Gold Ticket Minting Success");
+                    }
+                }
+            } catch (error) {
+                alert(error.message);
             }
         }
     };
@@ -106,6 +124,8 @@ function useTicketMint(): {
         if (selectedV2IdList.length < 8 || selectedV1IdList.length < 4) {
             alert("Please select item enough");
         } else {
+            const requestV1NumberList = [];
+            const requestV2NumberList = [];
             for (const v1Selected of selectedV1IdList) {
                 const parseSelected = JSON.parse(v1Selected);
                 const itemProperty = {
@@ -113,6 +133,7 @@ function useTicketMint(): {
                     value: parseSelected.apNumber,
                 };
                 property.push(itemProperty);
+                requestV1NumberList.push(parseSelected.apNumber);
             }
             for (const v2Selected of selectedV2IdList) {
                 const parseSelected = JSON.parse(v2Selected);
@@ -121,20 +142,79 @@ function useTicketMint(): {
                     value: Number(parseSelected.apNumber),
                 };
                 property.push(itemProperty);
+                requestV2NumberList.push(Number(parseSelected.apNumber));
             }
-            const result = await userService.mintTicket(
-                ticketType,
-                address,
-                property
+            try {
+                const v1ValidateResult = await userService.usedV1Validate(
+                    requestV1NumberList
+                );
+                const v2ValidateResult = await userService.usedV2Validate(
+                    requestV2NumberList
+                );
+                if (v1ValidateResult === true && v2ValidateResult === true) {
+                    const result = await userService.mintTicket(
+                        ticketType,
+                        address,
+                        property
+                    );
+                    const ticketTypeProperty = {
+                        trait_type: "type",
+                        value: ticketType,
+                    };
+                    property.push(ticketTypeProperty);
+                    if (result === true) {
+                        alert("Diamond Ticket Minting Success");
+                    }
+                }
+            } catch (error) {
+                alert(error.message);
+            }
+        }
+    };
+
+    const onChangeV1 = async (event: any) => {
+        if (!event.target.value) {
+            const v1ImageList = await userService.getUsedV1ImageUrl();
+            setUsedV1ApImageList(v1ImageList);
+        } else {
+            setSearchV1Ap(event.target.value);
+        }
+    };
+    const onChangeV2 = async (event: any) => {
+        if (!event.target.value) {
+            const v2ImageList = await userService.getUsedV2ImageUrl();
+            setUsedV2ApImageList(v2ImageList);
+        } else {
+            setSearchV2Ap(event.target.value);
+        }
+    };
+
+    const onClickV1 = async () => {
+        if (!searchV1Ap) {
+            const v1ImageList = await userService.getUsedV1ImageUrl();
+            setUsedV1ApImageList(v1ImageList);
+        } else {
+            const searchUsedAp = await graphqlService.searchUsedV1Ap(
+                searchV1Ap
             );
-            const ticketTypeProperty = {
-                trait_type: "type",
-                value: ticketType,
-            };
-            property.push(ticketTypeProperty);
-            if (result === true) {
-                alert("Diamond Ticket Minting Success");
-            }
+            const imageUrlList = await userService.seachOneV1ImageUrl(
+                searchUsedAp[0].apNumber
+            );
+            setUsedV1ApImageList(imageUrlList);
+        }
+    };
+    const onClickV2 = async () => {
+        if (!searchV2Ap) {
+            const v2ImageList = await userService.getUsedV2ImageUrl();
+            setUsedV2ApImageList(v2ImageList);
+        } else {
+            const searchUsedAp = await graphqlService.searchUsedV2Ap(
+                searchV2Ap
+            );
+            const imageUrlList = await userService.seachOneV2ImageUrl(
+                searchUsedAp[0].apNumber
+            );
+            setUsedV2ApImageList(imageUrlList);
         }
     };
 
@@ -151,6 +231,10 @@ function useTicketMint(): {
         v2ImageList,
         goldTicketMint,
         diamondTicketMint,
+        onChangeV1,
+        onChangeV2,
+        onClickV1,
+        onClickV2,
     };
 }
 

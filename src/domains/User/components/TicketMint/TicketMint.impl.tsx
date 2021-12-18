@@ -18,6 +18,10 @@ const TicketMint: React.FC = () => {
         v2ImageList,
         goldTicketMint,
         diamondTicketMint,
+        onChangeV1,
+        onChangeV2,
+        onClickV1,
+        onClickV2,
     } = useTicketMint();
 
     return (
@@ -70,12 +74,20 @@ const TicketMint: React.FC = () => {
                     <OwnApBox apImage={v2ImageList} type="V2" />
                 </div>
                 <div css={defaultContainer}>
-                    <UsedApBox type="V1" />
+                    <UsedApBox
+                        type="V1"
+                        onChange={onChangeV1}
+                        onClick={onClickV1}
+                    />
                     <SelectApBox
                         goldOnClick={goldTicketMint}
                         diamondOnClick={diamondTicketMint}
                     />
-                    <UsedApBox type="V2" />
+                    <UsedApBox
+                        type="V2"
+                        onChange={onChangeV2}
+                        onClick={onClickV2}
+                    />
                 </div>
             </div>
         </div>
