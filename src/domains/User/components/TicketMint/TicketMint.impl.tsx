@@ -28,10 +28,12 @@ const TicketMint: React.FC = () => {
         <div css={defaultBackground}>
             <RouteV1Button />
             <div css={headerBox}>
-                <div css={imageContainer}>
-                    <Image src={logo} css={imageStyle} />
-                </div>
-                <div css={titleTextStyle}> AnimalsPunks</div>
+                {/* <Link href={PATH.main}> */}
+                    <div css={imageContainer}>
+                        <Image src={logo} css={imageStyle} />
+                    </div>
+                    <div css={titleTextStyle}> AnimalsPunks</div>
+                {/* </Link> */}
                 <Link href={PATH.main}>
                     <div css={menuTextStyle}>Home</div>
                 </Link>
