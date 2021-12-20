@@ -78,7 +78,7 @@ export class UserService implements IUserService {
 
             const trxResult = await new CaverJsService().burnMix(
                 isUpdate,
-                "0.01"
+                "10"
             );
 
             if (trxResult === true) {
@@ -115,7 +115,7 @@ export class UserService implements IUserService {
             if (checkOwner === false)
                 throw new Error("This Animals Punks is not yours");
 
-            const result = await new CaverJsService().burnMix(true, "0.01");
+            const result = await new CaverJsService().burnMix(true, "20");
             if (result === true) {
                 await axios({
                     method: "delete",
