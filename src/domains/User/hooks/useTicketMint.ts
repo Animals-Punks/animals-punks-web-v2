@@ -74,53 +74,54 @@ function useTicketMint(): {
     };
 
     const goldTicketMint = async () => {
-        const klaytn: any | undefined = (window as any).klaytn;
-        const address = klaytn.selectedAddress;
-        const ticketType = "gold";
-        const property = [];
-        const ticketNumber = await graphqlService.getTicketCurrnetNumber(
-            ticketType
-        );
-        if (ticketNumber[0].currentTicketNumber > 295) {
-            alert("골드 티켓 민팅이 종료되었습니다!");
-        } else {
-            if (selectedV2IdList.length < 8) {
-                alert("Please select 8 V2 item");
-            } else {
-                const requestV2NumberList = [];
-                for (const selected of selectedV2IdList) {
-                    const parseSelected = JSON.parse(selected);
-                    const itemProperty = {
-                        trait_type: "V2",
-                        value: Number(parseSelected.apNumber),
-                    };
-                    property.push(itemProperty);
-                    requestV2NumberList.push(Number(parseSelected.apNumber));
-                }
-                try {
-                    const validateResult = await userService.usedV2Validate(
-                        requestV2NumberList
-                    );
-                    if (validateResult === true) {
-                        const ticketTypeProperty = {
-                            trait_type: "type",
-                            value: ticketType,
-                        };
-                        property.push(ticketTypeProperty);
-                        const result = await userService.mintTicket(
-                            ticketType,
-                            address,
-                            property
-                        );
-                        if (result === true) {
-                            alert("Gold Ticket Minting Success");
-                        }
-                    }
-                } catch (error) {
-                    alert(error.message);
-                }
-            }
-        }
+        alert("골드 티켓 민팅이 종료되었습니다!");
+        // const klaytn: any | undefined = (window as any).klaytn;
+        // const address = klaytn.selectedAddress;
+        // const ticketType = "gold";
+        // const property = [];
+        // const ticketNumber = await graphqlService.getTicketCurrnetNumber(
+        //     ticketType
+        // );
+        // if (ticketNumber[0].currentTicketNumber > 295) {
+        //     alert("골드 티켓 민팅이 종료되었습니다!");
+        // } else {
+        //     if (selectedV2IdList.length < 8) {
+        //         alert("Please select 8 V2 item");
+        //     } else {
+        //         const requestV2NumberList = [];
+        //         for (const selected of selectedV2IdList) {
+        //             const parseSelected = JSON.parse(selected);
+        //             const itemProperty = {
+        //                 trait_type: "V2",
+        //                 value: Number(parseSelected.apNumber),
+        //             };
+        //             property.push(itemProperty);
+        //             requestV2NumberList.push(Number(parseSelected.apNumber));
+        //         }
+        //         try {
+        //             const validateResult = await userService.usedV2Validate(
+        //                 requestV2NumberList
+        //             );
+        //             if (validateResult === true) {
+        //                 const ticketTypeProperty = {
+        //                     trait_type: "type",
+        //                     value: ticketType,
+        //                 };
+        //                 property.push(ticketTypeProperty);
+        //                 const result = await userService.mintTicket(
+        //                     ticketType,
+        //                     address,
+        //                     property
+        //                 );
+        //                 if (result === true) {
+        //                     alert("Gold Ticket Minting Success");
+        //                 }
+        //             }
+        //         } catch (error) {
+        //             alert(error.message);
+        //         }
+        //     }
+        // }
     };
 
     const diamondTicketMint = async () => {
