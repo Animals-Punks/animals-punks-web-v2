@@ -346,59 +346,48 @@ export class UserService implements IUserService {
             let responseResult = false;
             if (ticketType === "gold") {
                 try {
-                    if (ticketNumber > 295) {
-                        alert("골드 티켓 민팅이 종료되었습니다!");
-                        throw new Error("골드 티켓 민팅이 종료되었습니다!");
-                    } else {
-                        const trxResult =
-                            await new CaverJsService().mintGoldTicket(
-                                address,
-                                ticketNumber[0].currentTicketNumber
-                            );
-                        const data = {
-                            ticketType,
-                            address,
-                            imageUrl: imageUrl[0].url,
-                            ticketNumber: ticketNumber[0].currentTicketNumber,
-                            usedAps: property,
-                        };
-                        if (trxResult === true) {
-                            await axios.post(
-                                `${process.env.NEXT_PUBLIC_TICKET_SERVER}ticket/mint`,
-                                data
-                            );
-                        }
-                        responseResult = true;
+                    const trxResult = await new CaverJsService().mintGoldTicket(
+                        address,
+                        ticketNumber[0].currentTicketNumber
+                    );
+                    const data = {
+                        ticketType,
+                        address,
+                        imageUrl: imageUrl[0].url,
+                        ticketNumber: ticketNumber[0].currentTicketNumber,
+                        usedAps: property,
+                    };
+                    if (trxResult === true) {
+                        await axios.post(
+                            `${process.env.NEXT_PUBLIC_TICKET_SERVER}ticket/mint`,
+                            data
+                        );
                     }
+                    responseResult = true;
                 } catch (error) {
                     alert(error);
                 }
             } else {
                 try {
-                    if (ticketNumber > 196) {
-                        alert("다이아 티켓 민팅이 종료되었습니다!");
-                        throw new Error("다이아 티켓 민팅이 종료되었습니다!");
-                    } else {
-                        const trxResult =
-                            await new CaverJsService().mintDiamondTicket(
-                                address,
-                                ticketNumber[0].currentTicketNumber
-                            );
-                        const data = {
-                            ticketType,
+                    const trxResult =
+                        await new CaverJsService().mintDiamondTicket(
                             address,
-                            imageUrl: imageUrl[0].url,
-                            ticketNumber: ticketNumber[0].currentTicketNumber,
-                            usedAps: property,
-                        };
-                        if (trxResult === true) {
-                            await axios.post(
-                                `${process.env.NEXT_PUBLIC_TICKET_SERVER}ticket/mint`,
-                                data
-                            );
-                        }
-                        responseResult = true;
+                            ticketNumber[0].currentTicketNumber
+                        );
+                    const data = {
+                        ticketType,
+                        address,
+                        imageUrl: imageUrl[0].url,
+                        ticketNumber: ticketNumber[0].currentTicketNumber,
+                        usedAps: property,
+                    };
+                    if (trxResult === true) {
+                        await axios.post(
+                            `${process.env.NEXT_PUBLIC_TICKET_SERVER}ticket/mint`,
+                            data
+                        );
                     }
+                    responseResult = true;
                 } catch (error) {
                     alert(error);
                 }

@@ -78,40 +78,47 @@ function useTicketMint(): {
         const address = klaytn.selectedAddress;
         const ticketType = "gold";
         const property = [];
-        if (selectedV2IdList.length < 8) {
-            alert("Please select 8 V2 item");
+        const ticketNumber = await graphqlService.getTicketCurrnetNumber(
+            ticketType
+        );
+        if (ticketNumber[0].currentTicketNumber > 295) {
+            alert("골드 티켓 민팅이 종료되었습니다!");
         } else {
-            const requestV2NumberList = [];
-            for (const selected of selectedV2IdList) {
-                const parseSelected = JSON.parse(selected);
-                const itemProperty = {
-                    trait_type: "V2",
-                    value: Number(parseSelected.apNumber),
-                };
-                property.push(itemProperty);
-                requestV2NumberList.push(Number(parseSelected.apNumber));
-            }
-            try {
-                const validateResult = await userService.usedV2Validate(
-                    requestV2NumberList
-                );
-                if (validateResult === true) {
-                    const ticketTypeProperty = {
-                        trait_type: "type",
-                        value: ticketType,
+            if (selectedV2IdList.length < 8) {
+                alert("Please select 8 V2 item");
+            } else {
+                const requestV2NumberList = [];
+                for (const selected of selectedV2IdList) {
+                    const parseSelected = JSON.parse(selected);
+                    const itemProperty = {
+                        trait_type: "V2",
+                        value: Number(parseSelected.apNumber),
                     };
-                    property.push(ticketTypeProperty);
-                    const result = await userService.mintTicket(
-                        ticketType,
-                        address,
-                        property
-                    );
-                    if (result === true) {
-                        alert("Gold Ticket Minting Success");
-                    }
+                    property.push(itemProperty);
+                    requestV2NumberList.push(Number(parseSelected.apNumber));
                 }
-            } catch (error) {
-                alert(error.message);
+                try {
+                    const validateResult = await userService.usedV2Validate(
+                        requestV2NumberList
+                    );
+                    if (validateResult === true) {
+                        const ticketTypeProperty = {
+                            trait_type: "type",
+                            value: ticketType,
+                        };
+                        property.push(ticketTypeProperty);
+                        const result = await userService.mintTicket(
+                            ticketType,
+                            address,
+                            property
+                        );
+                        if (result === true) {
+                            alert("Gold Ticket Minting Success");
+                        }
+                    }
+                } catch (error) {
+                    alert(error.message);
+                }
             }
         }
     };
@@ -121,53 +128,63 @@ function useTicketMint(): {
         const address = klaytn.selectedAddress;
         const ticketType = "diamond";
         const property = [];
-        if (selectedV2IdList.length < 8 || selectedV1IdList.length < 4) {
-            alert("Please select item enough");
+        const ticketNumber = await graphqlService.getTicketCurrnetNumber(
+            ticketType
+        );
+        if (ticketNumber[0].currentTicketNumber > 196) {
+            alert("다이아 티켓 민팅이 종료되었습니다!");
         } else {
-            const requestV1NumberList = [];
-            const requestV2NumberList = [];
-            for (const v1Selected of selectedV1IdList) {
-                const parseSelected = JSON.parse(v1Selected);
-                const itemProperty = {
-                    trait_type: "V1",
-                    value: parseSelected.apNumber,
-                };
-                property.push(itemProperty);
-                requestV1NumberList.push(parseSelected.apNumber);
-            }
-            for (const v2Selected of selectedV2IdList) {
-                const parseSelected = JSON.parse(v2Selected);
-                const itemProperty = {
-                    trait_type: "V2",
-                    value: Number(parseSelected.apNumber),
-                };
-                property.push(itemProperty);
-                requestV2NumberList.push(Number(parseSelected.apNumber));
-            }
-            try {
-                const v1ValidateResult = await userService.usedV1Validate(
-                    requestV1NumberList
-                );
-                const v2ValidateResult = await userService.usedV2Validate(
-                    requestV2NumberList
-                );
-                if (v1ValidateResult === true && v2ValidateResult === true) {
-                    const result = await userService.mintTicket(
-                        ticketType,
-                        address,
-                        property
-                    );
-                    const ticketTypeProperty = {
-                        trait_type: "type",
-                        value: ticketType,
+            if (selectedV2IdList.length < 8 || selectedV1IdList.length < 4) {
+                alert("Please select item enough");
+            } else {
+                const requestV1NumberList = [];
+                const requestV2NumberList = [];
+                for (const v1Selected of selectedV1IdList) {
+                    const parseSelected = JSON.parse(v1Selected);
+                    const itemProperty = {
+                        trait_type: "V1",
+                        value: parseSelected.apNumber,
                     };
-                    property.push(ticketTypeProperty);
-                    if (result === true) {
-                        alert("Diamond Ticket Minting Success");
-                    }
+                    property.push(itemProperty);
+                    requestV1NumberList.push(parseSelected.apNumber);
                 }
-            } catch (error) {
-                alert(error.message);
+                for (const v2Selected of selectedV2IdList) {
+                    const parseSelected = JSON.parse(v2Selected);
+                    const itemProperty = {
+                        trait_type: "V2",
+                        value: Number(parseSelected.apNumber),
+                    };
+                    property.push(itemProperty);
+                    requestV2NumberList.push(Number(parseSelected.apNumber));
+                }
+                try {
+                    const v1ValidateResult = await userService.usedV1Validate(
+                        requestV1NumberList
+                    );
+                    const v2ValidateResult = await userService.usedV2Validate(
+                        requestV2NumberList
+                    );
+                    if (
+                        v1ValidateResult === true &&
+                        v2ValidateResult === true
+                    ) {
+                        const result = await userService.mintTicket(
+                            ticketType,
+                            address,
+                            property
+                        );
+                        const ticketTypeProperty = {
+                            trait_type: "type",
+                            value: ticketType,
+                        };
+                        property.push(ticketTypeProperty);
+                        if (result === true) {
+                            alert("Diamond Ticket Minting Success");
+                        }
+                    }
+                } catch (error) {
+                    alert(error.message);
+                }
             }
         }
     };
