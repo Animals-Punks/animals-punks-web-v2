@@ -374,11 +374,11 @@ export class UserService implements IUserService {
                     alert(error);
                 }
             } else {
-                if (ticketNumber > 196) {
-                    alert("다이아 티켓 민팅이 종료되었습니다!");
-                    throw new Error("다이아 티켓 민팅이 종료되었습니다!");
-                } else {
-                    try {
+                try {
+                    if (ticketNumber > 196) {
+                        alert("다이아 티켓 민팅이 종료되었습니다!");
+                        throw new Error("다이아 티켓 민팅이 종료되었습니다!");
+                    } else {
                         const trxResult =
                             await new CaverJsService().mintDiamondTicket(
                                 address,
@@ -398,7 +398,7 @@ export class UserService implements IUserService {
                             );
                         }
                         responseResult = true;
-                }
+                    }
                 } catch (error) {
                     alert(error);
                 }
