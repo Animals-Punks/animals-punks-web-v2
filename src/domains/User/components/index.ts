@@ -10,6 +10,7 @@ import SelectNameLogicModal from "./SelectNameLogicModal";
 import ChangeApNameModal from "./ChangeApNameModal";
 import DeleteApNameModal from "./DeleteApNameModal";
 import TicketMint from "./TicketMint";
+import MintBabyPunks from "./MintBabyPunks";
 
 export {
     IntroBox,
@@ -24,4 +25,5 @@ export {
     ChangeApNameModal,
     DeleteApNameModal,
     TicketMint,
+    MintBabyPunks,
 };
