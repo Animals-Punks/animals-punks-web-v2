@@ -3,5 +3,6 @@ export declare namespace IWhiteLineBox {
         width?: string;
         height?: string;
         isButton?: boolean;
+        onClick?: any;
     }
 }
