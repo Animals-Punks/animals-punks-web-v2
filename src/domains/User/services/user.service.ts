@@ -218,6 +218,26 @@ export class UserService implements IUserService {
         }
     }
 
+    public async getKlubsV2Metadata(address: string): Promise<any[]> {
+        const klubsEndpoint = process.env.NEXT_PUBLIC_KLUBS_ENDPOINT;
+        const caverServerEndpoint =
+            `${process.env.NEXT_PUBLIC_CAVER_SERVER}caver/getOwnTokens` || "";
+        const params = { address: address };
+        const caverServerResponse = await axios.get(caverServerEndpoint, {
+            params,
+        });
+        const ownedV2NumberList = caverServerResponse.data;
+        const v2ImageList = [];
+        for (const ownedV2Number of ownedV2NumberList) {
+            const response = await axios.get(
+                `${klubsEndpoint}/${ownedV2Number}/metadata`
+            );
+            const v2Metadata = response.data;
+            v2ImageList.push(v2Metadata);
+        }
+        return v2ImageList;
+    }
+
     public async getUsedV2ImageUrl(): Promise<string[]> {
         const usedApList = await graphqlService.getV2UsedAp();
         if (usedApList === []) {
@@ -397,6 +417,38 @@ export class UserService implements IUserService {
             console.log(error);
             alert(error.response.data.message);
             return false;
+        }
+    }
+
+    public async getUsedOneAPOnChain(apNumber: number): Promise<string[]> {
+        const usedOneAps = await new CaverJsService().getUsedOneApOnChain(
+            apNumber
+        );
+        console.log(usedOneAps);
+        return usedOneAps;
+    }
+
+    public async getUsedApOnChain(): Promise<string[]> {
+        const usedApList = await new CaverJsService().getUsedApOnChain();
+        return usedApList;
+    }
+
+    public async mintBabyAnimalsPunks(
+        address: string,
+        apNumber: number[],
+        species: string[]
+    ) {
+        const mintResult = await new CaverJsService().mintBabyPunks(
+            address,
+            apNumber,
+            species
+        );
+        if (mintResult === true) {
+            alert("베이비 펑크 민팅에 성공했습니다!");
+        } else {
+            alert(
+                "베이비 펑크 민팅에 실패했습니다! 카이카스를 통해 트랜잭션을 먼저 확인해주세요!"
+            );
         }
     }
 }

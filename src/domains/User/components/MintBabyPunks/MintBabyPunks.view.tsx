@@ -1,14 +1,24 @@
+import Image from "next/image";
 import { css } from "@emotion/react";
+import TextField from "@mui/material/TextField";
 
 import { IMintBabyPunks } from "./MintBabyPunks.interface";
 import { HeaderBox, MintInfoBox, WhiteLineBox } from "@common/components";
+import babyPunks from "@assets/images/babyPunkExample.gif";
 
 const VMintBabyPunks: React.FC<IMintBabyPunks.IVMintBabyPunks> = ({
-    gifSource,
     mixBalance,
     extraList,
+    ownedApListOnClick,
     owndApList,
     usedApList,
+    ownedV2Metadata,
+    selectV2,
+    selectedFirstAp,
+    setselectedSecoundAp,
+    matingButton,
+    searchNumberOnChange,
+    searchNumberOnClick,
 }) => {
     const extra = extraList.map((key, vaule) => {
         return (
@@ -18,13 +28,29 @@ const VMintBabyPunks: React.FC<IMintBabyPunks.IVMintBabyPunks> = ({
         );
     });
 
-    const owndAp = owndApList.map((key, vaule) => {
-        return <WhiteLineBox height="7vw" width="7vw">{key.image}</WhiteLineBox>;
+    const owndAp = ownedV2Metadata.map(metadata => {
+        return (
+            <div>
+                <img
+                    src={metadata.image}
+                    key={metadata.image}
+                    css={apBoxStyle}
+                    onClick={() =>
+                        selectV2(
+                            metadata.attributes[1].value,
+                            metadata.name,
+                            metadata.image,
+                            metadata.nftId
+                        )
+                    }
+                />
+            </div>
+        );
     });
 
-    const useedAp = usedApList.map((key, vaule) => {
-        return <WhiteLineBox height="7vw" width="7vw">{key.image}</WhiteLineBox>;
-    })
+    const useedAp = usedApList.map((image: any) => {
+        return <img src={image} key={image} css={apBoxStyle} />
+    });
 
     return (
         <>
@@ -40,7 +66,10 @@ const VMintBabyPunks: React.FC<IMintBabyPunks.IVMintBabyPunks> = ({
                         <MintInfoBox>
                             <div css={boxColumnContainer}>
                                 <div css={boxRowBeetweenContinaer}>
-                                    <WhiteLineBox isButton={true}>
+                                    <WhiteLineBox
+                                        isButton={true}
+                                        onClick={ownedApListOnClick}
+                                    >
                                         Kaikas Walelt connect
                                     </WhiteLineBox>
                                     <WhiteLineBox>
@@ -50,32 +79,60 @@ const VMintBabyPunks: React.FC<IMintBabyPunks.IVMintBabyPunks> = ({
                                 Two animals of the same kind are needed for
                                 breeding
                                 <div css={boxRowContainer}>
-                                    <WhiteLineBox
-                                        height="12vw"
-                                        width="12vw"
-                                    ></WhiteLineBox>
+                                    {selectedFirstAp[0].string === "test" ? (
+                                        <WhiteLineBox
+                                            height="12vw"
+                                            width="12vw"
+                                        ></WhiteLineBox>
+                                    ) : (
+                                        <img
+                                            src={selectedFirstAp[0].imageUrl}
+                                            css={selectedBoxStyle}
+                                        />
+                                    )}
                                     <div css={boxColumnContainer}>
                                         <div css={plusStyle}>+</div>
-                                        <WhiteLineBox isButton={true}>
+                                        <WhiteLineBox
+                                            isButton={true}
+                                            onClick={matingButton}
+                                        >
                                             Mating
                                         </WhiteLineBox>
                                     </div>
-                                    <WhiteLineBox
-                                        height="12vw"
-                                        width="12vw"
-                                    ></WhiteLineBox>
+                                    {setselectedSecoundAp[0].string === "test" ? (
+                                        <WhiteLineBox
+                                            height="12vw"
+                                            width="12vw"
+                                        ></WhiteLineBox>
+                                    ) : (
+                                        <img
+                                            src={
+                                                setselectedSecoundAp[0].imageUrl
+                                            }
+                                            css={selectedBoxStyle}
+                                        />
+                                    )}
                                 </div>
                                 <div css={boxRowContainer}>{extra}</div>
                             </div>
                         </MintInfoBox>
-                        <MintInfoBox>{gifSource}</MintInfoBox>
+                        {/* <MintInfoBox>{gifSource}</MintInfoBox> */}
+                        <div style={{ width: "45vw" }}>
+                            <Image src={babyPunks} />
+                        </div>
                     </div>
                     <div css={boxRowContainer}>
                         <div css={boxColumnContainer}>
                             <MintInfoBox>
                                 <div css={boxColumnContainer}>
                                     <WhiteLineBox>Your animals</WhiteLineBox>
-                                    <div css={boxRowContainer}>{owndAp}</div>
+                                    <div css={boxRowContainer}>
+                                        {owndApList.length === 1 ? (
+                                            <></>
+                                        ) : (
+                                            owndAp
+                                        )}
+                                    </div>
                                 </div>
                             </MintInfoBox>
                         </div>
@@ -85,11 +142,18 @@ const VMintBabyPunks: React.FC<IMintBabyPunks.IVMintBabyPunks> = ({
                                     <WhiteLineBox>Uesd animals</WhiteLineBox>
                                     <div css={boxRowContainer}>
                                         <WhiteLineBox>
-                                            Search: Number
+                                            <TextField
+                                                id="outlined-basic"
+                                                label="Search Number"
+                                                variant="filled"
+                                                onChange={searchNumberOnChange}
+                                                style={{ display: "flex" }}
+                                            />
                                         </WhiteLineBox>
                                         <WhiteLineBox
                                             width="5vw"
                                             isButton={true}
+                                            onClick={searchNumberOnClick}
                                         >
                                             OK
                                         </WhiteLineBox>
@@ -146,6 +210,24 @@ const boxRowBeetweenContinaer = css`
 
 const plusStyle = css`
     font-size: 5vw;
+`;
+
+const apBoxStyle = css`
+    width: 100px;
+    height: 100px;
+    margin: 3px;
+    border-radius: 10px;
+    border: solid 3px #fff;
+    cursor: pointer;
+`;
+
+const selectedBoxStyle = css`
+    width: 12vw;
+    height: 12vw;
+    margin: 3px;
+    border-radius: 10px;
+    border: solid 3px #fff;
+    cursor: pointer;
 `;
 
 export default VMintBabyPunks;

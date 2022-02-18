@@ -7,6 +7,7 @@ const WhiteLineBox: React.FC<IWhiteLineBox.IProps> = ({
     width,
     height,
     isButton,
+    onClick,
 }) => {
     return (
         <div
@@ -16,6 +17,7 @@ const WhiteLineBox: React.FC<IWhiteLineBox.IProps> = ({
                     ? { width: width, height: height, cursor: "pointer" }
                     : { width: width, height: height }
             }
+            onClick={onClick}
         >
             {children}
         </div>

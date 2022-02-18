@@ -11,7 +11,7 @@ export default function BabyPunks() {
                     <link rel="header icon" href="/headerIcon.png" />
                     <title>Animals Punks V2</title>
                 </Head>
-                <body style={{ backgroundColor: "#FFAEAD", height: "200vh" }}>
+                <body style={{ backgroundColor: "#FFA9AB", height: "200vh" }}>
                     <MintBabyPunks />
                 </body>
             </RecoilRoot>
