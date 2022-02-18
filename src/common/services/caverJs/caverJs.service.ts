@@ -149,4 +149,78 @@ export class CaverJsService {
         if (trxResult.status === true) return true;
         return false;
     }
+
+    async getMixBalance(): Promise<string> {
+        // TODO: Get Mix Balance
+        return "4";
+    }
+
+    async getExtraBabyPunks(): Promise<any[]> {
+        // TODO: Get Extra baby punks
+        const extraList = [
+            {
+                species: "Tiger",
+                extra: 1,
+            },
+            {
+                species: "Cat",
+                extra: 2,
+            },
+            {
+                species: "Ape",
+                extra: 3,
+            },
+            {
+                species: "Rabbit",
+                extra: 4,
+            },
+            {
+                species: "Tuttle",
+                extra: 5,
+            },
+            {
+                species: "Seal",
+                extra: 6,
+            },
+            {
+                species: "Pig",
+                extra: 7,
+            },
+            {
+                species: "Dog",
+                extra: 8,
+            },
+        ];
+        return extraList;
+    }
+
+    async getUsedApOnChain(): Promise<string[]> {
+        // TODO: Get Used ap
+        return [
+            "https://storage.googleapis.com/klubs/ipfsimage/QmZLMp34TCC4icxfjyKyiKkmVp7YrQFgdRKHfzW7ZeUQv1/7613.png.png",
+            "https://storage.googleapis.com/klubs/ipfsimage/QmZLMp34TCC4icxfjyKyiKkmVp7YrQFgdRKHfzW7ZeUQv1/7612.png.png",
+        ];
+    }
+
+    async getUsedOneApOnChain(apNumber: number): Promise<string[]> {
+        console.log(apNumber);
+        // TODO: Get Used one ap
+        return [
+            "https://storage.googleapis.com/klubs/ipfsimage/QmZLMp34TCC4icxfjyKyiKkmVp7YrQFgdRKHfzW7ZeUQv1/7613.png.png",
+        ];
+    }
+
+    async mintBabyPunks(
+        address: string,
+        apNumber: number[],
+        species: string[]
+    ): Promise<boolean> {
+        // TODO: transaction MIX.
+        alert("일단 믹스부터 받아가자.");
+        // TODO: Mint AP.
+        console.log(address);
+        console.log(apNumber);
+        console.log(species);
+        return true;
+    }
 }

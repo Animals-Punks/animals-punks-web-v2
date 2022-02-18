@@ -1,3 +1,4 @@
+import HeaderBox from "./HeaderBox";
 import InformationBox from "./InformationBox";
 import ElementBox from "./ElementBox";
 import CenterText from "./CenterText";
@@ -18,8 +19,11 @@ import RouteV1Button from "./RouteV1Button";
 import OwnApBox from "./OwnApBox";
 import SelectApBox from "./SelectApBox";
 import UsedApBox from "./UsedApBox";
+import MintInfoBox from "./MintInfoBox";
+import WhiteLineBox from "./WhiteLineBox";
 
 export {
+    HeaderBox,
     InformationBox,
     ElementBox,
     CenterText,
@@ -40,4 +44,6 @@ export {
     OwnApBox,
     SelectApBox,
     UsedApBox,
+    MintInfoBox,
+    WhiteLineBox,
 };
