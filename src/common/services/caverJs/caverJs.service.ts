@@ -156,58 +156,131 @@ export class CaverJsService {
     }
 
     async getExtraBabyPunks(): Promise<any[]> {
-        // TODO: Get Extra baby punks
+        const Caver: any | undefined = (window as any).caver;
+        const myContract = new Caver.klay.Contract(
+            [
+                {
+                    inputs: [],
+                    name: "getAllExtra",
+                    outputs: [
+                        {
+                            internalType: "uint256[8]",
+                            name: "",
+                            type: "uint256[8]",
+                        },
+                    ],
+                    stateMutability: "view",
+                    type: "function",
+                },
+            ],
+            "0xe7A2fC68dD2D533e1e6c7897E0B38f7F5F5B79Be"
+        );
+        const extra = await myContract.methods.getAllExtra().call();
         const extraList = [
             {
                 species: "Tiger",
-                extra: 1,
+                extra: Number(extra[0]),
             },
             {
                 species: "Cat",
-                extra: 2,
+                extra: Number(extra[1]),
             },
             {
                 species: "Ape",
-                extra: 3,
+                extra: Number(extra[2]),
             },
             {
                 species: "Rabbit",
-                extra: 4,
+                extra: Number(extra[3]),
             },
             {
-                species: "Tuttle",
-                extra: 5,
+                species: "Turtle",
+                extra: Number(extra[4]),
             },
             {
                 species: "Seal",
-                extra: 6,
+                extra: Number(extra[5]),
             },
             {
                 species: "Pig",
-                extra: 7,
+                extra: Number(extra[6]),
             },
             {
                 species: "Dog",
-                extra: 8,
+                extra: Number(extra[7]),
             },
         ];
         return extraList;
     }
 
     async getUsedApOnChain(): Promise<string[]> {
-        // TODO: Get Used ap
-        return [
-            "https://storage.googleapis.com/klubs/ipfsimage/QmZLMp34TCC4icxfjyKyiKkmVp7YrQFgdRKHfzW7ZeUQv1/7613.png.png",
-            "https://storage.googleapis.com/klubs/ipfsimage/QmZLMp34TCC4icxfjyKyiKkmVp7YrQFgdRKHfzW7ZeUQv1/7612.png.png",
-        ];
+        const Caver: any | undefined = (window as any).caver;
+        const myContract = new Caver.klay.Contract(
+            [
+                {
+                    inputs: [],
+                    name: "getAllUsedAp",
+                    outputs: [
+                        {
+                            internalType: "uint256[]",
+                            name: "",
+                            type: "uint256[]",
+                        },
+                    ],
+                    stateMutability: "view",
+                    type: "function",
+                },
+            ],
+            "0xe7A2fC68dD2D533e1e6c7897E0B38f7F5F5B79Be"
+        );
+        const response = await myContract.methods.getAllUsedAp().call();
+        const usedList = [];
+
+        for (const usedAp of response) {
+            usedList.push(
+                `https://storage.googleapis.com/klubs/ipfsimage/QmZLMp34TCC4icxfjyKyiKkmVp7YrQFgdRKHfzW7ZeUQv1/${usedAp}.png.png`
+            );
+        }
+        return usedList;
     }
 
     async getUsedOneApOnChain(apNumber: number): Promise<string[]> {
-        console.log(apNumber);
-        // TODO: Get Used one ap
-        return [
-            "https://storage.googleapis.com/klubs/ipfsimage/QmZLMp34TCC4icxfjyKyiKkmVp7YrQFgdRKHfzW7ZeUQv1/7613.png.png",
-        ];
+        const Caver: any | undefined = (window as any).caver;
+        const myContract = new Caver.klay.Contract(
+            [
+                {
+                    inputs: [
+                        {
+                            internalType: "uint256",
+                            name: "tokenId",
+                            type: "uint256",
+                        },
+                    ],
+                    name: "getUsedApById",
+                    outputs: [
+                        {
+                            internalType: "uint256[]",
+                            name: "",
+                            type: "uint256[]",
+                        },
+                    ],
+                    stateMutability: "view",
+                    type: "function",
+                },
+            ],
+            "0xe7A2fC68dD2D533e1e6c7897E0B38f7F5F5B79Be"
+        );
+        try {
+            const response = await myContract.methods
+                .getUsedApById(apNumber)
+                .call();
+            return [
+                `https://storage.googleapis.com/klubs/ipfsimage/QmZLMp34TCC4icxfjyKyiKkmVp7YrQFgdRKHfzW7ZeUQv1/${response}.png.png`,
+            ];
+        } catch (error) {
+            console.log(error);
+            return [];
+        }
     }
 
     async mintBabyPunks(
@@ -221,6 +294,45 @@ export class CaverJsService {
         console.log(address);
         console.log(apNumber);
         console.log(species);
-        return true;
+        const Caver: any | undefined = (window as any).caver;
+        const data = Caver.klay.abi.encodeFunctionCall(
+            {
+                inputs: [
+                    {
+                        internalType: "address",
+                        name: "to",
+                        type: "address",
+                    },
+                    {
+                        internalType: "uint256[]",
+                        name: "reqUsedAp",
+                        type: "uint256[]",
+                    },
+                    {
+                        internalType: "string",
+                        name: "babyPunkSpecies",
+                        type: "string",
+                    },
+                ],
+                name: "mint",
+                outputs: [],
+                stateMutability: "nonpayable",
+                type: "function",
+            },
+            [address, apNumber, species[0]]
+        );
+
+        const result = await Caver.klay.sendTransaction({
+            type: "SMART_CONTRACT_EXECUTION",
+            from: address,
+            to: process.env.NEXT_PUBLIC_DIAMOND_TICKET_ADDRESS,
+            gas: "800000",
+            data,
+        });
+        const trxResult = await Caver.klay.getTransactionReceipt(
+            result.senderTxHash
+        );
+        if (trxResult.status === true) return true;
+        return false;
     }
 }
