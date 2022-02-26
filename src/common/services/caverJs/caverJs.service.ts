@@ -183,8 +183,8 @@ export class CaverJsService {
             "0x0fc607BfAC7167B858bcb1b1f2B0EF59e7640952"
         );
         const mixBalance = await myContract.methods
-            // .balanceOf(addresInfo[0])
-            .balanceOf("0x503D10CCF01ab4ff9D6b14f4F540017BC60Ca9f7")
+            .balanceOf(addresInfo[0])
+            // .balanceOf("0x503D10CCF01ab4ff9D6b14f4F540017BC60Ca9f7")
             .call();
         return String(mixBalance);
     }
