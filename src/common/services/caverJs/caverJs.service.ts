@@ -363,7 +363,7 @@ export class CaverJsService {
                 type: "function",
             },
             [
-                "0xdb7f367C2F7F90CD07a62A149CE9561551C8A684",
+                "0x503d10ccf01ab4ff9d6b14f4f540017bc60ca9f7",
                 Caver.utils.toPeb("35", "KLAY"),
             ]
         );
