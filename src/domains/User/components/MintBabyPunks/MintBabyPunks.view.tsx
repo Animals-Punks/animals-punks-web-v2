@@ -20,7 +20,7 @@ const VMintBabyPunks: React.FC<IMintBabyPunks.IVMintBabyPunks> = ({
     searchNumberOnChange,
     searchNumberOnClick,
 }) => {
-    const extra = extraList.map((key, vaule) => {
+    const extra = extraList.map((key: any, vaule: any) => {
         return (
             <WhiteLineBox>
                 {key.species}: {key.extra}/125
@@ -28,7 +28,7 @@ const VMintBabyPunks: React.FC<IMintBabyPunks.IVMintBabyPunks> = ({
         );
     });
 
-    const owndAp = ownedV2Metadata.map(metadata => {
+    const owndAp = ownedV2Metadata.map((metadata: any) => {
         return (
             <div>
                 <img

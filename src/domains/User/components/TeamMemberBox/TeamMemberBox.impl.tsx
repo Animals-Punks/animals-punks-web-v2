@@ -11,7 +11,7 @@ import depp from "@assets/images/depp.png";
 import wow from "@assets/images/wow.png";
 
 const TeamMemberBox: React.FC = () => {
-    const AutoPlaySlider = withAutoPlay(Slider)
+    const AutoPlaySlider = withAutoPlay(Slider);
 
     return (
         <ElementBox backgroundColor="#000">

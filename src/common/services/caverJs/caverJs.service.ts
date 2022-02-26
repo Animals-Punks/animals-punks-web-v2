@@ -1,3 +1,5 @@
+import axios from "axios";
+
 export class CaverJsService {
     async checkOwner(reqAddress: string) {
         const klaytn: any | undefined = (window as any).klaytn;
@@ -151,8 +153,40 @@ export class CaverJsService {
     }
 
     async getMixBalance(): Promise<string> {
-        // TODO: Get Mix Balance
-        return "4";
+        const Caver: any | undefined = (window as any).caver;
+        const klaytn: any | undefined = (window as any).klaytn;
+        const addresInfo = await klaytn.enable();
+        const myContract = new Caver.klay.Contract(
+            [
+                {
+                    constant: true,
+                    inputs: [
+                        {
+                            internalType: "address",
+                            name: "account",
+                            type: "address",
+                        },
+                    ],
+                    name: "balanceOf",
+                    outputs: [
+                        {
+                            internalType: "uint256",
+                            name: "",
+                            type: "uint256",
+                        },
+                    ],
+                    payable: false,
+                    stateMutability: "view",
+                    type: "function",
+                },
+            ],
+            "0x0fc607BfAC7167B858bcb1b1f2B0EF59e7640952"
+        );
+        const mixBalance = await myContract.methods
+            // .balanceOf(addresInfo[0])
+            .balanceOf("0x503D10CCF01ab4ff9D6b14f4F540017BC60Ca9f7")
+            .call();
+        return String(mixBalance);
     }
 
     async getExtraBabyPunks(): Promise<any[]> {
@@ -173,7 +207,7 @@ export class CaverJsService {
                     type: "function",
                 },
             ],
-            "0xe7A2fC68dD2D533e1e6c7897E0B38f7F5F5B79Be"
+            "0x6AeFf7C1127b4d3eB8A13274d44CFDde5fA12D62"
         );
         const extra = await myContract.methods.getAllExtra().call();
         const extraList = [
@@ -231,16 +265,28 @@ export class CaverJsService {
                     type: "function",
                 },
             ],
-            "0xe7A2fC68dD2D533e1e6c7897E0B38f7F5F5B79Be"
+            "0x6AeFf7C1127b4d3eB8A13274d44CFDde5fA12D62"
         );
-        const response = await myContract.methods.getAllUsedAp().call();
+        const usedApTokenIdList = await myContract.methods
+            .getAllUsedAp()
+            .call();
         const usedList = [];
 
-        for (const usedAp of response) {
-            usedList.push(
-                `https://storage.googleapis.com/klubs/ipfsimage/QmZLMp34TCC4icxfjyKyiKkmVp7YrQFgdRKHfzW7ZeUQv1/${usedAp}.png.png`
+        const klubsEndpoint = process.env.NEXT_PUBLIC_KLUBS_ENDPOINT;
+
+        for (const usedApTokenId of usedApTokenIdList) {
+            const response = await axios.get(
+                `${klubsEndpoint}/${usedApTokenId}/metadata`
             );
+            const v2Metadata = response.data;
+            usedList.push(v2Metadata.image);
         }
+
+        // for (const usedAp of response) {
+        //     usedList.push(
+        //         `https://storage.googleapis.com/klubs/ipfsimage/QmZLMp34TCC4icxfjyKyiKkmVp7YrQFgdRKHfzW7ZeUQv1/${usedAp}.png.png`
+        //     );
+        // }
         return usedList;
     }
 
@@ -268,71 +314,144 @@ export class CaverJsService {
                     type: "function",
                 },
             ],
-            "0xe7A2fC68dD2D533e1e6c7897E0B38f7F5F5B79Be"
+            "0x6AeFf7C1127b4d3eB8A13274d44CFDde5fA12D62"
         );
         try {
-            const response = await myContract.methods
+            const usedApTokenId = await myContract.methods
                 .getUsedApById(apNumber)
                 .call();
-            return [
-                `https://storage.googleapis.com/klubs/ipfsimage/QmZLMp34TCC4icxfjyKyiKkmVp7YrQFgdRKHfzW7ZeUQv1/${response}.png.png`,
-            ];
+            const klubsEndpoint = process.env.NEXT_PUBLIC_KLUBS_ENDPOINT;
+            const response = await axios.get(
+                `${klubsEndpoint}/${usedApTokenId}/metadata`
+            );
+            const v2Metadata = response.data;
+            return [v2Metadata.image];
         } catch (error) {
             console.log(error);
             return [];
         }
     }
 
-    async mintBabyPunks(
-        address: string,
-        apNumber: number[],
-        species: string[]
-    ): Promise<boolean> {
-        // TODO: transaction MIX.
-        alert("일단 믹스부터 받아가자.");
-        // TODO: Mint AP.
-        console.log(address);
-        console.log(apNumber);
-        console.log(species);
+    async transferMix(fromAddress: string): Promise<boolean> {
         const Caver: any | undefined = (window as any).caver;
         const data = Caver.klay.abi.encodeFunctionCall(
             {
+                constant: false,
                 inputs: [
                     {
                         internalType: "address",
-                        name: "to",
+                        name: "recipient",
                         type: "address",
                     },
                     {
-                        internalType: "uint256[]",
-                        name: "reqUsedAp",
-                        type: "uint256[]",
-                    },
-                    {
-                        internalType: "string",
-                        name: "babyPunkSpecies",
-                        type: "string",
+                        internalType: "uint256",
+                        name: "amount",
+                        type: "uint256",
                     },
                 ],
-                name: "mint",
-                outputs: [],
+                name: "transfer",
+                outputs: [
+                    {
+                        internalType: "bool",
+                        name: "",
+                        type: "bool",
+                    },
+                ],
+                payable: false,
                 stateMutability: "nonpayable",
                 type: "function",
             },
-            [address, apNumber, species[0]]
+            [
+                "0xdb7f367C2F7F90CD07a62A149CE9561551C8A684",
+                Caver.utils.toPeb("35", "KLAY"),
+            ]
         );
 
         const result = await Caver.klay.sendTransaction({
             type: "SMART_CONTRACT_EXECUTION",
-            from: address,
-            to: process.env.NEXT_PUBLIC_DIAMOND_TICKET_ADDRESS,
-            gas: "800000",
+            from: fromAddress,
+            to: "0x0fc607BfAC7167B858bcb1b1f2B0EF59e7640952",
+            gas: "8000000",
             data,
         });
+        console.log(result);
         const trxResult = await Caver.klay.getTransactionReceipt(
             result.senderTxHash
         );
         if (trxResult.status === true) return true;
         return false;
+    }
+
+    async mintBabyPunks(
+        address: string,
+        apNumber: number[],
+        species: string[]
+    ) {
+        const usedApList = await this.getUsedApOnChain();
+        const klubsEndpoint = process.env.NEXT_PUBLIC_KLUBS_ENDPOINT;
+        const availdableUrls = [];
+        for (const available of apNumber) {
+            const response = await axios.get(
+                `${klubsEndpoint}/${available}/metadata`
+            );
+            const v2Metadata = response.data;
+            availdableUrls.push(v2Metadata.image);
+        }
+        if (
+            usedApList.includes(availdableUrls[0]) === false &&
+            usedApList.includes(availdableUrls[1]) === false
+        ) {
+            const mixTransferResult = await this.transferMix(address);
+            if (mixTransferResult === true) {
+                // TODO: Mint AP.
+                console.log(address);
+                console.log(apNumber);
+                console.log(species);
+                const Caver: any | undefined = (window as any).caver;
+                const data = Caver.klay.abi.encodeFunctionCall(
+                    {
+                        inputs: [
+                            {
+                                internalType: "address",
+                                name: "to",
+                                type: "address",
+                            },
+                            {
+                                internalType: "uint256[]",
+                                name: "reqUsedAp",
+                                type: "uint256[]",
+                            },
+                            {
+                                internalType: "string",
+                                name: "babyPunkSpecies",
+                                type: "string",
+                            },
+                        ],
+                        name: "mint",
+                        outputs: [],
+                        stateMutability: "nonpayable",
+                        type: "function",
+                    },
+                    [address, apNumber, species[0]]
+                );
+
+                try {
+                    await Caver.klay.sendTransaction({
+                        type: "SMART_CONTRACT_EXECUTION",
+                        from: address,
+                        to: "0x6AeFf7C1127b4d3eB8A13274d44CFDde5fA12D62",
+                        gas: "8000000",
+                        data,
+                    });
+                    return true;
+                } catch (error) {
+                    return false;
+                }
+                // const trxResult = await Caver.klay.getTransactionReceipt(
+                //     result.senderTxHash
+                // );
+            }
+        }
+        alert("이미 사용된 애펑 입니다.");
     }
 }

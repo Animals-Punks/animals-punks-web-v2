@@ -445,10 +445,12 @@ export class UserService implements IUserService {
         );
         if (mintResult === true) {
             alert("베이비 펑크 민팅에 성공했습니다!");
-        } else {
+            return true;
+        } else if (mintResult === false) {
             alert(
                 "베이비 펑크 민팅에 실패했습니다! 카이카스를 통해 트랜잭션을 먼저 확인해주세요!"
             );
+            return false;
         }
     }
 }
