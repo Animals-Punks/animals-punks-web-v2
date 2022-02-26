@@ -28,9 +28,7 @@ const MintBabyPunks: React.FC = () => {
             const result = await klaytn.enable();
             const address = result[0];
             setKaikasAddress(address);
-            const v2metaDatas = await userService.getKlubsV2Metadata(
-                "0x58413c1dcdccea0c327d002adca1e0ce87b86de7"
-            );
+            const v2metaDatas = await userService.getKlubsV2Metadata(address);
             setownedV2Metadata(v2metaDatas);
             const v2ImageUrlList = [];
             for (const v2MetaData of v2metaDatas) {
