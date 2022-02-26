@@ -180,7 +180,7 @@ export class CaverJsService {
                     type: "function",
                 },
             ],
-            "0x0fc607BfAC7167B858bcb1b1f2B0EF59e7640952"
+            "0xdd483a970a7a7fef2b223c3510fac852799a88bf"
         );
         const mixBalance = await myContract.methods
             .balanceOf(addresInfo[0])
@@ -208,7 +208,7 @@ export class CaverJsService {
                     type: "function",
                 },
             ],
-            "0x6AeFf7C1127b4d3eB8A13274d44CFDde5fA12D62"
+            "0x84E5552e9AE4aEF39bD6DD75BA4583d0130Bf0Ad"
         );
         const extra = await myContract.methods.getAllExtra().call();
         const extraList = [
@@ -266,7 +266,7 @@ export class CaverJsService {
                     type: "function",
                 },
             ],
-            "0x6AeFf7C1127b4d3eB8A13274d44CFDde5fA12D62"
+            "0x84E5552e9AE4aEF39bD6DD75BA4583d0130Bf0Ad"
         );
         const usedApTokenIdList = await myContract.methods
             .getAllUsedAp()
@@ -315,7 +315,7 @@ export class CaverJsService {
                     type: "function",
                 },
             ],
-            "0x6AeFf7C1127b4d3eB8A13274d44CFDde5fA12D62"
+            "0x84E5552e9AE4aEF39bD6DD75BA4583d0130Bf0Ad"
         );
         try {
             const usedApTokenId = await myContract.methods
@@ -371,7 +371,7 @@ export class CaverJsService {
         const result = await Caver.klay.sendTransaction({
             type: "SMART_CONTRACT_EXECUTION",
             from: fromAddress,
-            to: "0x0fc607BfAC7167B858bcb1b1f2B0EF59e7640952",
+            to: "0xdd483a970a7a7fef2b223c3510fac852799a88bf",
             gas: "8000000",
             data,
         });
@@ -440,7 +440,7 @@ export class CaverJsService {
                     await Caver.klay.sendTransaction({
                         type: "SMART_CONTRACT_EXECUTION",
                         from: address,
-                        to: "0x6AeFf7C1127b4d3eB8A13274d44CFDde5fA12D62",
+                        to: "0x84E5552e9AE4aEF39bD6DD75BA4583d0130Bf0Ad",
                         gas: "8000000",
                         data,
                     });
