@@ -186,7 +186,8 @@ export class CaverJsService {
             .balanceOf(addresInfo[0])
             // .balanceOf("0x503D10CCF01ab4ff9D6b14f4F540017BC60Ca9f7")
             .call();
-        return String(mixBalance);
+        // console.log(mixBalance / 1000000000000000000);
+        return String(mixBalance / 1000000000000000000);
     }
 
     async getExtraBabyPunks(): Promise<any[]> {
