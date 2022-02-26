@@ -383,6 +383,30 @@ export class CaverJsService {
         return false;
     }
 
+    async getBabyPunksTotalSupply() {
+        const Caver: any | undefined = (window as any).caver;
+        const myContract = new Caver.klay.Contract(
+            [
+                {
+                    inputs: [],
+                    name: "totalSupply",
+                    outputs: [
+                        {
+                            internalType: "uint256",
+                            name: "",
+                            type: "uint256",
+                        },
+                    ],
+                    stateMutability: "view",
+                    type: "function",
+                },
+            ],
+            "0x84E5552e9AE4aEF39bD6DD75BA4583d0130Bf0Ad"
+        );
+        const totalSupply = await myContract.methods.totalSupply().call();
+        console.log(totalSupply);
+    }
+
     async mintBabyPunks(
         address: string,
         apNumber: number[],
