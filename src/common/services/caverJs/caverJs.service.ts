@@ -426,12 +426,50 @@ export class CaverJsService {
             usedApList.includes(availdableUrls[0]) === false &&
             usedApList.includes(availdableUrls[1]) === false
         ) {
+            const extranBabyPunks = await this.getExtraBabyPunks();
+            const specie = species[0];
+            if (specie === 'tiger') {
+                if (extranBabyPunks[0].extra === 10) {
+                    throw Error('호랑이 베펑 민팅이 종료 되었습니다.')
+                }
+            }
+            if (specie === 'cat') {
+                if (extranBabyPunks[1].extra === 10) {
+                    throw Error('고양이 베펑 민팅이 종료 되었습니다.')
+                }
+            }
+            if (specie === 'ape') {
+                if (extranBabyPunks[2].extra === 10) {
+                    throw Error('ape 베펑 민팅이 종료 되었습니다.')
+                }
+            }
+            if (specie === 'rabbit') {
+                if (extranBabyPunks[3].extra === 10) {
+                    throw Error('토끼 베펑 민팅이 종료 되었습니다.')
+                }
+            }
+            if (specie === 'turtle') {
+                if (extranBabyPunks[4].extra === 10) {
+                    throw Error('거북이 베펑 민팅이 종료 되었습니다.')
+                }
+            }
+            if (specie === 'seal') {
+                if (extranBabyPunks[5].extra === 10) {
+                    throw Error('물개 베펑 민팅이 종료 되었습니다.')
+                }
+            }
+            if (specie === 'pig') {
+                if (extranBabyPunks[6].extra === 10) {
+                    throw Error('돼지 베펑 민팅이 종료 되었습니다.')
+                }
+            }
+            if (specie === 'dog') {
+                if (extranBabyPunks[7].extra === 10) {
+                    throw Error('강아지 베펑 민팅이 종료 되었습니다.')
+                }
+            }
             const mixTransferResult = await this.transferMix(address);
             if (mixTransferResult === true) {
-                // TODO: Mint AP.
-                console.log(address);
-                console.log(apNumber);
-                console.log(species);
                 const Caver: any | undefined = (window as any).caver;
                 const data = Caver.klay.abi.encodeFunctionCall(
                     {

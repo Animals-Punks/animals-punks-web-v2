@@ -114,13 +114,17 @@ const MintBabyPunks: React.FC = () => {
                     selectedFirstAp[0].species,
                     selectedSecoundAp[0].species,
                 ];
-                const mintResult = await userService.mintBabyAnimalsPunks(
-                    kaikasAddress,
-                    apNumber,
-                    species
-                );
-                if (mintResult) {
-                    window.location.reload();
+                try {
+                    const mintResult = await userService.mintBabyAnimalsPunks(
+                        kaikasAddress,
+                        apNumber,
+                        species
+                    );
+                    if (mintResult) {
+                        window.location.reload();
+                    }
+                } catch (error) {
+                    alert(error);
                 }
             }
         } else {
