@@ -34,7 +34,7 @@ export default function useMintBabyPunks(): {
     const [usedApList, setUsedApList] = useState([""]);
     const [searchApNumber, setSearchApNumber] = useState("0");
     const [mix, setMix] = useState("0");
-    const [limitSupply, setLimitSupply] = useState(880);
+    const [limitSupply, setLimitSupply] = useState(920);
     const [extraList, setExtraList] = useState([
         {
             species: "Tiger",
@@ -73,7 +73,8 @@ export default function useMintBabyPunks(): {
     const getExtraAndMixBalance = async () => {
         const extra = await new CaverJsService().getExtraBabyPunks();
         const mixBalance = await new CaverJsService().getMixBalance();
-        const totalSupply = await new CaverJsService().getBabyPunksTotalSupply();
+        const totalSupply =
+            await new CaverJsService().getBabyPunksTotalSupply();
         const calculateTotalSupply = limitSupply - Number(totalSupply);
         setLimitSupply(calculateTotalSupply);
         setMix(mixBalance);
