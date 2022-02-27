@@ -86,6 +86,8 @@ const MintBabyPunks: React.FC = () => {
                 return true;
             } else if (mintDate > 0) {
                 return true;
+            } else {
+                return false;
             }
         }
         return false;
