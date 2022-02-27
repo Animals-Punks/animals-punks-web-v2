@@ -214,31 +214,31 @@ export class CaverJsService {
         const extraList = [
             {
                 species: "Tiger",
-                extra: Number(extra[0]),
+                extra: Number(extra[0]) - 10,
             },
             {
                 species: "Cat",
-                extra: Number(extra[1]),
+                extra: Number(extra[1]) - 10,
             },
             {
                 species: "Ape",
-                extra: Number(extra[2]),
+                extra: Number(extra[2]) - 10,
             },
             {
                 species: "Rabbit",
-                extra: Number(extra[3]),
+                extra: Number(extra[3]) - 10,
             },
             {
                 species: "Turtle",
-                extra: Number(extra[4]),
+                extra: Number(extra[4]) - 10,
             },
             {
                 species: "Seal",
-                extra: Number(extra[5]),
+                extra: Number(extra[5]) - 10,
             },
             {
                 species: "Pig",
-                extra: Number(extra[6]),
+                extra: Number(extra[6]) - 10,
             },
             {
                 species: "Dog",
@@ -429,27 +429,27 @@ export class CaverJsService {
             const extranBabyPunks = await this.getExtraBabyPunks();
             const specie = species[0];
             if (specie === 'tiger') {
-                if (extranBabyPunks[0].extra === 10) {
+                if (extranBabyPunks[0].extra === 0) {
                     throw Error('호랑이 베펑 민팅이 종료 되었습니다.')
                 }
             }
             if (specie === 'cat') {
-                if (extranBabyPunks[1].extra === 10) {
+                if (extranBabyPunks[1].extra === 0) {
                     throw Error('고양이 베펑 민팅이 종료 되었습니다.')
                 }
             }
             if (specie === 'ape') {
-                if (extranBabyPunks[2].extra === 10) {
+                if (extranBabyPunks[2].extra === 0) {
                     throw Error('ape 베펑 민팅이 종료 되었습니다.')
                 }
             }
             if (specie === 'rabbit') {
-                if (extranBabyPunks[3].extra === 10) {
+                if (extranBabyPunks[3].extra === 0) {
                     throw Error('토끼 베펑 민팅이 종료 되었습니다.')
                 }
             }
             if (specie === 'turtle') {
-                if (extranBabyPunks[4].extra === 10) {
+                if (extranBabyPunks[4].extra === 0) {
                     throw Error('거북이 베펑 민팅이 종료 되었습니다.')
                 }
             }
@@ -464,7 +464,7 @@ export class CaverJsService {
                 }
             }
             if (specie === 'dog') {
-                if (extranBabyPunks[7].extra === 10) {
+                if (extranBabyPunks[7].extra === 0) {
                     throw Error('강아지 베펑 민팅이 종료 되었습니다.')
                 }
             }
