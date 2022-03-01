@@ -29,7 +29,7 @@ const MintBabyPunks: React.FC = () => {
             const result = await klaytn.enable();
             const address = result[0];
             setKaikasAddress(address);
-            const v2metaDatas = await userService.getKlubsV2Metadata(address);
+            const v2metaDatas = await userService.getKlubsV2Metadata("0xa61ce8b5ea8f08929e3b07f120ec1d0b8de19144");
             setownedV2Metadata(v2metaDatas);
             const v2ImageUrlList = [];
             for (const v2MetaData of v2metaDatas) {
@@ -95,41 +95,41 @@ const MintBabyPunks: React.FC = () => {
 
     const matingButton = async () => {
         const timeValidateResult = timeValidate();
-        if (timeValidateResult === true) {
-            if (limitSupply === 0) {
-                alert("민팅이 종료 되었습니다.");
-            } else if (kaikasAddress.length === 0) {
-                alert("카이카스 지갑을 먼저 연결해주세요!");
-            } else if (
-                selectedFirstAp[0].string === "test" ||
-                selectedSecoundAp[0].string === "test"
-            ) {
-                alert("애니멀 펑크를 2개 선택해주세요!");
-            } else {
-                const apNumber = [
-                    selectedFirstAp[0].nftId,
-                    selectedSecoundAp[0].nftId,
-                ];
-                const species = [
-                    selectedFirstAp[0].species,
-                    selectedSecoundAp[0].species,
-                ];
-                try {
-                    const mintResult = await userService.mintBabyAnimalsPunks(
-                        kaikasAddress,
-                        apNumber,
-                        species
-                    );
-                    if (mintResult) {
-                        window.location.reload();
-                    }
-                } catch (error) {
-                    alert(error);
-                }
-            }
+        // if (timeValidateResult === true) {
+        if (limitSupply === 0) {
+            alert("민팅이 종료 되었습니다.");
+        } else if (kaikasAddress.length === 0) {
+            alert("카이카스 지갑을 먼저 연결해주세요!");
+        } else if (
+            selectedFirstAp[0].string === "test" ||
+            selectedSecoundAp[0].string === "test"
+        ) {
+            alert("애니멀 펑크를 2개 선택해주세요!");
         } else {
-            alert("아직 민팅 시간이 되지 않았습니다.")
+            const apNumber = [
+                selectedFirstAp[0].nftId,
+                selectedSecoundAp[0].nftId,
+            ];
+            const species = [
+                selectedFirstAp[0].species,
+                selectedSecoundAp[0].species,
+            ];
+            try {
+                const mintResult = await userService.mintBabyAnimalsPunks(
+                    kaikasAddress,
+                    apNumber,
+                    species
+                );
+                if (mintResult) {
+                    window.location.reload();
+                }
+            } catch (error) {
+                alert(error);
+            }
         }
+        // } else {
+        //     alert("아직 민팅 시간이 되지 않았습니다.")
+        // }
     };
 
     const searchNumberOnChange = (event: any) => {
