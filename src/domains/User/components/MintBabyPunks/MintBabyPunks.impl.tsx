@@ -94,7 +94,7 @@ const MintBabyPunks: React.FC = () => {
     };
 
     const matingButton = async () => {
-        const timeValidateResult = timeValidate();
+        // const timeValidateResult = timeValidate();
         // if (timeValidateResult === true) {
         if (limitSupply === 0) {
             alert("민팅이 종료 되었습니다.");
