@@ -230,8 +230,7 @@ export class CaverJsService {
             },
             {
                 species: "Turtle",
-                // extra: Number(extra[4]) - 10,
-                extra: 0,
+                extra: Number(extra[4]) - 10,
             },
             {
                 species: "Seal",
