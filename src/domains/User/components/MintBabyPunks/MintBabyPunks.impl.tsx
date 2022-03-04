@@ -74,14 +74,17 @@ const MintBabyPunks: React.FC = () => {
         const KR_TIME_DIFF = 9 * 60 * 60 * 1000;
         const kr_curr = new Date(utc + KR_TIME_DIFF);
 
-        const mintTime = new Date(2022, 2, 27, 20);
+        const mintTime = new Date(2022, 3, 4, 8);
         const firstMintTimeUtc =
             mintTime.getTime() + mintTime.getTimezoneOffset() * 60 * 1000;
         const firstMintKrCurr = new Date(firstMintTimeUtc + KR_TIME_DIFF);
         const mintDate = kr_curr.getDate() - firstMintKrCurr.getDate();
-        const calMintTime = kr_curr.getHours() - firstMintKrCurr.getHours();
+        const calMintTime = 20 - kr_curr.getHours();
 
-        if (mintDate <= 0 && calMintTime <= 0 ) {
+        console.log(mintDate);
+        console.log(calMintTime);
+
+        if (mintDate <= 0 && calMintTime <= 0) {
             return false;
             if (mintDate <= 0) {
                 return false;
