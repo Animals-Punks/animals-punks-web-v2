@@ -81,21 +81,18 @@ const MintBabyPunks: React.FC = () => {
         const mintDate = kr_curr.getDate() - firstMintKrCurr.getDate();
         const calMintTime = kr_curr.getHours() - firstMintKrCurr.getHours();
 
-        if (mintDate >= 0) {
-            if (calMintTime >= 0) {
-                return true;
-            } else if (mintDate > 0) {
-                return true;
-            } else {
+        if (mintDate <= 0 && calMintTime <= 0 ) {
+            return false;
+            if (mintDate <= 0) {
                 return false;
             }
         }
-        return false;
+        return true;
     };
 
     const matingButton = async () => {
-        // const timeValidateResult = timeValidate();
-        // if (timeValidateResult === true) {
+        const timeValidateResult = timeValidate();
+        if (timeValidateResult === true) {
         if (limitSupply === 0) {
             alert("민팅이 종료 되었습니다.");
         } else if (kaikasAddress.length === 0) {
@@ -127,9 +124,9 @@ const MintBabyPunks: React.FC = () => {
                 alert(error);
             }
         }
-        // } else {
-        //     alert("아직 민팅 시간이 되지 않았습니다.")
-        // }
+        } else {
+            alert("민팅이 종료 되었습니다.")
+        }
     };
 
     const searchNumberOnChange = (event: any) => {
