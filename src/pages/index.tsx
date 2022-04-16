@@ -6,7 +6,7 @@ import { RecoilRoot } from "recoil";
 import {
     IntroBox,
     IntroDuceBox,
-    MixTokenBox,
+    // MixTokenBox,
     RarityBox,
     RoadMapBox,
     TeamMemberBox,

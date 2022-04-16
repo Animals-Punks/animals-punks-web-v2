@@ -6,7 +6,6 @@ import { BackgroundImage, HeaderBox } from "@common/components";
 const IntroBox: React.FC = () => {
     return (
         <>
-            {/*<HeaderBox />*/}
             <BackgroundImage>
                 <link
                     rel="stylesheet"
