@@ -31,7 +31,7 @@ const Home: NextPage = () => {
                             <TeamMemberBox />
                             <RoadMapBox />
                             <RarityBox />
-                            <MixTokenBox />
+                            {/*<MixTokenBox />*/}
                             <PartnerShipBox />
                             <ConnectUsBox />
                         </div>
