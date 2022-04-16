@@ -6,7 +6,7 @@ import { RecoilRoot } from "recoil";
 import {
     IntroBox,
     IntroDuceBox,
-    MixTokenBox,
+    // MixTokenBox,
     RarityBox,
     RoadMapBox,
     TeamMemberBox,
@@ -31,7 +31,7 @@ const Home: NextPage = () => {
                             <TeamMemberBox />
                             <RoadMapBox />
                             <RarityBox />
-                            <MixTokenBox />
+                            {/*<MixTokenBox />*/}
                             <PartnerShipBox />
                             <ConnectUsBox />
                         </div>
