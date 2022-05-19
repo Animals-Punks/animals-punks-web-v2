@@ -17,7 +17,7 @@ const TextFieldBox: React.FC<ITextFieldBox.IProps> = ({
                 fullWidth={true}
                 onChange={onChange}
                 inputProps={{
-                    maxLength: 12
+                    maxLength: 12,
                 }}
             />
         </div>

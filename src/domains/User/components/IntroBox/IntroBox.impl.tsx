@@ -9,7 +9,7 @@ const IntroBox: React.FC = () => {
             <BackgroundImage>
                 <link
                     rel="stylesheet"
-                    href="https://fonts.googleapis.com/css2?family=Chewy"
+                    href={`https://fonts.googleapis.com/css2?family=Chewy"`}
                 />
                 <div css={welcomTextStyle}>ANIMALS PUNKS</div>
             </BackgroundImage>

@@ -97,10 +97,10 @@ const connectionButtonContainer = css`
 
 const buttonContainer = css`
     display: flex;
-    flex-directionL row;
+    flex-direction: row;
     justify-content: center;
     align-items: center;
-    maring-top: 10vh
+    margin-top: 10vh;
 `
 
 const processButtonContainer = css`

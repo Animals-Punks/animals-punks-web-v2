@@ -5,7 +5,7 @@ const CenterText: React.FC = ({ children }) => {
         <>
             <link
                 rel="stylesheet"
-                href="https://fonts.googleapis.com/css2?family=OpenSans"
+                href={`https://fonts.googleapis.com/css2?family=OpenSans`}
             />
             <div css={centerTextContainer}>
                 <div css={centerTextStyle}>{children}</div>
